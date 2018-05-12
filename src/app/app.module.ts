@@ -27,7 +27,7 @@ import { CategoriesComponent } from './categories/categories.component';
   ],
   imports: [
     NgbModule.forRoot(),
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'caboodle' }),
     routing
   ],
   providers: [],
