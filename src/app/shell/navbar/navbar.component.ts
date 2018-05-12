@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Router, ResolveEnd } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styles: []
 })
 export class NavbarComponent implements OnInit {
+  @Input() loggedIn;
+  navCollapse: boolean;
+  route: string;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
+    this.navCollapse = true;
+    this.router.events.subscribe(e => {
+      if (e instanceof ResolveEnd) {
+        this.route = e.url;
+      }
+    });
   }
 
 }
