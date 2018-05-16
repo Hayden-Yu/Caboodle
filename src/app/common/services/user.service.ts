@@ -1,8 +1,9 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Subject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { map, catchError } from 'rxjs/operators';
+import { isPlatformServer } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,11 @@ export class UserService {
   private isLoggedIn = new Subject<boolean>();
   loggedIn$ = this.isLoggedIn.asObservable();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    @Inject(PLATFORM_ID) private platformId: Object) {
+    if (isPlatformServer(this.platformId)) {
+      return;
+    }
     const token = localStorage.getItem(AUTH_TOKEN_KEY);
     const timeStamp = localStorage.getItem(AUTH_LAST_REFRESH_KEY);
     if (token) {
@@ -25,7 +30,7 @@ export class UserService {
   }
 
   getAuthToken(): string {
-    return localStorage.getItem(AUTH_TOKEN_KEY);
+    return isPlatformServer(this.platformId) ? '' : localStorage.getItem(AUTH_TOKEN_KEY);
   }
 
   login(email: string, password: string): Observable<void>  {
@@ -41,6 +46,7 @@ export class UserService {
 
   logout(): void {
     localStorage.removeItem(AUTH_TOKEN_KEY);
+    localStorage.removeItem(AUTH_LAST_REFRESH_KEY);
     this.isLoggedIn.next(false);
   }
 

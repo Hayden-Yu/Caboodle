@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router, ResolveEnd } from '@angular/router';
+import { UserService } from '../../common/services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,11 +8,15 @@ import { Router, ResolveEnd } from '@angular/router';
   styles: []
 })
 export class NavbarComponent implements OnInit {
-  @Input() loggedIn;
+  loggedIn;
   navCollapse: boolean;
   route: string;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    private userService: UserService) {
+    this.loggedIn = !!this.userService.getAuthToken();
+    this.userService.loggedIn$.subscribe(v => this.loggedIn = v);
+  }
 
   ngOnInit() {
     this.navCollapse = true;
@@ -22,4 +27,7 @@ export class NavbarComponent implements OnInit {
     });
   }
 
+  logout() {
+    this.userService.logout();
+  }
 }
