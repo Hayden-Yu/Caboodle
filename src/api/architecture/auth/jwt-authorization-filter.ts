@@ -14,7 +14,7 @@ export function jwtTokenFilter(req, res, next) {
         next(err);
       } else {
         // TODO: attatch real user onto req
-        if (claim.username && claim.username === 'user') {
+        if (claim.username && claim.username === 'user@example.com') {
           logger.debug(`User [${claim}] authorized`);
           req.user = {
             id: 1,

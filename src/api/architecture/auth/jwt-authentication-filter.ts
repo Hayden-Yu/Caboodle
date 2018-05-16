@@ -16,13 +16,15 @@ export function login(req, res, next) {
   } else {
     logger.debug('Attempt username password authorization');
     // TODO: scrub against user list in db after db is setup
-    if (req.body.username === 'user' && req.body.password === 'password') {
+    if (req.body.username === 'user@example.com' && req.body.password === 'password') {
       logger.debug(`Authorized user [${req.body.username}]`);
       generateToken({
         username: req.body.username
       })
       .then((token) => res.json({token: token}))
       .catch(err => next(err));
+    } else {
+      res.status(401).send();
     }
   }
 }
@@ -35,17 +37,13 @@ export function login(req, res, next) {
  */
 export function refreshToken(req, res, next) {
   logger.debug('Attempt jwt token refresh');
-  jwtTokenFilter(req, res, (err) => {
-    if (err) {
-      next(err);
-    } else {
-      generateToken({
-        username: req.body.username
-      })
-      .then((token) => res.json({token: token}))
-      .catch(error => next(error));
-    }
-  });
+  if (req.user && req.user.username) {
+    generateToken({
+      username: req.user.username
+    })
+    .then((token) => res.json({token: token}))
+    .catch(error => next(error));
+  }
 }
 
 
