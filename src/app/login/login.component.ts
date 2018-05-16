@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../common/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder,
+  private userService: UserService,
+  private router: Router) { }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
@@ -21,5 +25,17 @@ export class LoginComponent implements OnInit {
   invalidControl(formControlName: string): boolean {
     return this.loginForm.get(formControlName).invalid
     && this.loginForm.get(formControlName).touched;
+  }
+
+  submitForm() {
+    if (!this.loginForm.valid) {
+      return;
+    }
+    this.userService.login(
+      this.loginForm.get('username').value.trim(),
+      this.loginForm.get('password').value.trim()
+    ).subscribe((() => {
+      this.router.navigate(['/home']);
+    }));
   }
 }

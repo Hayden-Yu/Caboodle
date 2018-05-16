@@ -3,8 +3,10 @@ import * as bodyParser from 'body-parser';
 import { jwtTokenFilter } from './architecture/auth/jwt-authorization-filter';
 import { login, refreshToken } from './architecture/auth/jwt-authentication-filter';
 import { jwtErrorHandler } from './architecture/auth/jwt-error-handler';
+import { cors } from './architecture/cors';
 
 const router = express.Router();
+router.use(cors);
 router.use(bodyParser.json());
 router.use(jwtTokenFilter);
 

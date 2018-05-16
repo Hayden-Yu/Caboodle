@@ -28,8 +28,8 @@ export class UserService {
     return localStorage.getItem(AUTH_TOKEN_KEY);
   }
 
-  login(email: string, password: string): Observable<any>  {
-    return this.http.post(`${environment.api}/login`, {
+  login(email: string, password: string): Observable<void>  {
+    return this.http.post(`${environment.api}login`, {
       username: email,
       password: password
     }).pipe(map((res: any) => {
@@ -45,7 +45,7 @@ export class UserService {
   }
 
   refreshToken(): void {
-    this.http.get(`${environment.api}/refreshToken`)
+    this.http.get(`${environment.api}refreshToken`)
     .pipe(catchError((err, caught) => {
       return of('');
     }))
