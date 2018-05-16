@@ -12,13 +12,15 @@ import { jwtTokenFilter } from './jwt-authorization-filter';
  */
 export function login(req, res, next) {
   if (!req.body || !(req.body.username && req.body.password)) {
-    req.status(401).send();
+    res.status(401).send();
   } else {
     logger.debug('Attempt username password authorization');
     // TODO: scrub against user list in db after db is setup
     if (req.body.username === 'user' && req.body.password === 'password') {
       logger.debug(`Authorized user [${req.body.username}]`);
-      generateToken(req.body.username)
+      generateToken({
+        username: req.body.username
+      })
       .then((token) => res.json({token: token}))
       .catch(err => next(err));
     }
@@ -37,7 +39,9 @@ export function refreshToken(req, res, next) {
     if (err) {
       next(err);
     } else {
-      generateToken(req.user.username)
+      generateToken({
+        username: req.body.username
+      })
       .then((token) => res.json({token: token}))
       .catch(error => next(error));
     }
@@ -51,7 +55,7 @@ function generateToken (claim): Promise<string> {
       environment.jwtSecret,
       {
         algorithm: 'HS512',
-        expiresIn: '3d'
+        expiresIn: '3 days'
       },
       (err, token) => {
         if (err) {

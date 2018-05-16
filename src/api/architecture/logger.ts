@@ -1,7 +1,8 @@
-import * as logger from 'winston';
+import * as winston from 'winston';
+const logger = new winston.Logger();
 
 logger.configure({
   level: 'silly'
 });
 
-export = logger;
+export default logger;
