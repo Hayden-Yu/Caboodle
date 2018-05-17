@@ -1,21 +1,25 @@
-<div class="text-center">
-  <form class="form-signin">
-
-    <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-    
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-
-      <label for="inputPassword" class="sr-only">Password</label>
-      <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-    
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
+<form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+<h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
+<div class="container">
+  <div class="row form-group">
+    <div class="col-12">
+      <input type="text" class="form-control" placeholder="Email address" autofocus formControlName="username"
+        [ngClass]="{'is-invalid': invalidControl('username')}">
+        <div class="invalid-feedback" [hidden]="!invalidControl('username')">Please enter a valid email you registered with</div>
     </div>
-    
-    <button class="btn btn-sm btn-primary " type="submit">Sign in</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2017-2018</p>
-  </form>
+  </div>
+  <div class="row form-group">
+    <div class="col-12">
+      <input type="password" class="form-control" placeholder="Password" formControlName="password"
+        [ngClass]="{'is-invalid': invalidControl('password')}">
+      <div class="invalid-feedback" [hidden]="!invalidControl('password')">Please enter the password</div>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <div class="col-2">
+      <button class="btn btn-sm btn-primary" type="submit">Sign in</button>
+    </div>
+  </div>
 </div>
+</form>
+

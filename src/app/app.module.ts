@@ -12,6 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ContentComponent } from './shell/content/content.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { CategoriesComponent } from './categories/categories.component';
   imports: [
     NgbModule.forRoot(),
     BrowserModule.withServerTransition({ appId: 'caboodle' }),
+    ReactiveFormsModule,
+    HttpClientModule,
     routing
   ],
   providers: [],
