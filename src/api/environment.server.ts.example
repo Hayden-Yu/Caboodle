@@ -1,0 +1,11 @@
+export const environment: any = {
+  jwtSecret: 'some random string',
+  logLevel: 'info',
+  database:
+    host: 'localhost',
+    port: 3306,
+    username: 'caboodle_admin',
+    password: 'P@ssw03d',
+    database: 'caboodle'
+  },
+};
