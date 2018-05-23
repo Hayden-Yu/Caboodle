@@ -1,3 +1,4 @@
+import { User } from './../../core/model/user.model';
 import { environment } from '../../environment.server';
 import * as jwt from 'jsonwebtoken';
 import logger from '../logger';
@@ -11,21 +12,25 @@ import { jwtTokenFilter } from './jwt-authorization-filter';
  * @param next
  */
 export function login(req, res, next) {
-  if (!req.body || !(req.body.username && req.body.password)) {
+  if (!req.body || !(req.body.email && req.body.password)) {
     res.status(401).send();
   } else {
     logger.debug('Attempt username password authorization');
-    // TODO: scrub against user list in db after db is setup
-    if (req.body.username === 'user@example.com' && req.body.password === 'password') {
-      logger.debug(`Authorized user [${req.body.username}]`);
-      generateToken({
-        username: req.body.username
-      })
-      .then((token) => res.json({token: token}))
-      .catch(err => next(err));
-    } else {
-      res.status(401).send();
-    }
+    User.findOne({
+      where: {email: req.body.email}
+    }).then(user => {
+      if (user && user.validatePassword(req.body.password)) {
+        logger.debug(`Authorized user [${req.body.email}]`);
+        generateToken({
+          email: req.body.email
+        })
+        .then((token) => res.json({token: token}))
+        .catch(err => next(err));
+      } else {
+        logger.debug(`Authorization failed user [${req.body.email}]`);
+        res.status(401).send();
+      }
+    });
   }
 }
 
@@ -37,9 +42,9 @@ export function login(req, res, next) {
  */
 export function refreshToken(req, res, next) {
   logger.debug('Attempt jwt token refresh');
-  if (req.user && req.user.username) {
+  if (req.auth && req.auth.username) {
     generateToken({
-      username: req.user.username
+      email: req.auth.username
     })
     .then((token) => res.json({token: token}))
     .catch(error => next(error));

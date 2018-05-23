@@ -1,4 +1,4 @@
-import { Model, PrimaryKey, Column, Sequelize, BelongsTo, HasMany, Table, ForeignKey, NotNull } from 'sequelize-typescript';
+import { Model, PrimaryKey, Column, Sequelize, BelongsTo, HasMany, Table, ForeignKey, AllowNull } from 'sequelize-typescript';
 import { Collection } from './collection.model';
 import { EndpointHeader } from './endpoint.model/endpoint-header.model';
 
@@ -22,15 +22,15 @@ export const methods = [
 
 @Table
 export class Endpoint extends Model<Endpoint> {
-  @NotNull
+  @AllowNull(false)
   @Column(Sequelize.STRING)
   name: string;
 
-  @NotNull
+  @AllowNull(false)
   @Column(Sequelize.STRING)
   url: string;
 
-  @NotNull
+  @AllowNull(false)
   @Column(Sequelize.ENUM(methods))
   method: string;
 

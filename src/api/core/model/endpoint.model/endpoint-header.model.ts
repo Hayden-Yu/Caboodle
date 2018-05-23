@@ -1,16 +1,16 @@
-import { Model, PrimaryKey, Column, Sequelize, BelongsTo, Table, ForeignKey, NotNull, Default } from 'sequelize-typescript';
+import { Model, PrimaryKey, Column, Sequelize, BelongsTo, Table, ForeignKey, AllowNull, Default } from 'sequelize-typescript';
 import { Endpoint } from '../endpoint.model';
 
 @Table
 export class EndpointHeader extends Model<EndpointHeader> {
-  @NotNull
+  @AllowNull(false)
   @Column(Sequelize.STRING)
   name: string;
 
   @Column(Sequelize.STRING)
   defaultValue: string;
 
-  @NotNull
+  @AllowNull(false)
   @Default(false)
   @Column(Sequelize.BOOLEAN)
   isParam: boolean;

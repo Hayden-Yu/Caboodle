@@ -1,10 +1,10 @@
 import { Endpoint } from './endpoint.model';
 import { User } from './user.model';
-import { Table, Model, PrimaryKey, Column, Sequelize, ForeignKey, BelongsToMany, HasMany, NotNull } from 'sequelize-typescript';
+import { Table, Model, PrimaryKey, Column, Sequelize, ForeignKey, BelongsToMany, HasMany, AllowNull } from 'sequelize-typescript';
 
 @Table
 export class Collection extends Model<Collection> {
-  @NotNull
+  @AllowNull(false)
   @Column(Sequelize.STRING)
   name: string;
 
