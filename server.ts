@@ -8,7 +8,8 @@ import * as express from 'express';
 import { join } from 'path';
 
 import router from './src/api/router';
-
+import { orm } from './src/api/core/model/orm';
+orm.sync();
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
 

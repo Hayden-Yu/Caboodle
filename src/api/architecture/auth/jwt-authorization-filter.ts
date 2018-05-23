@@ -1,3 +1,4 @@
+import { User } from './../../core/model/user.model';
 import * as jwt from 'jsonwebtoken';
 import { environment } from '../../environment.server';
 import logger from '../logger';
@@ -13,13 +14,14 @@ export function jwtTokenFilter(req, res, next) {
       if (err) {
         next(err);
       } else {
-        // TODO: attatch real user onto req
-        if (claim.username && claim.username === 'user@example.com') {
-          logger.debug(`User [${claim}] authorized`);
-          req.user = {
-            id: 1,
-            username: 'user'
-          };
+        if (claim.email) {
+          User.findOne({ where: {email: claim.email} })
+          .then(user => {
+            if (user) {
+              logger.debug(`User [${claim.email}] authorized`);
+              req.auth = user;
+            }
+          });
         }
       }
     });

@@ -5,6 +5,8 @@ import { login, refreshToken } from './architecture/auth/jwt-authentication-filt
 import { jwtErrorHandler } from './architecture/auth/jwt-error-handler';
 import { cors } from './architecture/cors';
 
+import * as user from './core/routes/user';
+
 const router = express.Router();
 router.use(cors);
 router.use(bodyParser.json());
@@ -12,6 +14,8 @@ router.use(jwtTokenFilter);
 
 router.post('/login', login);
 router.get('/refreshToken', refreshToken);
+
+router.use('/user', user.router);
 
 router.use(jwtErrorHandler);
 router.use((req, res) => res.status(404).send());
