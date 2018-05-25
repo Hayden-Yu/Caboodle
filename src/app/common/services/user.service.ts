@@ -1,3 +1,5 @@
+import { ValidationError } from './validation-error';
+import { User } from './user';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Subject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -33,14 +35,15 @@ export class UserService {
     return isPlatformServer(this.platformId) ? '' : localStorage.getItem(AUTH_TOKEN_KEY);
   }
 
-  login(email: string, password: string): Observable<void>  {
+  login(email: string, password: string): Observable<boolean>  {
     return this.http.post(`${environment.api}login`, {
-      username: email,
+      email: email,
       password: password
     }).pipe(map((res: any) => {
       localStorage.setItem(AUTH_TOKEN_KEY, res.token);
       localStorage.setItem(AUTH_LAST_REFRESH_KEY, new Date().toISOString());
       this.isLoggedIn.next(true);
+      return true;
     }));
   }
 
@@ -63,6 +66,23 @@ export class UserService {
         this.logout();
       }
     });
+  }
+
+  register(user: User): Observable<Array<ValidationError>> {
+    return this.http.post(`${environment.api}user`, user)
+    .pipe(
+      catchError((err, caught) => {
+        return of(err.error);
+      }),
+      map(res => {
+        if (res && res.token) {
+          localStorage.setItem(AUTH_TOKEN_KEY, res.token);
+          localStorage.setItem(AUTH_LAST_REFRESH_KEY, new Date().toISOString());
+          this.isLoggedIn.next(true);
+          return [];
+        }
+        return res.error;
+      }));
   }
 }
 

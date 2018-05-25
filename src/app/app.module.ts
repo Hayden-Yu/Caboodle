@@ -14,6 +14,7 @@ import { ContentComponent } from './shell/content/content.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     ContentComponent,
     CategoriesComponent,
+    RegisterComponent,
   ],
   imports: [
     NgbModule.forRoot(),

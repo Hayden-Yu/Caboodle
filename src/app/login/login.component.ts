@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../common/services/user.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
+import { EMAIL_REGEX } from '../common/constants';
 
 @Component({
   selector: 'app-login',
@@ -21,8 +22,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
-      username: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      username: ['', [Validators.required, Validators.pattern(EMAIL_REGEX)]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
     });
     this.errorMsg = '';
   }
