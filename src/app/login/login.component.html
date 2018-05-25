@@ -1,11 +1,14 @@
 <br>
+<h3 style="text-indent: 30px">Log In</h3>
+<br>
+<ngb-alert *ngIf="errorMsg" type="danger" (close)="!errorMsg"><span class="fade-in">{{ errorMsg }}</span></ngb-alert>
 <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
 <div class="container-fluid">
   <div class="row form-group">
     <div class="col-md-2">
         <label>Email:</label>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6 col-lg-5">
       <input type="text" class="form-control" placeholder="Email address" autofocus formControlName="username"
         [ngClass]="{'is-invalid': invalidControl('username')}">
         <div class="invalid-feedback">Please enter a valid email you registered with</div>
@@ -16,7 +19,7 @@
     <div class="col-md-2">
       <label>Password:</label>
     </div>
-    <div class="col-md-8">
+    <div class="col-md-6 col-lg-5">
       <input type="password" class="form-control" placeholder="Password" formControlName="password"
         [ngClass]="{'is-invalid': invalidControl('password')}">
       <div class="invalid-feedback">Please enter the password</div>
@@ -33,7 +36,7 @@
       <button class="btn btn-primary" type="submit" style="width:100%">Log In</button>
     </div>
     <div class="col-2">
-        <a routerLink="/register"><button class="btn btn-primary" style="width:100%">Sign Up</button></a>
+        <a routerLink="/signup"><button class="btn btn-primary" style="width:100%">Sign Up</button></a>
       </div>
   </div>
 </div>

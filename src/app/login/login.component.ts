@@ -1,7 +1,9 @@
+import { catchError } from 'rxjs/operators';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../common/services/user.service';
 import { Router } from '@angular/router';
+import { of } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +12,8 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  errorMsg: string;
+  private errorMsgTimer;
 
   constructor(private formBuilder: FormBuilder,
   private userService: UserService,
@@ -20,6 +24,7 @@ export class LoginComponent implements OnInit {
       username: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
     });
+    this.errorMsg = '';
   }
 
   invalidControl(formControlName: string): boolean {
@@ -33,9 +38,29 @@ export class LoginComponent implements OnInit {
     }
     this.userService.login(
       this.loginForm.get('username').value.trim(),
-      this.loginForm.get('password').value.trim()
-    ).subscribe((() => {
-      this.router.navigate(['/home']);
+      this.loginForm.get('password').value
+    )
+    .pipe(catchError((err, caught) => {
+      if (err.status === 401) {
+        if (err && err.length) {
+          this.errorMsg = 'Invalid Login';
+        }
+      }
+      return of(false);
+    }))
+    .subscribe(((stat) => {
+      if (stat) {
+        this.router.navigate(['/home']);
+      } else {
+        if (this.errorMsgTimer) {
+          this.errorMsg = '';
+          clearTimeout(this.errorMsgTimer);
+        }
+        this.errorMsg = this.errorMsg || 'Login failed, please try again later';
+        this.errorMsgTimer = setTimeout(() => {
+          this.errorMsg = '';
+        }, 3000);
+      }
     }));
   }
 }
