@@ -5,15 +5,19 @@
     <div class="panel-body">
         <div class="container bootstrap-header-table"> 
             <div class="row">
-                <input class="form-control" id="apiSearch" name="apiSearch" type="text" placeholder="Search by API" style="margin-bottom:10px;"/>
+                <div class="col-md-3">
+                        <a href="listings" class="btn btn-info" role="button">Search By API</a>
+                <!-- <input class="form-control" id="apiSearch" name="apiSearch" type="text" placeholder="Search by API" style="margin-bottom:10px;"/> -->
+                
                 <input class="form-control" id="categorySearch" name="categorySearch" type="text" placeholder="Search by Category" style="margin-bottom:10px;"  (keyup)="onCategorySearchKeyup($event)"/>
+                </div>
             </div>
             <table class="table table-striped" id="table-format">
                 <tr class="row header-row" style="cursor:pointer">
                     <th >Category Name</th>
                 </tr>
                 <tr class="row body-rows" *ngFor="let cat of filteredList" (click)="routeCategory(cat.categories)" style="cursor:pointer" >
-                    <td>{{cat}}</td>
+                    <td>{{cat.name}}</td>
                 </tr>
             </table>
         </div>

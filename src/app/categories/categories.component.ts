@@ -18,12 +18,13 @@ export class CategoriesComponent implements OnInit {
   ngOnInit() {
     this.categoryList = this.category.getCategories();
     this.filteredList =  this.categoryList;
+    console.log(this.categoryList);
   }
 
   onCategorySearchKeyup(event: any){
     const val = event.target.value.toLowerCase();
     this.filteredList = this.categoryList.filter((categories) => {
-      if (categories.toLowerCase().includes(val)) {
+      if (categories.name.toLowerCase().includes(val)) {
         return true;
       }
     });
