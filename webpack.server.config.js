@@ -7,7 +7,7 @@ module.exports = {
   target: 'node',
   mode: 'none',
   // this makes sure we include node_modules and other 3rd party libraries
-  externals: [/node_modules/],
+  externals: [/node_modules/, ['pg', 'sqlite3', 'tedious', 'pg-hstore']],
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].js'
@@ -27,6 +27,10 @@ module.exports = {
       /(.+)?express(\\|\/)(.+)?/,
       path.join(__dirname, 'src'),
       {}
+    ),
+    new webpack.ContextReplacementPlugin(
+      /Sequelize(\\|\/)/,
+      path.resolve(__dirname, '../src')
     )
   ]
 };
