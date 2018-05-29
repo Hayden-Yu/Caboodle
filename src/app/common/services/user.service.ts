@@ -88,6 +88,26 @@ export class UserService {
       catchError((err, caught) => of(null)),
       map(res => res && res.status === 200));
   }
+
+  validateActivation(token: string): Observable<string> {
+    return this.http.get(`${environment.api}activation?code=${token}`)
+    .pipe(
+      catchError((err, caught) => of({})),
+      map((res: any) => res.email));
+  }
+
+  setPassword(code: string, password: string): void {
+    this.http.post(`${environment.api}activation`, {
+      code: code,
+      password: password,
+    }).subscribe((res: any) => {
+      if (res && res.token) {
+        localStorage.setItem(AUTH_TOKEN_KEY, res.token);
+        localStorage.setItem(AUTH_LAST_REFRESH_KEY, new Date().toISOString());
+        this.isLoggedIn.next(true);
+      }
+    });
+  }
 }
 
 const AUTH_TOKEN_KEY = 'CABOODEL::AUTH_TOKEN';

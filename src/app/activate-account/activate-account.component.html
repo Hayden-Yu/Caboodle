@@ -1,0 +1,36 @@
+<br>
+<div style="text-indent: 30px">
+  <h3>Activate Account</h3>
+  <p class="text-secondary">{{ email }}</p>
+</div>
+<br>
+<div class="container-fluid">
+  <form [formGroup]="form" (ngSubmit)="submitForm()">
+    <div class="row form-group">
+      <div class="col-md-2">
+          <label>New Password:</label>
+      </div>
+      <div class="col-md-6 col-lg-5">
+        <input type="password" class="form-control" placeholder="Enter Password" autofocus ngbTooltip="Must contain more than 6 characters, no white space"
+          [ngClass]="{'is-invalid': invalidControl('password')}" formControlName="password">
+          <div class="invalid-feedback">Invalid password! Password must contain more than 6 characters, no white space</div>
+      </div>
+    </div>
+    <div class="row form-group">
+      <div class="col-md-2">
+          <label>Confirm Password:</label>
+      </div>
+      <div class="col-md-6 col-lg-5">
+        <input type="password" class="form-control" placeholder="Enter Password Again"
+          [ngClass]="{'is-invalid': invalidControl('confirmation')}" formControlName="confirmation">
+          <div class="invalid-feedback">The two entry of password do not match</div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-2">
+        <button class="btn btn-primary" type="submit">Set Password</button>
+      </div>
+    </div>
+  </form>
+</div>

@@ -17,6 +17,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { ApiListComponent } from './api-list/api-list.component';
+import { ActivateAccountComponent } from './activate-account/activate-account.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ApiListComponent } from './api-list/api-list.component';
     CategoriesComponent,
     RegisterComponent,
     ApiListComponent,
+    ActivateAccountComponent,
   ],
   imports: [
     NgbModule.forRoot(),

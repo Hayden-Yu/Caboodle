@@ -13,9 +13,13 @@ router.get('/', (req, res, next) => {
     UserActivation.findById(req.query.code, {
       include: [User]
     }).then(activation => {
-      res.json({
-        email: activation.user.email,
-      });
+      if (activation) {
+        res.json({
+          email: activation.user.email,
+        });
+      } else {
+        res.status(401).send();
+      }
     })
     .catch(next);
   } else if (req.query.email) {
