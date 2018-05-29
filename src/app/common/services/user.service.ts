@@ -1,7 +1,7 @@
 import { ValidationError } from './validation-error';
 import { User } from './user';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { Subject, Observable, of } from 'rxjs';
+import { Subject, Observable, of, observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { map, catchError } from 'rxjs/operators';
@@ -80,6 +80,13 @@ export class UserService {
         }
         return res.error;
       }));
+  }
+
+  forgetPassword(email: string): Observable<boolean> {
+    return this.http.get(`${environment.api}activation?email=${encodeURI(email)}`, {observe: 'response'})
+    .pipe(
+      catchError((err, caught) => of(null)),
+      map(res => res && res.status === 200));
   }
 }
 

@@ -21,13 +21,17 @@ router.get('/', (req, res, next) => {
   } else if (req.query.email) {
     User.findOne({where: {email: req.query.email}})
     .then(user => {
-      UserActivation.create({
-        id: uuid(),
-        userId: user.id,
-      }).then(activation => {
-        eventEmitter.emit(FORGET_PASSWORD_EVENT, activation);
-        res.status(200).send();
-      });
+      if (user) {
+        UserActivation.create({
+          id: uuid(),
+          userId: user.id,
+        }).then(activation => {
+          eventEmitter.emit(FORGET_PASSWORD_EVENT, activation);
+          res.status(200).send();
+        });
+      } else {
+        res.send(401);
+      }
     })
     .catch(next);
   } else {
