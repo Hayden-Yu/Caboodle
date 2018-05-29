@@ -1,6 +1,10 @@
-import { User } from './../model/user.model';
+import { eventEmitter } from './../../architecture/event-emitter';
+import { UserActivation } from './../models/user-activation.model';
+import { User } from './../models/user.model';
 import * as express from 'express';
 import { login } from '../../architecture/auth/jwt-authentication-filter';
+import { USER_CREATED_EVENT } from '../events/user-created-event';
+import * as uuid from 'uuid/v4';
 
 export const router = express.Router();
 
@@ -19,17 +23,7 @@ router.post('/', (req, res, next) => {
   .then(error => {
     if (error) {
       res.status(400).json({ error: error.errors });
-    } else if (!req.body.password || req.body.password.length < 6) {
-      res.status(400).json({
-        error: [{
-          message: 'password should contain more than 6 characters',
-          type: 'Validation error',
-          path: 'password',
-          value: {},
-        }]
-      });
-    } else {
-      user.setPassword(req.body.password);
+    }  else {
       user.save()
       .then(e => login(req, res, next))
       .catch(err => {
@@ -43,3 +37,4 @@ router.post('/', (req, res, next) => {
   })
   .catch(err => next(err));
 });
+

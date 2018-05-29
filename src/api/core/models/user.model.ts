@@ -3,7 +3,9 @@ import { Table, Model, PrimaryKey, Column, Sequelize, Unique, IsEmail, HasMany, 
 import { Collection, UserCollection } from './collection.model';
 import * as crypto from 'crypto';
 
-@Table
+@Table({
+  timestamps: true
+})
 export class User extends Model<User> {
   @AllowNull(false)
   @IsEmail
@@ -26,7 +28,7 @@ export class User extends Model<User> {
   lastName: string;
 
   @AllowNull(false)
-  @Default(true)
+  @Default(false)
   @Column(Sequelize.BOOLEAN)
   active: boolean;
 

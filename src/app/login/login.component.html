@@ -20,7 +20,7 @@
       <label>Password:</label>
     </div>
     <div class="col-md-6 col-lg-5">
-      <input type="password" ngbTooltip="Contains more than 6 characters" class="form-control" placeholder="Password" formControlName="password"
+      <input type="password" ngbTooltip="Contains more than 6 characters, no white space" class="form-control" placeholder="Password" formControlName="password"
         [ngClass]="{'is-invalid': invalidControl('password')}">
       <div class="invalid-feedback">Please enter a valid password</div>
     </div>

@@ -1,10 +1,13 @@
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { catchError } from 'rxjs/operators';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, PLATFORM_ID, Injector } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../common/services/user.service';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { EMAIL_REGEX } from '../common/constants';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-login',
@@ -16,14 +19,21 @@ export class LoginComponent implements OnInit {
   errorMsg: string;
   private errorMsgTimer;
 
+  private modal: NgbModal;
   constructor(private formBuilder: FormBuilder,
-  private userService: UserService,
-  private router: Router) { }
+    private userService: UserService,
+    private router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private injector: Injector) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.modal = this.injector.get(NgbModal);
+    }
+  }
 
   ngOnInit() {
     this.loginForm = this.formBuilder.group({
       username: ['', [Validators.required, Validators.pattern(EMAIL_REGEX)]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(/^\S*$/)]]
     });
     this.errorMsg = '';
   }
@@ -63,5 +73,15 @@ export class LoginComponent implements OnInit {
         }, 3000);
       }
     }));
+  }
+
+  forgetPassword() {
+    const modal = this.modal.open(ForgetPasswordComponent);
+    modal.componentInstance.email = this.loginForm.get('username').value.trim();
+    modal.result.then(email => {
+      if (email) {
+        this.loginForm.get('username').setValue(email);
+      }
+    });
   }
 }

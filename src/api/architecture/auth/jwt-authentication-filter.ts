@@ -1,4 +1,4 @@
-import { User } from './../../core/model/user.model';
+import { User } from './../../core/models/user.model';
 import { environment } from '../../environment.server';
 import * as jwt from 'jsonwebtoken';
 import logger from '../logger';
@@ -22,7 +22,8 @@ export function login(req, res, next) {
       if (user && user.validatePassword(req.body.password)) {
         logger.debug(`Authorized user [${req.body.email}]`);
         generateToken({
-          email: req.body.email
+          email: req.body.email,
+          active: true,
         })
         .then((token) => res.json({token: token}))
         .catch(err => next(err));
@@ -44,7 +45,8 @@ export function refreshToken(req, res, next) {
   logger.debug('Attempt jwt token refresh');
   if (req.auth && req.auth.username) {
     generateToken({
-      email: req.auth.username
+      email: req.auth.username,
+      active: true,
     })
     .then((token) => res.json({token: token}))
     .catch(error => next(error));

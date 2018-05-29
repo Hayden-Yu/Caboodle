@@ -1,5 +1,6 @@
 import { environment } from './../environment.server';
 import { Sequelize } from 'sequelize-typescript';
+import logger from './logger';
 
 export const sequlize = new Sequelize(
   {
@@ -13,5 +14,6 @@ export const sequlize = new Sequelize(
       max: 15,
       min: 3,
       acquire: 10000
-    }
+    },
+    logging: logger.debug.bind(logger),
   });
