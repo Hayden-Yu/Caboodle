@@ -13,11 +13,9 @@ export class User extends Model<User> {
   @Column(Sequelize.STRING(64))
   email: string;
 
-  @AllowNull(false)
   @Column(Sequelize.STRING)
   password: string;
 
-  @AllowNull(false)
   @Column(Sequelize.STRING(32))
   salt: string;
 

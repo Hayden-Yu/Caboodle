@@ -68,18 +68,15 @@ export class UserService {
     });
   }
 
-  register(user: User): Observable<Array<ValidationError>> {
-    return this.http.post(`${environment.api}user`, user)
+  register(user: User): Observable<Array<ValidationError> | boolean> {
+    return this.http.post(`${environment.api}user`, user, {observe: 'response'})
     .pipe(
       catchError((err, caught) => {
         return of(err.error);
       }),
       map(res => {
-        if (res && res.token) {
-          localStorage.setItem(AUTH_TOKEN_KEY, res.token);
-          localStorage.setItem(AUTH_LAST_REFRESH_KEY, new Date().toISOString());
-          this.isLoggedIn.next(true);
-          return [];
+        if (res.status === 200) {
+          return true;
         }
         return res.error;
       }));

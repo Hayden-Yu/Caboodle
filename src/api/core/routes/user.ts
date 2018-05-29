@@ -25,7 +25,10 @@ router.post('/', (req, res, next) => {
       res.status(400).json({ error: error.errors });
     }  else {
       user.save()
-      .then(e => login(req, res, next))
+      .then(u => {
+        res.send();
+        eventEmitter.emit(USER_CREATED_EVENT, u);
+      })
       .catch(err => {
         if (err.message === 'Validation error') {
           res.status(400).json({ error: err.errors });
