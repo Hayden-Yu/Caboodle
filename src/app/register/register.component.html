@@ -1,0 +1,42 @@
+<br>
+<h3 style="text-indent: 30px">Create Account</h3>
+<br>
+<ngb-alert *ngIf="errorMsg" type="danger" (close)="!errorMsg"><span class="fade-in">{{ errorMsg }}</span></ngb-alert>
+<ngb-alert type="success" *ngIf="success"><span class="fade-in">Invitation sent, please check your email</span></ngb-alert>
+<form [formGroup]="userForm" (ngSubmit)="submitForm()">
+<div class="container-fluid">
+  <div class="row form-group">
+    <div class="col-md-2">
+      <label>Email:</label>
+    </div>
+    <div class="col-md-6 col-lg-5">
+      <input  ngbTooltip="Email is required" type="text" formControlName="email" class="form-control" placeholder="Email Address" autofocus
+      [ngClass]="{'is-invalid': invalidControl('email')}">
+      <div class="invalid-feedback">Please enter a valid email address</div>
+    </div>
+  </div>
+
+  <div class="row form-group">
+    <div class="col-md-2">
+      <label>First Name:</label>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <input type="text" formControlName="firstName" class="form-control" placeholder="First Name">
+    </div>
+  </div>
+  <div class="row form-group">
+    <div class="col-md-2">
+      <label>Last Name:</label>
+    </div>
+    <div class="col-md-4 col-lg-3">
+      <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-sm-2">
+      <button class="btn btn-primary" type="submit">Get Invitation</button>
+    </div>
+  </div>
+</div>
+</form>

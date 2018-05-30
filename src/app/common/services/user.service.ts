@@ -1,5 +1,7 @@
+import { ValidationError } from './validation-error';
+import { User } from './user';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { Subject, Observable, of } from 'rxjs';
+import { Subject, Observable, of, observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { map, catchError } from 'rxjs/operators';
@@ -33,14 +35,15 @@ export class UserService {
     return isPlatformServer(this.platformId) ? '' : localStorage.getItem(AUTH_TOKEN_KEY);
   }
 
-  login(email: string, password: string): Observable<void>  {
+  login(email: string, password: string): Observable<boolean>  {
     return this.http.post(`${environment.api}login`, {
-      username: email,
+      email: email,
       password: password
     }).pipe(map((res: any) => {
       localStorage.setItem(AUTH_TOKEN_KEY, res.token);
       localStorage.setItem(AUTH_LAST_REFRESH_KEY, new Date().toISOString());
       this.isLoggedIn.next(true);
+      return true;
     }));
   }
 
@@ -61,6 +64,47 @@ export class UserService {
         localStorage.setItem(AUTH_LAST_REFRESH_KEY, new Date().toISOString());
       } else {
         this.logout();
+      }
+    });
+  }
+
+  register(user: User): Observable<Array<ValidationError> | boolean> {
+    return this.http.post(`${environment.api}user`, user, {observe: 'response'})
+    .pipe(
+      catchError((err, caught) => {
+        return of(err.error);
+      }),
+      map(res => {
+        if (res.status === 200) {
+          return true;
+        }
+        return res.error;
+      }));
+  }
+
+  forgetPassword(email: string): Observable<boolean> {
+    return this.http.get(`${environment.api}activation?email=${encodeURI(email)}`, {observe: 'response'})
+    .pipe(
+      catchError((err, caught) => of(null)),
+      map(res => res && res.status === 200));
+  }
+
+  validateActivation(token: string): Observable<string> {
+    return this.http.get(`${environment.api}activation?code=${token}`)
+    .pipe(
+      catchError((err, caught) => of({})),
+      map((res: any) => res.email));
+  }
+
+  setPassword(code: string, password: string): void {
+    this.http.post(`${environment.api}activation`, {
+      code: code,
+      password: password,
+    }).subscribe((res: any) => {
+      if (res && res.token) {
+        localStorage.setItem(AUTH_TOKEN_KEY, res.token);
+        localStorage.setItem(AUTH_LAST_REFRESH_KEY, new Date().toISOString());
+        this.isLoggedIn.next(true);
       }
     });
   }

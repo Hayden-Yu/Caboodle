@@ -1,4 +1,4 @@
-import { User } from './../../core/model/user.model';
+import { User } from './../../core/models/user.model';
 import * as jwt from 'jsonwebtoken';
 import { environment } from '../../environment.server';
 import logger from '../logger';
@@ -15,7 +15,7 @@ export function jwtTokenFilter(req, res, next) {
         next(err);
       } else {
         if (claim.email) {
-          User.findOne({ where: {email: claim.email} })
+          User.findOne({ where: {email: claim.email, active: true} })
           .then(user => {
             if (user) {
               logger.debug(`User [${claim.email}] authorized`);

@@ -46,4 +46,5 @@ export class ApiListComponent implements OnInit {
         return true;
       }
     });
+  }
 }

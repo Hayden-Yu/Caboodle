@@ -1,3 +1,4 @@
+import { ForgetPasswordComponent } from './login/forget-password/forget-password.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,9 +13,11 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ContentComponent } from './shell/content/content.component';
 import { CategoriesComponent } from './categories/categories.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RegisterComponent } from './register/register.component';
 import { ApiListComponent } from './api-list/api-list.component';
+import { ActivateAccountComponent } from './activate-account/activate-account.component';
 
 @NgModule({
   declarations: [
@@ -25,18 +28,23 @@ import { ApiListComponent } from './api-list/api-list.component';
     PageNotFoundComponent,
     HomeComponent,
     LoginComponent,
+    ForgetPasswordComponent,
     ContentComponent,
     CategoriesComponent,
+    RegisterComponent,
     ApiListComponent,
+    ActivateAccountComponent,
   ],
   imports: [
     NgbModule.forRoot(),
     BrowserModule.withServerTransition({ appId: 'caboodle' }),
     ReactiveFormsModule,
+    FormsModule,
     HttpClientModule,
     routing
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ForgetPasswordComponent]
 })
 export class AppModule { }
