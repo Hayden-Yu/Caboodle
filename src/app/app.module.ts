@@ -18,6 +18,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { ApiListComponent } from './api-list/api-list.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
+import { ApiProfileComponent } from './api-profile/api-profile.component';
+import { AboutUsComponent } from './about-us/about-us.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,8 @@ import { ActivateAccountComponent } from './activate-account/activate-account.co
     RegisterComponent,
     ApiListComponent,
     ActivateAccountComponent,
+    ApiProfileComponent,
+    AboutUsComponent,
   ],
   imports: [
     NgbModule.forRoot(),

@@ -7,6 +7,8 @@ import { HomeComponent } from './home/home.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ApiListComponent } from './api-list/api-list.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ApiProfileComponent } from './api-profile/api-profile.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -15,6 +17,8 @@ export const appRoutes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'categories', component: CategoriesComponent },
   { path: 'listings', component: ApiListComponent },
+  { path: 'about', component: AboutUsComponent },
+  { path: 'apiprofile', component: ApiProfileComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

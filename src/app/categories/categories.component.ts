@@ -21,7 +21,7 @@ export class CategoriesComponent implements OnInit {
     console.log(this.categoryList);
   }
 
-  onCategorySearchKeyup(event: any){
+  onCategorySearchKeyup(event: any) {
     const val = event.target.value.toLowerCase();
     this.filteredList = this.categoryList.filter((categories) => {
       if (categories.name.toLowerCase().includes(val)) {
