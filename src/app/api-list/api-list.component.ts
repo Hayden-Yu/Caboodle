@@ -28,6 +28,10 @@ export class ApiListComponent implements OnInit {
     {'link': 'https://thecatapi.com/docs.html', 'catId': 2, 'name': 'The Cat API'},
     {'link': 'https://dog.ceo/dog-api', 'catId': 2, 'name': 'The Dog API'},
   ];
+  // Pagination values
+  page: 1;
+
+
   constructor(private categories: CategoryService) { }
 
   ngOnInit() {
