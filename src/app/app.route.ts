@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ApiListComponent } from './api-list/api-list.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ApiProfileComponent } from './api-profile/api-profile.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -18,6 +19,7 @@ export const appRoutes: Routes = [
   { path: 'categories', component: CategoriesComponent },
   { path: 'listings', component: ApiListComponent },
   { path: 'about', component: AboutUsComponent },
+  { path: 'contact', component: ContactUsComponent },
   { path: 'apiprofile', component: ApiProfileComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }

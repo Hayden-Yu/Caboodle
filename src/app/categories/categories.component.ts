@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CategoryService } from '../../data-class/category.service';
+import { CategoryService } from '../data-class/category.service';
 import { filter } from 'rxjs/operators';
 
 @Component({

@@ -20,6 +20,7 @@ import { ApiListComponent } from './api-list/api-list.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { ApiProfileComponent } from './api-profile/api-profile.component';
 import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { AboutUsComponent } from './about-us/about-us.component';
     ActivateAccountComponent,
     ApiProfileComponent,
     AboutUsComponent,
+    ContactUsComponent,
   ],
   imports: [
     NgbModule.forRoot(),
