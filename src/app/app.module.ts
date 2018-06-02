@@ -12,13 +12,15 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ContentComponent } from './shell/content/content.component';
-import { CategoriesComponent } from './categories/categories.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { ApiListComponent } from './api-list/api-list.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { CaptchaDirective } from './common/directives/captcha.directive';
+import { ApiProfileComponent } from './api-profile/api-profile.component';
+import { AboutUsComponent } from './about-us/about-us.component';
+import { ContactUsComponent } from './contact-us/contact-us.component';
 
 @NgModule({
   declarations: [
@@ -31,11 +33,13 @@ import { CaptchaDirective } from './common/directives/captcha.directive';
     LoginComponent,
     ForgetPasswordComponent,
     ContentComponent,
-    CategoriesComponent,
     RegisterComponent,
     ApiListComponent,
     ActivateAccountComponent,
     CaptchaDirective,
+    ApiProfileComponent,
+    AboutUsComponent,
+    ContactUsComponent,
   ],
   imports: [
     NgbModule.forRoot(),

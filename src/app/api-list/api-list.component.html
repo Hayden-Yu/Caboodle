@@ -6,20 +6,34 @@
         <div class="container bootstrap-header-table"> 
             <div class="row">
                 <div class="col-md-3">
-                        <a href="categories" class="btn btn-info" role="button">Search By Category</a>
-                <!-- <input class="form-control" id="apiSearch" name="apiSearch" type="text" placeholder="Search by API" style="margin-bottom:10px;"/> -->
-                
-                <input class="form-control" id="apiSearch" name="apiSearch" type="text" placeholder="Search by API Listings" style="margin-bottom:10px;"  (keyup)="onAPISearchKeyup($event)"/>
+                    <label  for="apiSearch" hidden></label>
+                    <input class="form-control shadow-sm" id="apiSearch" name="apiSearch" type="text" placeholder="Search Api Listings" style="margin-bottom:10px;"  (keyup)="onAPISearchKeyup($event)"/>
                 </div>
+                <div ngbDropdown>                     
+                    <button class="btn btn-outline-primary"  id="categoryDropdownMenu" aria-haspopup="true" aria-expanded="false" ngbDropdownToggle>
+                        Select Category
+                    </button>
+                    <div ngbDropdownMenu  aria-labelledby="categoryDropdownMenu">
+                            <button class="dropdown-item" (click)="onCategoryClick(-1)" >All</button>
+                            <button *ngFor="let cat of catDrop" class="dropdown-item" (click)="onCategoryClick(cat.id)" >{{cat.name}}</button>
+                    </div>
+                </div>
+                
+                
             </div>
-            <table class="table table-striped" id="table-format">
-                <tr class="row header-row" style="cursor:pointer">
-                    <th >API Name</th>
-                </tr>
-                <tr class="row body-rows" *ngFor="let api of filteredList" (click)="routeAPI(api.link)" style="cursor:pointer" >
-                    <td><a href={{api.link}}>{{api.name}}</a></td>
+            <!-- Table Maybe upgrade to datatable in the future--> 
+
+            <table class="table table-striped table-bordered table-hover">
+                <caption>List of api's</caption>
+                <thead class="thead-dark" style="background-color: #212529">
+                    <tr style="cursor:pointer">
+                        <th>API Name</th>
+                    </tr>
+                </thead>
+                <tr *ngFor="let api of filteredList"  (click)="routeAPI(api.link)" style="cursor:pointer" >
+                    <td scope="row"><a href={{api.link}}>{{api.name}}</a></td>
                 </tr>
             </table>
-        </div>
-    </div>
-</div>
+        </div>   <!-- end row -->
+    </div>    <!-- end panel body -->
+</div>  <!-- end panel default -->
