@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoryService } from '../data-class/category.service';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 @Component({
   selector: 'app-api-list',
   templateUrl: './api-list.component.html',
-  styles: []
+  styleUrls: ['./api-list.component.scss']
 })
 
 
