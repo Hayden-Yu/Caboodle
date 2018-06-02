@@ -1,11 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../data-class/category.service';
+
 
 @Component({
   selector: 'app-api-list',
   templateUrl: './api-list.component.html',
   styles: []
 })
+
+
 export class ApiListComponent implements OnInit {
+  catDrop: any;
   filteredList: any;
   apiList: any = [  // convert to service?
     {'link': 'https://github.com/peruukki/nhl-score-api', 'catId': 0, 'name': 'NHL Scores'},
@@ -22,10 +27,15 @@ export class ApiListComponent implements OnInit {
     {'link': 'https://thecatapi.com/docs.html', 'catId': 2, 'name': 'The Cat API'},
     {'link': 'https://dog.ceo/dog-api', 'catId': 2, 'name': 'The Dog API'},
   ];
-  constructor() { }
+  constructor(private categories: CategoryService) { }
 
   ngOnInit() {
-      this.filteredList = this.apiList.sort(function(a, b) {
+      this.catDrop = this.categories.getCategories();
+      this.filteredList = this.getFilteredList();
+  }
+
+  getFilteredList() {
+    return this.apiList.sort(function(a, b) {
       const nameA = a.name.toUpperCase(); // ignore upper and lowercase
       const nameB = b.name.toUpperCase(); // ignore upper and lowercase
       if (nameA < nameB) {
@@ -46,5 +56,18 @@ export class ApiListComponent implements OnInit {
         return true;
       }
     });
+    console.log(this.filteredList);
+  }
+  onCategoryClick(id) {
+    if (id === -1) {
+      this.filteredList = this.getFilteredList();
+    } else {
+    this.filteredList = this.apiList.filter(apiList => {
+      if (apiList.catId === id) {
+        return true;
+      }
+      return false;
+    });
+    }
   }
 }

@@ -12,7 +12,6 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { ContentComponent } from './shell/content/content.component';
-import { CategoriesComponent } from './categories/categories.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
@@ -33,7 +32,6 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     LoginComponent,
     ForgetPasswordComponent,
     ContentComponent,
-    CategoriesComponent,
     RegisterComponent,
     ApiListComponent,
     ActivateAccountComponent,
