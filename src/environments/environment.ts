@@ -5,6 +5,7 @@
 export const environment = {
   production: false,
   api: 'http://localhost:4000/api/',
+  captchaKey: '6LfldVwUAAAAAItkDn0UjyZihpmWgLwGGMjM_grm',
 };
 
 /*

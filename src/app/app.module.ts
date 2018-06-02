@@ -18,6 +18,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { ApiListComponent } from './api-list/api-list.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
+import { CaptchaDirective } from './common/directives/captcha.directive';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { ActivateAccountComponent } from './activate-account/activate-account.co
     RegisterComponent,
     ApiListComponent,
     ActivateAccountComponent,
+    CaptchaDirective,
   ],
   imports: [
     NgbModule.forRoot(),

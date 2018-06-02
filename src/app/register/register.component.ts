@@ -1,3 +1,4 @@
+import { CaptchaValidator } from './../common/directives/captcha-validator';
 import { ValidationError } from './../common/services/validation-error';
 import { UserService } from './../common/services/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -24,7 +25,8 @@ export class RegisterComponent implements OnInit {
       this.userForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(EMAIL_REGEX)]],
       firstName: '',
-      lastName: ''
+      lastName: '',
+      captcha: ['', Validators.required],
     });
     this.errorMsg = '';
     this.success = false;
@@ -36,6 +38,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.userForm);
     if (!this.userForm.valid) {
       return;
     }
