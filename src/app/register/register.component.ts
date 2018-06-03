@@ -1,4 +1,3 @@
-import { CaptchaValidator } from './../common/directives/captcha-validator';
 import { ValidationError } from './../common/services/validation-error';
 import { UserService } from './../common/services/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -38,8 +37,9 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
-    console.log(this.userForm);
     if (!this.userForm.valid) {
+      this.userForm.get('email').markAsTouched();
+      this.userForm.get('captcha').markAsTouched();
       return;
     }
     if (this.errorMsgTimer) {
@@ -51,7 +51,7 @@ export class RegisterComponent implements OnInit {
       email: this.userForm.get('email').value.trim(),
       firstName: this.userForm.get('firstName').value.trim(),
       lastName: this.userForm.get('lastName').value.trim()
-    }).subscribe(res => {
+    }, this.userForm.get('captcha').value).subscribe(res => {
       if (res instanceof Array || !res) {
         const errs = res as Array<ValidationError>;
         if (errs.length) {

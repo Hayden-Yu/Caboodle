@@ -10,7 +10,7 @@
       <label>Email:</label>
     </div>
     <div class="col-md-6 col-lg-5">
-      <input  ngbTooltip="Email is required" type="text" formControlName="email" class="form-control" placeholder="Email Address" autofocus
+      <input  ngbTooltip="Email is required" type="text" formControlName="email" class="form-control" placeholder="Email Address"
       [ngClass]="{'is-invalid': invalidControl('email')}">
       <div class="invalid-feedback">Please enter a valid email address</div>
     </div>
@@ -32,7 +32,13 @@
       <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
     </div>
   </div>
-  <div appCaptcha formControlName="captcha"></div>
+  <div class="row form-group">
+    <div class="row-md-4">
+      <div appCaptcha formControlName="captcha" class="form-control" style="width:inherit;margin-left:15px"
+      [ngClass]="{'is-invalid': invalidControl('captcha')}"></div>
+      <div class="invalid-feedback" style="margin-left:15px">Please solve the captcha</div>
+    </div>
+  </div>
   <br>
   <div class="row">
     <div class="col-sm-2">

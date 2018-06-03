@@ -1,9 +1,8 @@
 import { environment } from './../../../environments/environment';
 // tslint:disable-next-line:max-line-length
-import { Directive, Input, OnInit, ElementRef, Inject, PLATFORM_ID, OnDestroy, NgZone, Injector, OnChanges, SimpleChanges, forwardRef } from '@angular/core';
+import { Directive, Input, OnInit, ElementRef, Inject, PLATFORM_ID, OnDestroy, NgZone, Injector, OnChanges, SimpleChanges, forwardRef, HostListener } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl, Validators, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isPlatformServer, isPlatformBrowser } from '@angular/common';
-import { CaptchaValidator } from './captcha-validator';
 
 export interface CaptchaOption {
   theme?: 'dark' | 'light';
@@ -14,14 +13,11 @@ export interface CaptchaOption {
 
 @Directive({
   selector: '[appCaptcha]',
-  providers: [
-    CaptchaValidator,
-    {
+  providers: [{
       provide: NG_VALUE_ACCESSOR,
       multi: true,
       useExisting: forwardRef(() => CaptchaDirective),
-    }
-  ]
+  }]
 })
 export class CaptchaDirective implements OnInit, ControlValueAccessor, OnChanges {
   @Input() captchaOptions: CaptchaOption = {};
@@ -33,7 +29,6 @@ export class CaptchaDirective implements OnInit, ControlValueAccessor, OnChanges
   constructor(private element: ElementRef,
     @Inject(PLATFORM_ID) private platformId: Object,
     private injector: Injector,
-    private captchaValidator: CaptchaValidator,
     private zone: NgZone) {
   }
 
@@ -48,8 +43,6 @@ export class CaptchaDirective implements OnInit, ControlValueAccessor, OnChanges
   ngOnChanges(changes: SimpleChanges) {
     if (isPlatformBrowser(this.platformId) && changes.hasOwnProperty('form')) {
       this.control = this.injector.get(NgControl).control;
-      this.control.setValidators(Validators.required);
-      this.control.updateValueAndValidity();
     }
   }
 
@@ -74,27 +67,23 @@ export class CaptchaDirective implements OnInit, ControlValueAccessor, OnChanges
     };
   }
 
-  verifyToken( token: string ) {
-    this.control.setAsyncValidators(this.captchaValidator.validateToken(token));
-    this.control.updateValueAndValidity();
-  }
-
   onExpired() {
     this.zone.run(() => {
       this.onChange('');
-      this.onTouched('');
+      this.writeValue('');
     });
   }
 
   onSuccess(token: string ) {
     this.zone.run(() => {
-      this.verifyToken(token);
       this.onChange(token);
       this.onTouched(token);
+      this.writeValue(token);
     });
   }
 
-  writeValue(obj: any): void {
+  writeValue(token: string): void {
+    this.element.nativeElement.value = token;
   }
 
   registerOnChange(fn: any): void {
