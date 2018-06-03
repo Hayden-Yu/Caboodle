@@ -15,7 +15,7 @@ import { Component, OnInit, Input } from '@angular/core';
             <div class="invalid-feedback">{{ errMsg }}</div>
           </div>
         </div>
-        <button class="btn btn-primary" (click)="submitForm()">Recover Password</button>
+        <button class="btn btn-outline-primary" (click)="submitForm()">Recover Password</button>
       </div>
       <div class="card-footer" [hidden]="!sent">A recovery link was sent to your email</div>
     </div>

@@ -1,44 +1,52 @@
-<br>
-<h3 style="text-indent: 30px">Log In</h3>
-<br>
+<video loop="" autoplay="" onplaying="this.controls=false" onclick="this.play();">
+  <source src="assets/images/slow_motion.mp4" type="video/mp4">
+    <p></p>
+</video>
 <ngb-alert *ngIf="errorMsg" type="danger" (close)="!errorMsg"><span class="fade-in">{{ errorMsg }}</span></ngb-alert>
-<form [formGroup]="loginForm" (ngSubmit)="submitForm()">
 <div class="container-fluid">
-  <div class="row form-group">
-    <div class="col-md-2">
-        <label>Email:</label>
-    </div>
-    <div class="col-md-6 col-lg-5">
-      <input type="text" class="form-control" placeholder="Email address" autofocus formControlName="username"
-        [ngClass]="{'is-invalid': invalidControl('username')}">
-        <div class="invalid-feedback">Please enter a valid email you registered with</div>
-    </div>
-  </div>
-  <br>
-  <div class="row form-group">
-    <div class="col-md-2">
-      <label>Password:</label>
-    </div>
-    <div class="col-md-6 col-lg-5">
-      <input type="password" ngbTooltip="Contains more than 6 characters, no white space" class="form-control" placeholder="Password" formControlName="password"
-        [ngClass]="{'is-invalid': invalidControl('password')}">
-      <div class="invalid-feedback">Please enter a valid password</div>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-sm-5">
-      <a><button class="btn btn-secondary btn" type="button" (click)="forgetPassword()">Forgot Password?</button></a>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-2">
-      <button class="btn btn-primary" type="submit" style="width:100%">Log In</button>
-    </div>
-    <div class="col-2">
-        <a routerLink="/signup"><button class="btn btn-primary" type="button" style="width:100%">Sign Up</button></a>
+  <form [formGroup]="loginForm" (ngSubmit)="submitForm()">
+    <br>
+    <div class="row">
+      <div class="col-12">
+        <h3 style="overflow: hidden;">Log In</h3>
       </div>
-  </div>
+    </div>
+    <br>
+    <div class="row form-group">
+      <div class="col-md-2">
+          <label>Email:</label>
+      </div>
+      <div class="col-md-6 col-lg-5">
+        <input type="text" class="form-control" placeholder="Email address" autofocus formControlName="username"
+          [ngClass]="{'is-invalid': invalidControl('username')}">
+          <div class="invalid-feedback">Please enter a valid email you registered with</div>
+      </div>
+    </div>
+    <br>
+    <div class="row form-group">
+      <div class="col-md-2">
+        <label>Password:</label>
+      </div>
+      <div class="col-md-6 col-lg-5">
+        <input type="password" ngbTooltip="Contains more than 6 characters, no white space" class="form-control" placeholder="Password" formControlName="password"
+          [ngClass]="{'is-invalid': invalidControl('password')}">
+        <div class="invalid-feedback">Please enter a valid password</div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-sm-5">
+        <a><button class="btn btn-outline-info" type="button" (click)="forgetPassword()">Forgot Password?</button></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <button class="btn btn-outline-primary" type="submit" style="width:100%">Log In</button>
+      </div>
+      <div class="col-2">
+          <a routerLink="/signup"><button class="btn btn-outline-primary" type="button" style="width:100%">Sign Up</button></a>
+        </div>
+    </div>
+  </form>
 </div>
-</form>
 

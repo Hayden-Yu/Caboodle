@@ -1,5 +1,6 @@
 export const environment: any = {
   host: 'http://localhost:4200',
+  captchaKey: 'google recaptcha key',
   jwtSecret: 'some random string',
   logLevel: 'info',
   database:{

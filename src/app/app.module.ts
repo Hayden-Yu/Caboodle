@@ -17,6 +17,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
 import { ApiListComponent } from './api-list/api-list.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
+import { CaptchaDirective } from './common/directives/captcha.directive';
 import { ApiProfileComponent } from './api-profile/api-profile.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
@@ -35,6 +36,7 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     RegisterComponent,
     ApiListComponent,
     ActivateAccountComponent,
+    CaptchaDirective,
     ApiProfileComponent,
     AboutUsComponent,
     ContactUsComponent,

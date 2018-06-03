@@ -8,7 +8,7 @@ import { EMAIL_REGEX } from '../common/constants';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styles: []
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   userForm: FormGroup;
@@ -24,7 +24,8 @@ export class RegisterComponent implements OnInit {
       this.userForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.pattern(EMAIL_REGEX)]],
       firstName: '',
-      lastName: ''
+      lastName: '',
+      captcha: ['', Validators.required],
     });
     this.errorMsg = '';
     this.success = false;
@@ -37,6 +38,8 @@ export class RegisterComponent implements OnInit {
 
   submitForm() {
     if (!this.userForm.valid) {
+      this.userForm.get('email').markAsTouched();
+      this.userForm.get('captcha').markAsTouched();
       return;
     }
     if (this.errorMsgTimer) {
@@ -48,7 +51,7 @@ export class RegisterComponent implements OnInit {
       email: this.userForm.get('email').value.trim(),
       firstName: this.userForm.get('firstName').value.trim(),
       lastName: this.userForm.get('lastName').value.trim()
-    }).subscribe(res => {
+    }, this.userForm.get('captcha').value).subscribe(res => {
       if (res instanceof Array || !res) {
         const errs = res as Array<ValidationError>;
         if (errs.length) {

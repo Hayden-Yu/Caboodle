@@ -68,8 +68,8 @@ export class UserService {
     });
   }
 
-  register(user: User): Observable<Array<ValidationError> | boolean> {
-    return this.http.post(`${environment.api}user`, user, {observe: 'response'})
+  register(user: User, token: string): Observable<Array<ValidationError> | boolean> {
+    return this.http.post(`${environment.api}user?token=${token}`, user, {observe: 'response'})
     .pipe(
       catchError((err, caught) => {
         return of(err.error);
