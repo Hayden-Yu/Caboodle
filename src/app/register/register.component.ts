@@ -8,7 +8,7 @@ import { EMAIL_REGEX } from '../common/constants';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styles: []
+  styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
   userForm: FormGroup;

@@ -1,49 +1,57 @@
-<br>
-<h3 style="text-indent: 30px">Create Account</h3>
-<br>
+<video loop="" autoplay="" onplaying="this.controls=false" onclick="this.play();">
+    <source src="assets/images/slow_motion.mp4" type="video/mp4">
+      <p></p>
+  </video>
 <ngb-alert *ngIf="errorMsg" type="danger" (close)="!errorMsg"><span class="fade-in">{{ errorMsg }}</span></ngb-alert>
 <ngb-alert type="success" *ngIf="success"><span class="fade-in">Invitation sent, please check your email</span></ngb-alert>
-<form [formGroup]="userForm" (ngSubmit)="submitForm()">
 <div class="container-fluid">
-  <div class="row form-group">
-    <div class="col-md-2">
-      <label>Email:</label>
+  <form [formGroup]="userForm" (ngSubmit)="submitForm()">
+    <br>
+    <div class="row">
+      <div class="col-12">
+        <h3 style="overflow: hidden;">Create Account</h3>
+      </div>
     </div>
-    <div class="col-md-6 col-lg-5">
-      <input  ngbTooltip="Email is required" type="text" formControlName="email" class="form-control" placeholder="Email Address"
-      [ngClass]="{'is-invalid': invalidControl('email')}">
-      <div class="invalid-feedback">Please enter a valid email address</div>
+    <br>
+    <div class="row form-group">
+      <div class="col-md-2">
+        <label>Email:</label>
+      </div>
+      <div class="col-md-6 col-lg-5">
+        <input  ngbTooltip="Email is required" type="text" formControlName="email" class="form-control" placeholder="Email Address"
+        [ngClass]="{'is-invalid': invalidControl('email')}">
+        <div class="invalid-feedback">Please enter a valid email address</div>
+      </div>
     </div>
-  </div>
 
-  <div class="row form-group">
-    <div class="col-md-2">
-      <label>First Name:</label>
+    <div class="row form-group">
+      <div class="col-md-2">
+        <label>First Name:</label>
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <input type="text" formControlName="firstName" class="form-control" placeholder="First Name">
+      </div>
     </div>
-    <div class="col-md-4 col-lg-3">
-      <input type="text" formControlName="firstName" class="form-control" placeholder="First Name">
+    <div class="row form-group">
+      <div class="col-md-2">
+        <label>Last Name:</label>
+      </div>
+      <div class="col-md-4 col-lg-3">
+        <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
+      </div>
     </div>
-  </div>
-  <div class="row form-group">
-    <div class="col-md-2">
-      <label>Last Name:</label>
+    <div class="row form-group">
+      <div class="row-md-4">
+        <div appCaptcha formControlName="captcha" class="form-control" style="width:inherit;margin-left:15px;overflow: hidden;"
+        [ngClass]="{'is-invalid': invalidControl('captcha')}"></div>
+        <div class="invalid-feedback" style="margin-left:15px">Please solve the captcha</div>
+      </div>
     </div>
-    <div class="col-md-4 col-lg-3">
-      <input type="text" formControlName="lastName" class="form-control" placeholder="Last Name">
+    <br>
+    <div class="row">
+      <div class="col-sm-2">
+        <button class="btn btn-outline-primary" type="submit">Get Invitation</button>
+      </div>
     </div>
-  </div>
-  <div class="row form-group">
-    <div class="row-md-4">
-      <div appCaptcha formControlName="captcha" class="form-control" style="width:inherit;margin-left:15px"
-      [ngClass]="{'is-invalid': invalidControl('captcha')}"></div>
-      <div class="invalid-feedback" style="margin-left:15px">Please solve the captcha</div>
-    </div>
-  </div>
-  <br>
-  <div class="row">
-    <div class="col-sm-2">
-      <button class="btn btn-primary" type="submit">Get Invitation</button>
-    </div>
-  </div>
+  </form>
 </div>
-</form>

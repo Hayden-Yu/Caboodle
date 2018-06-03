@@ -1,0 +1,20 @@
+video {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -9999;
+}
+
+h3, label {
+  color: #FFFFFF;
+}
+
+h3 {
+  text-shadow: -0.3px 0 #6c757d, 0 0.3px #6c757d, 0.3px 0 #6c757d, 0 -0.3px #6c757d;
+}
+
+.invalid-feedback {
+  color: var(--warning);
+}
