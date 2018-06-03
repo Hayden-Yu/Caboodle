@@ -2,7 +2,7 @@ export const environment: any = {
   host: 'http://localhost:4200',
   jwtSecret: 'some random string',
   logLevel: 'info',
-  database:
+  database:{
     host: 'localhost',
     port: 3306,
     username: 'caboodle_admin',

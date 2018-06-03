@@ -1,15 +1,16 @@
+
 <div class="search-button" align="center" >
-    <a routerLink="/search">                                                              <!--Might need another page?-->
-    <button>API Search</button>
+    <a routerLink="/listings">                                                            
+    <button class="btn btn-primary btn-lg btn-block">API Search</button>
     </a>
 </div>
-
-<table style="width: 100%; height: 100%; overflow: auto">                           <!--Placeholder values until APIs are stored and can be represented.-->
+<div class="panel-body">
+    <table style="width: 100%; height: 100%; overflow: auto">                           <!--Placeholder values until APIs are stored and can be retrieved.-->
     <tr>
         <td>
             <div class="company-recent-api">
                 <p style="font-weight: bold; font-size: 25px">Recently Added Company APIs</p>
-                <table border="1" style="width: 50%">                               <!--Wrap content or have a fixed size for tables?-->
+                <table border="1" style="width: 50%" class="table table-bordered">                               <!--Wrap content or have a fixed size for tables?-->
                     <tr>
                         <td style="font-weight: bold">#</td>
                         <td style="font-weight: bold">Company</td>
@@ -57,7 +58,7 @@
         <td>
             <div class="recently-visited-api">
                 <p style="font-weight: bold; font-size: 25px">Recently Visited APIs</p>
-                <table border="1" style="width: 40%">                               <!--Wrap content or have a fixed size for tables?-->
+                <table border="1" style="width: 40%" class="table table-bordered">                               <!--Wrap content or have a fixed size for tables?-->
                     <tr>
                         <td style="font-weight: bold">API Name</td>
                         <td style="font-weight: bold">Date</td>
@@ -90,7 +91,7 @@
         <td>
             <div class="recently-added-user-api">
                 <p style="font-weight: bold; font-size: 25px">Recently Added User APIs</p>
-                <table border="1" style="width: 50%">                               <!--Wrap content or have a fixed size for tables?-->
+                <table class="table table-bordered" border="1" style="width: 50%">                               <!--Wrap content or have a fixed size for tables?-->
                     <tr>
                         <td style="font-weight: bold">#</td>
                         <td style="font-weight: bold">User</td>
@@ -135,4 +136,5 @@
             </div>
         </td>
     </tr>
-</table>
+    </table>
+</div>
