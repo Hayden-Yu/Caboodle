@@ -16,8 +16,8 @@ router.use(jwtTokenFilter);
 router.post('/login', login);
 router.get('/refreshToken', refreshToken);
 
-router.use('/user', user.router);
-router.use('/activation', activation.router);
+router.use('/', user.router);
+router.use('/', activation.router);
 
 router.use(jwtErrorHandler);
 router.use((req, res) => res.status(404).send());

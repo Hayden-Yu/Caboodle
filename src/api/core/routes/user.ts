@@ -1,3 +1,4 @@
+import { Collection } from './../models/collection.model';
 import { eventEmitter } from './../../architecture/event-emitter';
 import { UserActivation } from './../models/user-activation.model';
 import { User } from './../models/user.model';
@@ -7,15 +8,37 @@ import { USER_CREATED_EVENT } from '../events/user-created-event';
 import * as uuid from 'uuid/v4';
 import { environment } from './../../environment.server';
 import fetch from 'node-fetch';
+import { Endpoint } from '../models/endpoint.model';
 
 export const router = express.Router();
 
 router.param('userId', (req: any, res, next, id) => {
-  User.findById(id)
-  .then((user) => req.user = user);
+  User.findById(id, {
+    include: [{
+      model: Collection,
+      include: [Endpoint]
+    }]
+  })
+  .then((user) => {
+    req.user = user;
+    next();
+  });
 });
 
-router.post('/', (req, res, next) => {
+router.get('/user/:userId', (req: any, res, next) => {
+  if (!req.auth) {
+    res.send(401);
+  } else if (req.user) {
+    req.user.password = undefined;
+    req.user.salt = undefined;
+    req.user.updatedAt = undefined;
+    res.json(req.user);
+  } else {
+    res.send(404);
+  }
+});
+
+router.post('/user', (req, res, next) => {
   fetch(`https://www.google.com/recaptcha/api/siteverify?secret=${environment.captchaKey}&response=${req.query.token}`, {
     method: 'POST'
   })

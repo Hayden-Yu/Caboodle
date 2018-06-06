@@ -53,9 +53,7 @@ export class LoginComponent implements OnInit {
     )
     .pipe(catchError((err, caught) => {
       if (err.status === 401) {
-        if (err && err.length) {
-          this.errorMsg = 'Invalid Login';
-        }
+        this.errorMsg = 'Invalid Login';
       }
       return of(false);
     }))

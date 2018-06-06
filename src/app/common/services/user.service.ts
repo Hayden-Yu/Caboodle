@@ -1,5 +1,5 @@
-import { ValidationError } from './validation-error';
-import { User } from './user';
+import { ValidationError } from '../models/validation-error';
+import { User } from '../models/user';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Subject, Observable, of, observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
