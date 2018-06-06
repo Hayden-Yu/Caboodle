@@ -1,3 +1,4 @@
+import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { Component } from '@angular/core';
 import { RegisterComponent } from './register/register.component';
@@ -19,6 +20,7 @@ export const appRoutes: Routes = [
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'apiprofile', component: ApiProfileComponent },
+  { path: 'profile', component: AccountProfileComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];

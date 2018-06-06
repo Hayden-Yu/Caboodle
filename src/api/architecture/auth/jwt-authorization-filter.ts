@@ -21,10 +21,14 @@ export function jwtTokenFilter(req, res, next) {
               logger.debug(`User [${claim.email}] authorized`);
               req.auth = user;
             }
+            next();
           });
+        } else {
+          next();
         }
       }
     });
+  } else {
+    next();
   }
-  next();
 }

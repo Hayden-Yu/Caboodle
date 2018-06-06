@@ -108,6 +108,11 @@ export class UserService {
       }
     });
   }
+
+  getCurrentUser(): Observable<User> {
+    return this.http.get(`${environment.api}me`)
+      .pipe(map((res: any) => res));
+  }
 }
 
 const AUTH_TOKEN_KEY = 'CABOODEL::AUTH_TOKEN';

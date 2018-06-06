@@ -9,6 +9,7 @@ import * as uuid from 'uuid/v4';
 import { environment } from './../../environment.server';
 import fetch from 'node-fetch';
 import { Endpoint } from '../models/endpoint.model';
+import * as clientEnv from '../../../environments/environment.prod';
 
 export const router = express.Router();
 
@@ -77,3 +78,11 @@ router.post('/user', (req, res, next) => {
   .catch(next);
 });
 
+router.get('/me', (req: any, res, next) => {
+  if (!req.auth) {
+    res.send(401);
+    return;
+  } else {
+    res.redirect(`/${clientEnv.environment.api}user/${req.auth.id}`);
+  }
+});
