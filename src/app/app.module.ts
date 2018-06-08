@@ -23,6 +23,7 @@ import { ApiProfileComponent } from './api-profile/api-profile.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
+import { CollectionEndpointListComponent } from './collection-endpoint-list/collection-endpoint-list.component';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { AccountProfileComponent } from './account-profile/account-profile.compo
     AboutUsComponent,
     ContactUsComponent,
     AccountProfileComponent,
+    CollectionEndpointListComponent,
   ],
   imports: [
     NgbModule.forRoot(),

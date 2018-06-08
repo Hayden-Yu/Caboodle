@@ -1,0 +1,8 @@
+#detail {
+  overflow-y: auto;
+  height: 400px;
+}
+#list {
+  overflow-y: auto;
+  max-height: 400px;
+}

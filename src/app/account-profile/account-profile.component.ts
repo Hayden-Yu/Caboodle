@@ -13,6 +13,7 @@ export class AccountProfileComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
+    this.user = new User();
     this.userService.getCurrentUser()
       .subscribe(user => this.user = user);
   }

@@ -1,7 +1,15 @@
 <div class="container-fluid">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Welcome{{ (user && user.firstName ? ', ' + user.firstName : '') + '!' }}</h4>
+      <h4 class="card-title" style="display: inline-block;">Welcome{{ (user.firstName ? ', ' + user.firstName : '') + '!' }}</h4>
+      <i class="material-icons text-dark" style="margin-left: 5px;font-size: 1.5rem;">edit</i>
+      <h6 class="card-subtitle mb-2 text-muted">{{ user.email }}</h6>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-body">
+      <h6>Favorite Collections</h6>
+      <app-collection-endpoint-list [collections]="user.collections"></app-collection-endpoint-list>
     </div>
   </div>
 </div>
