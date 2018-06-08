@@ -24,6 +24,9 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { CollectionEndpointListComponent } from './collection-endpoint-list/collection-endpoint-list.component';
+import { UpdateAccountComponent } from './account-profile/update-account/update-account.component';
+// tslint:disable-next-line:max-line-length
+import { CollectionEndpointListDeleteConfirmationComponent } from './collection-endpoint-list/delete-confirmation/delete-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,8 @@ import { CollectionEndpointListComponent } from './collection-endpoint-list/coll
     ContactUsComponent,
     AccountProfileComponent,
     CollectionEndpointListComponent,
+    UpdateAccountComponent,
+    CollectionEndpointListDeleteConfirmationComponent,
   ],
   imports: [
     NgbModule.forRoot(),
@@ -62,6 +67,10 @@ import { CollectionEndpointListComponent } from './collection-endpoint-list/coll
     }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ForgetPasswordComponent]
+  entryComponents: [
+    ForgetPasswordComponent,
+    UpdateAccountComponent,
+    CollectionEndpointListDeleteConfirmationComponent
+  ]
 })
 export class AppModule { }

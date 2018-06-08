@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { CollectionEndpointListDeleteConfirmationComponent } from './delete-confirmation/delete-confirmation.component';
+import { isPlatformBrowser } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, Input, Output, EventEmitter, Inject, PLATFORM_ID, Injector } from '@angular/core';
 import { Collection } from '../common/models/collection';
 
 @Component({
@@ -11,13 +14,24 @@ export class CollectionEndpointListComponent implements OnInit {
   @Output() deleteCol: EventEmitter<number>;
 
   active: Collection;
-  constructor() { }
+  private modal: NgbModal;
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private injector: Injector
+  ) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.modal = this.injector.get(NgbModal);
+    }
+  }
 
   ngOnInit() {
     this.active = new Collection();
+    this.deleteCol = new EventEmitter();
   }
 
   deleteCollection(id: number) {
-    this.deleteCol.emit(id);
+    this.modal.open(CollectionEndpointListDeleteConfirmationComponent).result
+    .then(() => this.deleteCol.emit(id))
+    .catch(() => {});
   }
 }
