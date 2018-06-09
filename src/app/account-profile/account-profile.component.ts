@@ -1,3 +1,4 @@
+import { CaboodleApiService } from './../common/services/caboodle-api.service';
 import { UpdateAccountComponent } from './update-account/update-account.component';
 import { UserService } from './../common/services/user.service';
 import { User } from './../common/models/user';
@@ -16,6 +17,7 @@ export class AccountProfileComponent implements OnInit {
 
   modal: NgbModal;
   constructor(private userService: UserService,
+    private apiService: CaboodleApiService,
     @Inject(PLATFORM_ID) private platformId: Object,
     private injector: Injector
   ) {
@@ -35,6 +37,19 @@ export class AccountProfileComponent implements OnInit {
     modal.componentInstance.email = this.user.email;
     modal.componentInstance.firstName = this.user.firstName;
     modal.componentInstance.lastName = this.user.lastName;
+    modal.result
+    .then((user: User) => {
+      this.userService.updateUser(this.user.id, user)
+        .subscribe(u => this.user = u);
+    })
+    .catch(() => {});
+  }
+
+  deleteCollection(collectionId: number) {
+    if (collectionId) {
+      this.apiService.removeAccountCollection(this.user.id, collectionId)
+      .subscribe(u => this.user = u);
+    }
   }
 
 }

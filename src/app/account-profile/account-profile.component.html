@@ -2,14 +2,15 @@
   <div class="card">
     <div class="card-body">
       <h4 class="card-title" style="display: inline-block;">Welcome{{ (user.firstName ? ', ' + user.firstName : '') + '!' }}</h4>
-      <i class="material-icons text-dark" style="margin-left: 5px;font-size: 1.5rem;" ngbTooltip="Edit Profile" placement="right" (click)="updateProfile()">edit</i>
+      <button style="border: none;background-color:transparent" (click)="updateProfile()"><i class="material-icons text-dark" style="font-size: 1.5rem;" ngbTooltip="Edit Profile" placement="right" >edit</i></button>
       <h6 class="card-subtitle mb-2 text-muted">{{ user.email }}</h6>
     </div>
   </div>
   <div class="card">
     <div class="card-body">
-      <h6>Favorite Collections</h6>
-      <app-collection-endpoint-list [collections]="user.collections"></app-collection-endpoint-list>
+      <h6 style="display: inline-block;">Favorite Collections</h6>
+      <a routerLink="/listings"><i class="material-icons text-dark float-right" style="font-size: 1.5rem;" ngbTooltip="Add Collections" placement="left">add</i></a>
+      <app-collection-endpoint-list [collections]="user.collections" needDeleteCol="true" (deleteCol)="deleteCollection($event)"></app-collection-endpoint-list>
     </div>
   </div>
 </div>

@@ -11,6 +11,7 @@ import { Collection } from '../common/models/collection';
 })
 export class CollectionEndpointListComponent implements OnInit {
   @Input() collections: Collection[];
+  @Input() needDeleteCol = false;
   @Output() deleteCol: EventEmitter<number>;
 
   active: Collection;
@@ -22,16 +23,19 @@ export class CollectionEndpointListComponent implements OnInit {
     if (isPlatformBrowser(this.platformId)) {
       this.modal = this.injector.get(NgbModal);
     }
+    this.deleteCol = new EventEmitter();
   }
 
   ngOnInit() {
     this.active = new Collection();
-    this.deleteCol = new EventEmitter();
   }
 
   deleteCollection(id: number) {
     this.modal.open(CollectionEndpointListDeleteConfirmationComponent).result
-    .then(() => this.deleteCol.emit(id))
+    .then(() => {
+      this.deleteCol.emit(id);
+      this.active = new Collection();
+    })
     .catch(() => {});
   }
 }

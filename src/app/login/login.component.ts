@@ -59,7 +59,7 @@ export class LoginComponent implements OnInit {
     }))
     .subscribe(((stat) => {
       if (stat) {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/profile']);
       } else {
         if (this.errorMsgTimer) {
           this.errorMsg = '';

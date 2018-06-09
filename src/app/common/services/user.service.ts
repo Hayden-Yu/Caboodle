@@ -113,6 +113,11 @@ export class UserService {
     return this.http.get(`${environment.api}me`)
       .pipe(map((res: any) => res));
   }
+
+  updateUser(id: number, user: User): Observable<User> {
+    return this.http.put(`${environment.api}user/${id}`, user)
+      .pipe(map((res: any) => res));
+  }
 }
 
 const AUTH_TOKEN_KEY = 'CABOODEL::AUTH_TOKEN';
