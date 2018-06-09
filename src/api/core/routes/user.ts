@@ -28,14 +28,14 @@ router.param('userId', (req: any, res, next, id) => {
 
 router.get('/user/:userId', (req: any, res, next) => {
   if (!req.auth) {
-    res.send(401);
+    res.status(401).send();
   } else if (req.user) {
     req.user.password = undefined;
     req.user.salt = undefined;
     req.user.updatedAt = undefined;
     res.json(req.user);
   } else {
-    res.send(404);
+    res.status(404).send();
   }
 });
 
@@ -70,12 +70,51 @@ router.post('/user', (req, res, next) => {
           });
         }
       })
-      .catch(err => next(err));
+      .catch(next);
     } else {
       res.status(400).json({error: 'invalid captcha token'});
     }
   })
   .catch(next);
+});
+
+router.put('/user/:userId', (req: any, res, next) => {
+  if (!req.auth || !req.user || req.user.id !== req.auth.id) {
+    res.send(401);
+  } else {
+    (<User>req.user).updateAttributes({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
+    }).then(() => {
+      req.user.password = undefined;
+      req.user.salt = undefined;
+      req.user.updatedAt = undefined;
+      res.json(req.user);
+    })
+    .catch(next);
+  }
+});
+
+router.delete('/user/:userId/collection/:collectionId', (req: any, res, next) => {
+  if (!req.auth || !req.user || req.user.id !== req.auth.id) {
+    res.send(401);
+  } else {
+    Collection.findById(req.params.collectionId)
+    .then(collection => collection ? req.user.removeCollection(collection) : new Promise(resolve => resolve()))
+    .then(() => (<User>req.user).reload({
+      include: [{
+        model: Collection,
+        include: [Endpoint]
+      }]
+    }))
+    .then((user) => {
+      user.password = undefined;
+      user.salt = undefined;
+      user.updatedAt = undefined;
+      res.json(user);
+    })
+    .catch(next);
+  }
 });
 
 router.get('/me', (req: any, res, next) => {
