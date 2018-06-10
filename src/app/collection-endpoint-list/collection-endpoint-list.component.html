@@ -1,0 +1,31 @@
+<div class="row" *ngIf="collections && collections.length; else noCol">
+  <div class="col-4 pr-0">
+    <div class="list-group" id="list">
+      <button type="button" class="list-group-item list-group-item-action" (click)="active=collection" *ngFor="let collection of collections">{{ collection.name }}
+          <i  *ngIf="needDeleteCol" class="material-icons text-dark float-right" style="font-size: 1.5rem;" (click)="deleteCollection(collection.id)" placement="left" ngbTooltip="Remove from Favorite">delete</i>
+      </button>
+    </div>
+  </div>
+  <div class="col-8 pl-0">
+    <div class="card" id="detail">
+      <div class="card-header">
+        <span>{{ active.genre }} </span>
+        <ng-container *ngIf="active.tag">
+            <span class="badge badge-info float-right">{{ active.tag }}</span>
+        </ng-container>
+      </div>
+      <div class="list-group list-group-flush" style="border-bottom: 1px solid rgba(0,0,0,.125)">
+        <button type="button" class="list-group-item list-group-item-action" *ngFor="let endpoint of active.endpoints">{{ endpoint.name }}</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #noCol>
+  <div class="card bg-secondary text-white" style="height: 400px;">
+    <div class="card-body" style="padding-top: 170px;text-align: center;">
+      <h5>No collection Available</h5>
+      <a routerLink="/listings" class="text-white">add collection to your profile</a>
+    </div>
+  </div>
+</ng-template>

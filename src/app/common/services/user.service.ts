@@ -1,5 +1,5 @@
-import { ValidationError } from './validation-error';
-import { User } from './user';
+import { ValidationError } from '../models/validation-error';
+import { User } from '../models/user';
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { Subject, Observable, of, observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -107,6 +107,16 @@ export class UserService {
         this.isLoggedIn.next(true);
       }
     });
+  }
+
+  getCurrentUser(): Observable<User> {
+    return this.http.get(`${environment.api}me`)
+      .pipe(map((res: any) => res));
+  }
+
+  updateUser(id: number, user: User): Observable<User> {
+    return this.http.put(`${environment.api}user/${id}`, user)
+      .pipe(map((res: any) => res));
   }
 }
 

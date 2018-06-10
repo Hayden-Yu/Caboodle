@@ -1,4 +1,4 @@
-import { ValidationError } from './../common/services/validation-error';
+import { ValidationError } from './../common/models/validation-error';
 import { UserService } from './../common/services/user.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
