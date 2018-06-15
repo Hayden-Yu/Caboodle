@@ -1,11 +1,8 @@
 import { Collection } from './../models/collection.model';
 import { eventEmitter } from './../../architecture/event-emitter';
-import { UserActivation } from './../models/user-activation.model';
 import { User } from './../models/user.model';
 import * as express from 'express';
-import { login } from '../../architecture/auth/jwt-authentication-filter';
 import { USER_CREATED_EVENT } from '../events/user-created-event';
-import * as uuid from 'uuid/v4';
 import { environment } from './../../environment.server';
 import fetch from 'node-fetch';
 import { Endpoint } from '../models/endpoint.model';

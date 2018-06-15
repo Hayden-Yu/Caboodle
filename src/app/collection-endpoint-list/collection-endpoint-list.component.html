@@ -9,9 +9,9 @@
   <div class="col-8 pl-0">
     <div class="card" id="detail">
       <div class="card-header">
-        <span>{{ active.genre }} </span>
+        <span>{{ active.name }} </span>
         <ng-container *ngIf="active.tag">
-            <span class="badge badge-info float-right">{{ active.tag }}</span>
+            <span class="badge badge-info float-right">{{ active.category.toLowerCase() }}</span>
         </ng-container>
       </div>
       <div class="list-group list-group-flush" style="border-bottom: 1px solid rgba(0,0,0,.125)">

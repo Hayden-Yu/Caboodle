@@ -6,6 +6,7 @@ import { jwtErrorHandler } from './architecture/auth/jwt-error-handler';
 import { cors } from './architecture/cors';
 
 import * as user from './core/routes/user';
+import * as collection from './core/routes/collection';
 import * as activation from './core/routes/activation';
 
 const router = express.Router();
@@ -17,6 +18,7 @@ router.post('/login', login);
 router.get('/refreshToken', refreshToken);
 
 router.use(user.router);
+router.use(collection.router);
 router.use(activation.router);
 
 router.use(jwtErrorHandler);

@@ -4,7 +4,6 @@ import { mail, senderAddress } from './../../architecture/mail';
 import { User } from '../models/user.model';
 import { eventEmitter } from './../../architecture/event-emitter';
 import logger from '../../architecture/logger';
-import { Action } from 'rxjs/internal/scheduler/Action';
 import * as uuid from 'uuid/v4';
 
 export const USER_CREATED_EVENT = 'user-created-event';
