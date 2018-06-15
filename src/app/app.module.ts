@@ -21,6 +21,9 @@ import { CaptchaDirective } from './common/directives/captcha.directive';
 import { ApiProfileComponent } from './api-profile/api-profile.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ForumComponent } from './forum/forum.component';
+import { ForumContentComponent } from './forum-content/forum-content.component';
+import { ForumSubjectCreateComponent } from './forum-subject-create/forum-subject-create.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,9 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
     ApiProfileComponent,
     AboutUsComponent,
     ContactUsComponent,
+    ForumContentComponent,
+    ForumSubjectCreateComponent,
+    ForumComponent
   ],
   imports: [
     NgbModule.forRoot(),
