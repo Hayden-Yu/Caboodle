@@ -3,5 +3,5 @@
     <app-api-search (selectCollection)="selectCollection($event)"></app-api-search>
   </div>
   <hr>
-  <app-api-profile [collectionId]="collection.id" [user]="user" *ngIf="collection"></app-api-profile>
+  <app-api-profile [collectionId]="collectionId" [user]="user" *ngIf="collectionId"></app-api-profile>
 </div>

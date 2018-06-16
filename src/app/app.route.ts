@@ -7,7 +7,6 @@ import { HomeComponent } from './home/home.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ApiCollectionComponent } from './api-collection/api-collection.component';
 import { AboutUsComponent } from './about-us/about-us.component';
-import { ApiProfileComponent } from './api-profile/api-profile.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 
 export const appRoutes: Routes = [
@@ -16,6 +15,7 @@ export const appRoutes: Routes = [
   { path: 'activate/:code', component: ActivateAccountComponent},
   { path: 'home', component: HomeComponent },
   { path: 'collection', component: ApiCollectionComponent },
+  { path: 'collection/:id', component: ApiCollectionComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'profile', component: AccountProfileComponent },
