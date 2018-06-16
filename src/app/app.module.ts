@@ -16,7 +16,7 @@ import { ContentComponent } from './shell/content/content.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RegisterComponent } from './register/register.component';
-import { ApiListComponent } from './api-list/api-list.component';
+import { ApiCollectionComponent } from './api-collection/api-collection.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { CaptchaDirective } from './common/directives/captcha.directive';
 import { ApiProfileComponent } from './api-profile/api-profile.component';
@@ -42,7 +42,7 @@ import { LoadingSpinnerComponent } from './shell/loading-spinner/loading-spinner
     ForgetPasswordComponent,
     ContentComponent,
     RegisterComponent,
-    ApiListComponent,
+    ApiCollectionComponent,
     ActivateAccountComponent,
     CaptchaDirective,
     ApiProfileComponent,
