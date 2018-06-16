@@ -7,5 +7,5 @@ export class Collection {
   tag: string;
   website: string;
   description: string;
-  endpoints: Endpoint;
+  endpoints: Endpoint[];
 }

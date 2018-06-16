@@ -28,6 +28,7 @@ import { UpdateAccountComponent } from './account-profile/update-account/update-
 // tslint:disable-next-line:max-line-length
 import { CollectionEndpointListDeleteConfirmationComponent } from './collection-endpoint-list/delete-confirmation/delete-confirmation.component';
 import { ApiSearchComponent } from './api-search/api-search.component';
+import { LoadingSpinnerComponent } from './shell/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { ApiSearchComponent } from './api-search/api-search.component';
     UpdateAccountComponent,
     CollectionEndpointListDeleteConfirmationComponent,
     ApiSearchComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     NgbModule.forRoot(),

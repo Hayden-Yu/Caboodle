@@ -92,6 +92,28 @@ router.put('/user/:userId', (req: any, res, next) => {
   }
 });
 
+router.post('/user/:userId/collection/:collectionId', (req: any, res, next) => {
+  if (!req.auth || !req.user || req.user.id !== req.auth.id) {
+    res.send(401);
+  } else {
+    Collection.findById(req.params.collectionId)
+    .then(collection => collection ? req.user.addCollection(collection) : new Promise(resolve => resolve()))
+    .then(() => (<User>req.user).reload({
+      include: [{
+        model: Collection,
+        include: [Endpoint]
+      }]
+    }))
+    .then((user) => {
+      user.password = undefined;
+      user.salt = undefined;
+      user.updatedAt = undefined;
+      res.json(user);
+    })
+    .catch(next);
+  }
+});
+
 router.delete('/user/:userId/collection/:collectionId', (req: any, res, next) => {
   if (!req.auth || !req.user || req.user.id !== req.auth.id) {
     res.send(401);

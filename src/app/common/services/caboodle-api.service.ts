@@ -13,6 +13,11 @@ export class CaboodleApiService {
 
   constructor(private http: HttpClient) { }
 
+  addAccountCollection(userId: number, collectionId: number): Observable<User> {
+    return this.http.post(`${environment.api}user/${userId}/collection/${collectionId}`, undefined)
+      .pipe((res: any) => res);
+  }
+
   removeAccountCollection(userId: number, collectionId: number): Observable<User> {
     return this.http.delete(`${environment.api}user/${userId}/collection/${collectionId}`)
       .pipe((res: any) => res);
@@ -32,6 +37,11 @@ export class CaboodleApiService {
       param += `${param ? '&' : ''}category=${category}`;
     }
     return this.http.get(`${environment.api}collection${param ? '?' : ''}${param}`)
+      .pipe((res: any) => res);
+  }
+
+  getCollectionById(id: number): Observable<Collection> {
+    return this.http.get(`${environment.api}collection/${id}`)
       .pipe((res: any) => res);
   }
 }
