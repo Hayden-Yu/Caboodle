@@ -27,6 +27,7 @@ import { CollectionEndpointListComponent } from './collection-endpoint-list/coll
 import { UpdateAccountComponent } from './account-profile/update-account/update-account.component';
 // tslint:disable-next-line:max-line-length
 import { CollectionEndpointListDeleteConfirmationComponent } from './collection-endpoint-list/delete-confirmation/delete-confirmation.component';
+import { ApiSearchComponent } from './api-search/api-search.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { CollectionEndpointListDeleteConfirmationComponent } from './collection-
     CollectionEndpointListComponent,
     UpdateAccountComponent,
     CollectionEndpointListDeleteConfirmationComponent,
+    ApiSearchComponent,
   ],
   imports: [
     NgbModule.forRoot(),

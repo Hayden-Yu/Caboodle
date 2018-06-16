@@ -20,7 +20,6 @@ router.get('/collection/categories', (req, res, next) => {
   orm.query('SELECT DISTINCT `category` FROM `Collection`', { raw: true })
   .then((result) => {
     res.json(result[0]);
-    console.log(result);
   });
 });
 
@@ -33,8 +32,15 @@ router.get('/collection/:collectionId', (req: any, res, next) => {
 });
 
 router.get('/collection', (req: any, res, next) => {
+  const where: any = {};
+  if (req.query.category) {
+    where.category = req.query.category;
+  }
+  if (req.query.query) {
+    where.name = {$like: `%${req.query.query}%`};
+  }
   Collection.findAll({
-    where: req.query.category ? {category: req.query.category} : undefined,
+    where: where,
     limit: req.query.limit || 200,
     offset: req.query.offset || 0
   })
