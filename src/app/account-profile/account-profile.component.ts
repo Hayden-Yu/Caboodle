@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs/operators';
 import { CaboodleApiService } from './../common/services/caboodle-api.service';
 import { UpdateAccountComponent } from './update-account/update-account.component';
 import { UserService } from './../common/services/user.service';
@@ -5,6 +6,7 @@ import { User } from './../common/models/user';
 import { Component, OnInit, Inject, PLATFORM_ID, Injector } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-account-profile',
@@ -18,6 +20,7 @@ export class AccountProfileComponent implements OnInit {
   modal: NgbModal;
   constructor(private userService: UserService,
     private apiService: CaboodleApiService,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private injector: Injector
   ) {
@@ -29,6 +32,12 @@ export class AccountProfileComponent implements OnInit {
   ngOnInit() {
     this.user = new User();
     this.userService.getCurrentUser()
+      .pipe(catchError((err, caught) => {
+        if (err.status === 401) {
+          this.router.navigate(['/login']);
+        }
+        throw err;
+      }))
       .subscribe(user => this.user = user);
   }
 
