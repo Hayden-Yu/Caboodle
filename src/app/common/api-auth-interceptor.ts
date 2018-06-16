@@ -1,7 +1,8 @@
+import { catchError } from 'rxjs/operators';
 import { environment } from './../../environments/environment';
 import { UserService } from './services/user.service';
 import { Observable, Subscription } from 'rxjs';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Injector } from '@angular/core';
 import { Router } from '@angular/router';
@@ -35,15 +36,19 @@ export class ApiAuthInterceptor implements HttpInterceptor {
         this.sudoOnInit();
         this.init = true;
       }
-      if (req.url.indexOf(environment.api) === 0) {
-        if (this.loggedIn) {
-          const token = this.userService.getAuthToken();
-          const authReq = req.clone({headers: req.headers.set('Authorization', `Bearer ${token}`)});
-          return next.handle(authReq);
-        } else if (req.url !== `${environment.api}/login`) {
+      if (req.url.indexOf(environment.api) !== 0) { // only handles request to our server
+        return next.handle(req);
+      }
+      if (this.loggedIn) {
+        const token = this.userService.getAuthToken();
+        const authReq = req.clone({headers: req.headers.set('Authorization', `Bearer ${token}`)});
+        return next.handle(authReq);
+      }
+      return next.handle(req).pipe(catchError((err, caught) => {
+        if (err instanceof HttpErrorResponse && err.status === 401) {
           this.router.navigate(['/login']);
         }
-      }
-      return next.handle(req);
+        throw err;
+      }));
     }
 }
