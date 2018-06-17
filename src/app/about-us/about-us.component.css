@@ -1,6 +1,13 @@
 .carousel-caption{
-    color : blue;
+    color : greenyellow;
+    text-shadow: 1px 1px  limegreen;
 }
-body{
-    background-color: red;
+#ourTeam{
+    color: blue;
+    text-shadow: 1px 1px  forestgreen;
+    text-align: center;
+}
+.row{
+    color: grey;
+    text-shadow: 1px 1px  lightgray;
 }
