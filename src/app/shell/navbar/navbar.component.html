@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-info text-white">
   <a class="navbar-brand" routerLink="/home">Caboodle</a>
   <button class="navbar-toggler hidden-sm-up" type="button" (click)="navCollapse = !navCollapse">
     <span class="navbar-toggler-icon"></span>
@@ -7,7 +7,7 @@
   <div class="navbar-collapse collapse show" [ngbCollapse]="navCollapse">
     <ul class="navbar-nav mr-auto">
     <li class="nav-item">
-      <a class="nav-link" routerLink="/listings" [ngClass]="{'active': route==='/listings'}">API Catalog</a>
+      <a class="nav-link" routerLink="/collection" [ngClass]="{'active': route==='/collection'}">API Catalog</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/createApi" [ngClass]="{'active': route==='/createApi'}">Create API</a>

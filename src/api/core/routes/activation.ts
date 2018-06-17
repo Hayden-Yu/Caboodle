@@ -8,7 +8,7 @@ import { login } from '../../architecture/auth/jwt-authentication-filter';
 
 export const router = express.Router();
 
-router.get('/', (req, res, next) => {
+router.get('/activation', (req, res, next) => {
   if (req.query.code) {
     UserActivation.findById(req.query.code, {
       include: [User]
@@ -43,7 +43,7 @@ router.get('/', (req, res, next) => {
   }
 });
 
-router.post('/', (req, res, next) => {
+router.post('/activation', (req, res, next) => {
   if (req.body.code && req.body.password) {
     if (!req.body.password || req.body.password.length < 6) {
       res.status(400).json({

@@ -1,0 +1,8 @@
+.search-result {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #f6f6f6;
+}
