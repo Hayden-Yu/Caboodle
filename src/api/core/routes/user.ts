@@ -1,11 +1,8 @@
 import { Collection } from './../models/collection.model';
 import { eventEmitter } from './../../architecture/event-emitter';
-import { UserActivation } from './../models/user-activation.model';
 import { User } from './../models/user.model';
 import * as express from 'express';
-import { login } from '../../architecture/auth/jwt-authentication-filter';
 import { USER_CREATED_EVENT } from '../events/user-created-event';
-import * as uuid from 'uuid/v4';
 import { environment } from './../../environment.server';
 import fetch from 'node-fetch';
 import { Endpoint } from '../models/endpoint.model';
@@ -90,6 +87,28 @@ router.put('/user/:userId', (req: any, res, next) => {
       req.user.salt = undefined;
       req.user.updatedAt = undefined;
       res.json(req.user);
+    })
+    .catch(next);
+  }
+});
+
+router.post('/user/:userId/collection/:collectionId', (req: any, res, next) => {
+  if (!req.auth || !req.user || req.user.id !== req.auth.id) {
+    res.send(401);
+  } else {
+    Collection.findById(req.params.collectionId)
+    .then(collection => collection ? req.user.addCollection(collection) : new Promise(resolve => resolve()))
+    .then(() => (<User>req.user).reload({
+      include: [{
+        model: Collection,
+        include: [Endpoint]
+      }]
+    }))
+    .then((user) => {
+      user.password = undefined;
+      user.salt = undefined;
+      user.updatedAt = undefined;
+      res.json(user);
     })
     .catch(next);
   }

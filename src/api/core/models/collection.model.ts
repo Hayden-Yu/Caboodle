@@ -1,6 +1,6 @@
 import { Endpoint } from './endpoint.model';
 import { User } from './user.model';
-import { Table, Model, PrimaryKey, Column, Sequelize, ForeignKey, BelongsToMany, HasMany, AllowNull } from 'sequelize-typescript';
+import { Table, Model, Column, Sequelize, ForeignKey, HasMany, AllowNull } from 'sequelize-typescript';
 
 @Table
 export class Collection extends Model<Collection> {
@@ -9,15 +9,19 @@ export class Collection extends Model<Collection> {
   name: string;
 
   @Column(Sequelize.STRING)
-  genre: string;
+  category: string;
 
   @Column(Sequelize.STRING)
   tag: string;
 
+  @Column(Sequelize.STRING)
+  website: string;
+
+  @Column(Sequelize.STRING)
+  description: string;
+
   @HasMany(() => Endpoint)
   endpoints: Endpoint[];
-  // @BelongsToMany(() => User, () => UserCollection)
-  // users: User[];
 }
 
 @Table

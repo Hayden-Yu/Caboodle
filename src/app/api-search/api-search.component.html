@@ -1,0 +1,16 @@
+<div style="position: relative;">
+  <div class="input-group">
+    <div class="input-group-prepend" ngbDropdown>
+      <button class="btn btn-outline-secondary" type="button" id="category-toggle" ngbDropdownToggle>{{ this.selectedCategory }}</button>
+      <div class="dropdown-menu" ngbDropdownMenu>
+        <button class="dropdown-item" (click)="updateCategory('All')">All</button>
+        <div role="separator" class="dropdown-divider"></div>
+        <button class="dropdown-item" *ngFor="let c of categories" (click)="updateCategory(c.category)">{{ c.category }}</button>
+      </div>
+    </div>
+    <input type="text" class="form-control" placeholder="Search for API" (keyup)="queryKeyup()" (click)="queryKeyup()" [(ngModel)]="query">
+  </div>
+  <div class="list-group search-result" [hidden]="!dropdown">
+    <span class="list-group-item list-group-item-action text-noselect" *ngFor="let col of collections" (click)="onSelect(col)">{{ col.name }}</span>
+  </div>
+</div>

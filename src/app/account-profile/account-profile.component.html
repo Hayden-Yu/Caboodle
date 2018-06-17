@@ -9,7 +9,7 @@
   <div class="card">
     <div class="card-body">
       <h6 style="display: inline-block;">Favorite Collections</h6>
-      <a routerLink="/listings"><i class="material-icons text-dark float-right" style="font-size: 1.5rem;" ngbTooltip="Add Collections" placement="left">add</i></a>
+      <a routerLink="/collection"><i class="material-icons text-dark float-right" style="font-size: 1.5rem;" ngbTooltip="Add Collections" placement="left">add</i></a>
       <app-collection-endpoint-list [collections]="user.collections" needDeleteCol="true" (deleteCol)="deleteCollection($event)"></app-collection-endpoint-list>
     </div>
   </div>

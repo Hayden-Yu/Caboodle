@@ -3,7 +3,9 @@ import { Endpoint } from './endpoint';
 export class Collection {
   id: number;
   name: string;
-  genre: string;
+  category: string;
   tag: string;
-  endpoints: Endpoint;
+  website: string;
+  description: string;
+  endpoints: Endpoint[];
 }

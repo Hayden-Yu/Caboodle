@@ -1,0 +1,7 @@
+<div class="container-fluid">
+  <div class="mx-auto" style="max-width: 600px;">
+    <app-api-search (selectCollection)="selectCollection($event)"></app-api-search>
+  </div>
+  <hr>
+  <app-api-profile [collectionId]="collectionId" [user]="user" *ngIf="collectionId"></app-api-profile>
+</div>

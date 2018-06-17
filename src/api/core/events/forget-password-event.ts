@@ -1,10 +1,8 @@
 import { UserActivation } from './../models/user-activation.model';
 import { environment } from './../../environment.server';
 import { mail, senderAddress } from './../../architecture/mail';
-import { User } from './../../../app/common/models/user';
 import { eventEmitter } from './../../architecture/event-emitter';
 import logger from '../../architecture/logger';
-import { Action } from 'rxjs/internal/scheduler/Action';
 
 export const FORGET_PASSWORD_EVENT = 'forget-password-event';
 eventEmitter.on(FORGET_PASSWORD_EVENT, (act: UserActivation) => {
