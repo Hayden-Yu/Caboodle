@@ -8,12 +8,18 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { ApiCollectionComponent } from './api-collection/api-collection.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ForumComponent } from './forum/forum.component';
+import { ForumContentComponent } from './forum-content/forum-content.component';
+import { ForumSubjectCreateComponent } from './forum-subject-create/forum-subject-create.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: RegisterComponent },
   { path: 'activate/:code', component: ActivateAccountComponent},
   { path: 'home', component: HomeComponent },
+  { path: 'forum-content', component: ForumContentComponent },
+  { path: 'forum-subject-create', component: ForumSubjectCreateComponent },
+  { path: 'forum', component: ForumComponent },
   { path: 'collection', component: ApiCollectionComponent },
   { path: 'collection/:id', component: ApiCollectionComponent },
   { path: 'about', component: AboutUsComponent },

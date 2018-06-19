@@ -20,6 +20,9 @@ import { CaptchaDirective } from './common/directives/captcha.directive';
 import { ApiProfileComponent } from './api-profile/api-profile.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
+import { ForumComponent } from './forum/forum.component';
+import { ForumContentComponent } from './forum-content/forum-content.component';
+import { ForumSubjectCreateComponent } from './forum-subject-create/forum-subject-create.component';
 import { AccountProfileComponent } from './account-profile/account-profile.component';
 import { CollectionEndpointListComponent } from './collection-endpoint-list/collection-endpoint-list.component';
 import { UpdateAccountComponent } from './account-profile/update-account/update-account.component';
@@ -44,6 +47,9 @@ import { LoadingSpinnerComponent } from './shell/loading-spinner/loading-spinner
     ApiProfileComponent,
     AboutUsComponent,
     ContactUsComponent,
+    ForumContentComponent,
+    ForumSubjectCreateComponent,
+    ForumComponent,
     AccountProfileComponent,
     CollectionEndpointListComponent,
     UpdateAccountComponent,

@@ -1,0 +1,19 @@
+<div class="create-topic" align="center" >
+    <a routerLink="/forum-subject-create">
+    <button class="btn btn-primary btn-lg btn-block">Create New Topic</button>
+    </a>
+</div>
+<div class="company-recent-api">
+        <table border="1" style="width: 50%" class="table table-bordered">
+            <tr>
+                <td>Topics</td>
+                <td>User</td>
+                <td>Date</td>
+            </tr>
+            <tr *ngFor="let topic of topicList">
+                <td scope="row"><a routerLink={{topic.link}}>{{topic.subject}}</a></td>
+                <td scope="row">{{topic.user}}</td>
+                <td scope="row">{{topic.date}}</td>
+            </tr>
+        </table>
+</div>
