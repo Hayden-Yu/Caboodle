@@ -1,26 +1,27 @@
 
-  <img class="background" src="../../assets/images/starrySky.jpeg" >
-  <div class="container">
-    <div class="py-5 text-center, title">
-      <h2>Contact Us</h2>
-      <h4>Leave us a message and we'll get back to you soon!</h4>
-    </div>
+<img class="background" src="../../assets/images/starrySky.jpeg" >
+<div class="container">
+  <div class="py-5 text-center, title">
+    <h2>Contact Us</h2>
+    <h4>Leave us a message and we'll get back to you soon!</h4>
+  </div>
 
-    <div class="row justify-content-center">
-      <div class="col-md-8 order-md-1">
-        <h4 class="mb-3">Contact Information</h4>
+  <div class="row justify-content-center">
+    <div class="col-md-8 order-md-1">
+      <h4 class="mb-3">Contact Information</h4>
+      <div *ngIf="!name; else forminfo">
         <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="firstName">First Name</label>
-              <input type="text" class="form-control" id="firstName" placeholder="" value="" required>
+              <input type="text" class="form-control" id="fName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid first name is required.
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <label for="lastName">Last Name</label>
-              <input type="text" class="form-control" id="lastName" placeholder="" value="" required>
+              <input type="text" class="form-control" id="lName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid last name is required.
               </div>
@@ -58,7 +59,7 @@
             </div>
             <div class="mb-3">
               <label for="Message">Message</label>
-              <textarea type="textbox" class="form-control" id="Message" required></textarea>
+              <textarea type="textbox" class="form-control" id="message" required></textarea>
               <div class="invalid-feedback">
                 Please fill out this form to reach us!
               </div>
@@ -70,7 +71,13 @@
           </div>
 
           <hr class="mb-4">
-          <button class="btn btn-primary btn-lg btn-block" value="Submit Form" type="submit">Submit Message</button>
+          <button class="btn btn-primary btn-lg btn-block" value="Submit Form" type="submit" [disabled]="!rForm.valid">Submit Message</button>
         </form>
       </div>
     </div>
+  </div>
+</div>
+<ng-template #forminfo>
+  <h1>{{name}}</h1>
+  <p>{{description}}</p>
+</ng-template>
