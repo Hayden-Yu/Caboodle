@@ -1,0 +1,19 @@
+.background{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -9999;
+}
+.title{
+    color: white;
+    text-shadow: 1px 1px gray;
+    text-align: center;
+}
+
+.row{
+    color: white;
+    text-shadow: 1px 1px  gray;
+    
+}

@@ -1,7 +1,7 @@
-<body class="bg-light">
 
+  <img class="background" src="../../assets/images/starrySky.jpeg" >
   <div class="container">
-    <div class="py-5 text-center">
+    <div class="py-5 text-center, title">
       <h2>Contact Us</h2>
       <h4>Leave us a message and we'll get back to you soon!</h4>
     </div>
@@ -9,7 +9,7 @@
     <div class="row justify-content-center">
       <div class="col-md-8 order-md-1">
         <h4 class="mb-3">Contact Information</h4>
-        <form class="needs-validation" novalidate>
+        <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="firstName">First Name</label>
@@ -70,7 +70,7 @@
           </div>
 
           <hr class="mb-4">
-          <button class="btn btn-primary btn-lg btn-block" type="submit">Submit Message</button>
+          <button class="btn btn-primary btn-lg btn-block" value="Submit Form" type="submit">Submit Message</button>
         </form>
       </div>
     </div>
