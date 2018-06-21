@@ -1,0 +1,27 @@
+.carousel-caption{
+    color : greenyellow;
+    text-shadow: 1px 1px  limegreen;
+}
+#ourTeam{
+    color: blue;
+    text-shadow: 1px 1px  forestgreen;
+    text-align: center;
+}
+.row{
+    color: black;
+    text-shadow: 1px 1px  lightgray;
+    text-align: justify;
+}
+.teamCentred{
+    text-align: center;
+    color: #116611;
+    text-shadow: 1px 1px grey;
+}
+.background{
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -9999;
+}
