@@ -6,30 +6,30 @@ import {  FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./contact-us.component.css']
 })
 export class ContactUsComponent {
-  private rForm : FormGroup;
-  private post:any;
-  private fName:string = '';
-  private lName:string = '';
-  private username: string = '';
-  private email: string = '';
-  private issue:string = '';
-  private message:string = '';
+   rForm : FormGroup;
+   post:any;
+   fName:string = '';
+   lName:string = '';
+   //username: string = '';
+   email: string = '';
+   issue:string = '';
+   message:string = '';
 
   constructor(private fb: FormBuilder) { 
       this.rForm = fb.group({
         'fName': [null, Validators.required],
         'lName': [null, Validators.required],
-        'username': [null, Validators.required],
-        'email': [null, Validators.required],
+        //'username': [null, Validators.required],
+        'email': [null, Validators.email],
         'issue': [null, Validators.required],
-        'message': [null, Validators.required]
+        'message': [null, Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(400)])]
         
       })
   }
   addPost(post){
     this.fName = post.fName;
     this.lName = post.lName;
-    this.username = post.username;
+    //this.username = post.username;
     this.email = post.email;
     this.issue = post.issue;
     this.message = post.message;
