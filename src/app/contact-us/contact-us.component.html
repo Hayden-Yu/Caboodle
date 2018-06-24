@@ -13,14 +13,14 @@
         <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
           <div class="row">
             <div class="col-md-6 mb-3">
-              <label for="firstName">First Name</label>
+              <label for="fName">First Name</label>
               <input type="text" class="form-control" id="fName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid first name is required.
               </div>
             </div>
             <div class="col-md-6 mb-3">
-              <label for="lastName">Last Name</label>
+              <label for="lName">Last Name</label>
               <input type="text" class="form-control" id="lName" placeholder="" value="" required>
               <div class="invalid-feedback">
                 Valid last name is required.
@@ -58,7 +58,7 @@
               </div>
             </div>
             <div class="mb-3">
-              <label for="Message">Message</label>
+              <label for="message">Message</label>
               <textarea type="textbox" class="form-control" id="message" required></textarea>
               <div class="invalid-feedback">
                 Please fill out this form to reach us!
