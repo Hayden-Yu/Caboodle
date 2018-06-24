@@ -20,9 +20,9 @@ export class ContactUsComponent {
         'fName': [null, Validators.required],
         'lName': [null, Validators.required],
         'username': [null, Validators.required],
-        'email': [null, Validators.required],
+        'email': [null, Validators.email],
         'issue': [null, Validators.required],
-        'message': [null, Validators.compose([Validators.required, Validators.minLength(4),Validators.maxLength(400)])]
+        'message': [null, Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(400)])]
         
       })
   }

@@ -1,6 +1,7 @@
 
 <img class="background" src="../../assets/images/starrySky.jpeg" >
 <div class="container">
+  <div *ngIf="!fName; else forminfo">
   <div class="py-5 text-center, title">
     <h2>Contact Us</h2>
     <h4>Leave us a message and we'll get back to you soon!</h4>
@@ -8,8 +9,9 @@
 
   <div class="row justify-content-center">
     <div class="col-md-8 order-md-1">
+  
+      
       <h4 class="mb-3">Contact Information</h4>
-      <div *ngIf="!fName; else forminfo">
         <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
           <div class="row">
             <div class="col-md-6 mb-3">
@@ -75,9 +77,19 @@
   </div>
 </div>
 <ng-template #forminfo>
-  <h1>Name: {{fName}} {{lName}}</h1>
-  <h1>Username: {{username}}</h1>
-  <h1>Email: {{email}}</h1>
-  <h1>Issue: {{issue}}</h1>
-  <h1>Message: {{message}}</h1>
+  <div class="py-5 text-center, title">
+    <h2>Contact Us</h2>
+    <h4>Thank you for submitting your message!</h4>
+  </div>
+  <div class="row bigText">
+  Name: {{fName}} {{lName}}
+  <br/>
+  Username: {{username}}
+  <br/>
+  Email: {{email}}
+  <br/>
+  Issue: {{issue}}
+  <br/>
+  Message: {{message}}
+</div>
 </ng-template>
