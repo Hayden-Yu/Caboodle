@@ -6,14 +6,14 @@ import {  FormBuilder, FormGroup, Validators} from '@angular/forms';
   styleUrls: ['./contact-us.component.css']
 })
 export class ContactUsComponent {
-  private rForm : FormGroup;
-  private post:any;
-  private fName:string = '';
-  private lName:string = '';
-  private username: string = '';
-  private email: string = '';
-  private issue:string = '';
-  private message:string = '';
+   rForm : FormGroup;
+   post:any;
+   fName:string = '';
+   lName:string = '';
+   username: string = '';
+   email: string = '';
+   issue:string = '';
+   message:string = '';
 
   constructor(private fb: FormBuilder) { 
       this.rForm = fb.group({
@@ -22,7 +22,7 @@ export class ContactUsComponent {
         'username': [null, Validators.required],
         'email': [null, Validators.required],
         'issue': [null, Validators.required],
-        'message': [null, Validators.required]
+        'message': [null, Validators.compose([Validators.required, Validators.minLength(4),Validators.maxLength(400)])]
         
       })
   }
