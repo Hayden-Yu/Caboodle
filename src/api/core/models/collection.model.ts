@@ -1,8 +1,14 @@
-import { Endpoint } from './endpoint.model';
 import { User } from './user.model';
-import { Table, Model, Column, Sequelize, ForeignKey, HasMany, AllowNull } from 'sequelize-typescript';
+import { Table, Model, Column, Sequelize, ForeignKey, AllowNull } from 'sequelize-typescript';
+import { IEndpoint, Endpoint } from './documents/endpoint.doc';
 
-@Table
+@Table({
+  getterMethods: {
+    endpoints() {
+      return this._endpoints;
+    }
+  }
+})
 export class Collection extends Model<Collection> {
   @AllowNull(false)
   @Column(Sequelize.STRING)
@@ -20,8 +26,24 @@ export class Collection extends Model<Collection> {
   @Column(Sequelize.STRING)
   description: string;
 
-  @HasMany(() => Endpoint)
-  endpoints: Endpoint[];
+  _endpoints: IEndpoint[];
+
+  getEndpoints(lean?: boolean): Promise<IEndpoint[]> {
+    if (lean === undefined) {
+      lean = false;
+    }
+    const qry = Endpoint.find({ collectionId: this.id });
+    return lean ? qry.lean().exec() : qry.exec();
+  }
+
+  async attatchEndpoints() {
+    this._endpoints = await this.getEndpoints(true);
+    if (this._endpoints) {
+      for (const el of this._endpoints) {
+        el.__v = undefined;
+      }
+    }
+  }
 }
 
 @Table
