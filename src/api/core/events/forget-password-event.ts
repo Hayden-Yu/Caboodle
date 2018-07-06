@@ -1,4 +1,4 @@
-import { UserActivation } from './../models/user-activation.model';
+import { UserActivation } from '../models/user-activation.model';
 import { environment } from './../../environment.server';
 import { mail, senderAddress } from './../../architecture/mail';
 import { eventEmitter } from './../../architecture/event-emitter';

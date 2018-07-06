@@ -1,11 +1,10 @@
-import { Collection } from './../models/collection.model';
+import { Collection } from '../models/collection.model';
 import { eventEmitter } from './../../architecture/event-emitter';
-import { User } from './../models/user.model';
+import { User } from '../models/user.model';
 import * as express from 'express';
 import { USER_CREATED_EVENT } from '../events/user-created-event';
 import { environment } from './../../environment.server';
 import fetch from 'node-fetch';
-import { Endpoint } from '../models/endpoint.model';
 import * as clientEnv from '../../../environments/environment.prod';
 
 export const router = express.Router();
@@ -13,8 +12,7 @@ export const router = express.Router();
 router.param('userId', (req: any, res, next, id) => {
   User.findById(id, {
     include: [{
-      model: Collection,
-      include: [Endpoint]
+      model: Collection
     }]
   })
   .then((user) => {
@@ -100,8 +98,7 @@ router.post('/user/:userId/collection/:collectionId', (req: any, res, next) => {
     .then(collection => collection ? req.user.addCollection(collection) : new Promise(resolve => resolve()))
     .then(() => (<User>req.user).reload({
       include: [{
-        model: Collection,
-        include: [Endpoint]
+        model: Collection
       }]
     }))
     .then((user) => {
@@ -122,8 +119,7 @@ router.delete('/user/:userId/collection/:collectionId', (req: any, res, next) =>
     .then(collection => collection ? req.user.removeCollection(collection) : new Promise(resolve => resolve()))
     .then(() => (<User>req.user).reload({
       include: [{
-        model: Collection,
-        include: [Endpoint]
+        model: Collection
       }]
     }))
     .then((user) => {
