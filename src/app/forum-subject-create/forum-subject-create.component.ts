@@ -1,5 +1,7 @@
 import { Component, OnInit} from '@angular/core';
-//import { Router } from '@angular/router';
+import { ForumService } from '../common/services/forum.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forum-subject-create',
@@ -8,31 +10,18 @@ import { Component, OnInit} from '@angular/core';
 })
 export class ForumSubjectCreateComponent implements OnInit {
 
- subjectValue : string;
- messageValue : string;
+ subjectValue: string;
+ messageValue: string;
+ formForum: FormGroup;
 
-  constructor() {}
+  constructor(private forumService: ForumService, private router: Router, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
+    this.formForum = this.formBuilder.group({topic: [''], message: ['']});
   }
 
-  
+  submitForm() {
+    this.forumService.createArticle(this.formForum.get('topic').value);
+    this.router.navigate(['/forum']);
+  }
 }
-
-/*export const environment: any = {
-  host: 'http://localhost:6237/',
-  jwtSecret: 'YES6cIESXE1cnzEzinJ1',
-  captchaKey: '6LfldVwUAAAAAFN_5MV_mrcQnRN82trdGSpoT2we',
-  logLevel: 'silly',
-  database: {
-    host: 'myvmlab.senecacollege.ca',
-    username: 'caboodle',
-    password: 'cX8qzpMsN6rb',
-    database: 'shan',
-    port: 6239
-  },
-  email: {
-    username: 'caboodle.api@gmail.com',
-    password: '%ThUvY1iE$Oh'
-  }
-}*/

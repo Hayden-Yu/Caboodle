@@ -11,9 +11,7 @@
                 <td>Date</td>
             </tr>
             <tr *ngFor="let topic of topicList">
-                <td scope="row"><a routerLink={{topic.link}}>{{topic.subject}}</a></td>
-                <td scope="row">{{topic.user}}</td>
-                <td scope="row">{{topic.date}}</td>
+                <td scope="row"><a routerLink={{topic.link}}>{{topic}}</a></td>
             </tr>
         </table>
 </div>

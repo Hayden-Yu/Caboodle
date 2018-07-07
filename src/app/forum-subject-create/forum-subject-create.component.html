@@ -1,5 +1,3 @@
-<body class="bg-light">
-
     <div class="container">
       <div class="py-5 text-center">
         <h2>Create Subject</h2>
@@ -8,18 +6,18 @@
   
       <div class="row justify-content-center">
         <div class="col-md-8 order-md-1">
-          <form class="needs-validation" novalidate>
+          <form class="needs-validation" (ngSubmit)="submitForm()" novalidate>
   
             <div class="mb-3">
               <label for="subject">Subject</label>
-              <input type="text" class="form-control" id="address" placeholder="" required>
+              <input type="text" class="form-control" id="topic" placeholder="" formControlName="topic" required>
               <div class="invalid-feedback">
                 Please enter a subject title
               </div>
             </div>
               <div class="mb-4">
                 <label for="Message">Message</label>
-                <textarea type="textbox" class="form-control" id="Message" required></textarea>
+                <textarea type="textbox" class="form-control" id="Message" formControlName="message" required></textarea>
                 <div class="invalid-feedback">
                   Subject message cannot be blank!
                 </div>
@@ -27,7 +25,7 @@
             <hr class="mb-4">
   
             <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Post</button>
+            <button class="btn btn-primary btn-lg btn-block" type="submit" style="width:100%">Post</button>
           </form>
         </div>
       </div>
