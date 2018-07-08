@@ -3,6 +3,7 @@ import { Table, Model, Column, Sequelize, ForeignKey, AllowNull } from 'sequeliz
 import { IEndpoint, Endpoint } from './documents/endpoint.doc';
 
 @Table({
+  timestamps: true,
   getterMethods: {
     endpoints() {
       return this._endpoints;

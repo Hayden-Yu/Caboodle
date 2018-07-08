@@ -1,13 +1,12 @@
 
-<div class="search-button" align="center" >
-    <a routerLink="/collection">
-    <button class="btn btn-primary btn-lg btn-block">API Search</button>
-    </a>
-</div>
-<div class="panel-body">
-    <table style="width: 100%; height: 100%; overflow: auto">                           <!--Placeholder values until APIs are stored and can be retrieved.-->
-    <tr>
-        <td>
+<div class="container">
+    <div class="search-button" align="center" >
+        <a routerLink="/collection">
+        <button class="btn btn-primary btn-lg btn-block">API Search</button>
+        </a>
+    </div>                           <!--Placeholder values until APIs are stored and can be retrieved.-->
+    <div class="row">
+        <div class="column">
             <div class="company-recent-api">
                 <p style="font-weight: bold; font-size: 25px">Recently Added Company APIs</p>
                 <table border="1" style="width: 50%" class="table table-bordered">                               <!--Wrap content or have a fixed size for tables?-->
@@ -54,8 +53,8 @@
                 <a routerLink="/CompanyrecentAPIs/2"> > </a>
 
             </div>
-        </td>
-        <td>
+        </div> <!--- col -->
+        <div class="column" id="right-col">
             <div class="recently-visited-api">
                 <p style="font-weight: bold; font-size: 25px">Recently Visited APIs</p>
                 <table border="1" style="width: 40%" class="table table-bordered">                               <!--Wrap content or have a fixed size for tables?-->
@@ -85,10 +84,10 @@
                     </tr>
                 </table>
             </div>
-        </td>
-    </tr>
-    <tr>
-        <td>
+        </div> <!-- col -->
+    </div>  <!-- row -->
+    <div class="row">
+        <div class="col">
             <div class="recently-added-user-api">
                 <p style="font-weight: bold; font-size: 25px">Recently Added User APIs</p>
                 <table class="table table-bordered" border="1" style="width: 50%">                               <!--Wrap content or have a fixed size for tables?-->
@@ -134,7 +133,6 @@
                 <a routerLink="/CompanyrecentAPIs/3"> 3 </a>
                 <a routerLink="/CompanyrecentAPIs/2"> > </a>
             </div>
-        </td>
-    </tr>
-    </table>
+        </div>
+    </div>
 </div>

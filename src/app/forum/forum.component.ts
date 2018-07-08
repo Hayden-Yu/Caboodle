@@ -10,7 +10,7 @@ import { toDate } from '@angular/common/src/i18n/format_date';
 
 export class ForumComponent implements OnInit {
 
-  topicList: any[] =[
+  topicList: any[] = [
     {
       subject: 'Introduction',
       user: 'Caboodle',
@@ -23,19 +23,19 @@ export class ForumComponent implements OnInit {
       date: '2018-06-16',
       link: '/forum-content'
     }
-  ]
+  ];
 
   constructor() { }
   ngOnInit() {
   }
 
-  setTopic(newSubject, newMessage){
+  setTopic(newSubject, newMessage) {
     this.topicList.unshift({
       subject: newSubject,
       user: 'Caboodle (New)',
       date: '2018-06-15',
       link: '/forum-subject-create'
-    })
+    });
   }
 
 }
