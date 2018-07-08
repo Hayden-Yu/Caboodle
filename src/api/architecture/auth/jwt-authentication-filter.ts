@@ -1,8 +1,7 @@
-import { User } from './../../core/models/user.model';
+import { User } from '../../core/models/user.model';
 import { environment } from '../../environment.server';
 import * as jwt from 'jsonwebtoken';
 import logger from '../logger';
-import { jwtTokenFilter } from './jwt-authorization-filter';
 
 /**
  * express middleware function,

@@ -1,0 +1,145 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <select class="custom-select" [(ngModel)]="endpoint.method">
+            <option>GET</option>
+            <option>POST</option>
+            <option>PUT</option>
+            <option>DELETE</option>
+            <option>HEAD</option>
+          </select>
+        </div>
+        <input type="text" class="form-control" placeholder="URL">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header" style="padding-top: 8px; padding-bottom: 8px;">
+            Headers
+          <button type="button" class="float-right" style="border: none;background-color:transparent" (click)="addHeader()">
+            <i class="material-icons text-dark" style="font-size: 1.5rem;" placement="left">add</i>
+          </button>
+        </div>
+        <div class="card-body" style="padding-top: 0px; padding-bottom: 0px;">
+          <div class="list-group list-group-flush">
+            <ng-container *ngIf="this.endpoint.headers">
+              <div class="list-group-item" *ngFor="let header of endpoint.headers;let i = index">
+                <div class="form-row">
+                  <div class="form-group col-5" style="margin-bottom: 0px;">
+                    <input type="text" class="form-control" placeholder="Key" [(ngModel)]="header.key">
+                  </div>
+                  <div class="form-group col-6" style="margin-bottom: 0px;">
+                    <input type="text" class="form-control" placeholder="Value" [(ngModel)]="header.value">
+                  </div>
+                  <div class="col-1">
+                    <button (click)="removeHeader(i)" class="float-right" style="border: none;background-color:transparent" type="button">
+                      <i class="material-icons text-dark" style="font-size: 1.5rem;" placement="left">close</i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </ng-container>
+            <div class="list-group-item form-row">
+              <div class="form-row">
+                <div class="form-group col-5" style="margin-bottom: 0px;">
+                  <input type="text" class="form-control" placeholder="Key" [(ngModel)]="newHeader.key">
+                </div>
+                <div class="form-group col-6" style="margin-bottom: 0px;">
+                  <input type="text" class="form-control" placeholder="Value" [(ngModel)]="newHeader.value">
+                </div>
+                <div class="col-1">
+                  <button (click)="newHeader.key = ''; newHeader.value = ''" class="float-right" style="border: none;background-color:transparent" type="button">
+                    <i class="material-icons text-dark" style="font-size: 1.5rem;" placement="left">close</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="endpoint.method !== 'GET'">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header" style="padding-top: 8px; padding-bottom: 8px;">
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" [(ngModel)]="requestBody">
+            <label class="form-check-label">Request Body</label>
+          </div>
+        </div>
+        <div class="card-body" *ngIf="requestBody">
+          <div class="container-fluid">
+            <div class="row form-group">
+              <div class="col-4">
+                <label>Type</label>
+              </div>
+              <div class="col-8">
+                <select class="form-control" [(ngModel)]="endpoint.body.type">
+                  <option value="raw">Raw</option>
+                  <option value="form-data">Form Data</option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <ng-container *ngIf="endpoint.body.type === 'raw'; else formData">
+                <div class="form-group col-12">
+                  <textarea [(ngModel)]="endpoint.body.raw" rows="20" placeholder="&#123;&#10;&#9;&#34;request&#34;: &#34;Raw Data&#34;&#10;&#125;" class="form-control"></textarea>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #formData>
+  <div class="list-group list-group-flush col-12">
+    <div class="list-group-item">
+      <button type="button" class="btn btn-outline-primary float-right" (click)="addNewFormData()">
+        <i class="material-icons" style="font-size: 1rem;" placement="right">add</i>
+        Add a new field
+      </button>
+    </div>
+    <ng-container *ngIf="this.endpoint.body.formData">
+      <div class="list-group-item" *ngFor="let field of endpoint.body.formData; let i = index">
+        <div class="form-row">
+          <div class="form-group col-5" style="margin-bottom: 0px;">
+            <input type="text" class="form-control" placeholder="Key" [(ngModel)]="field.key">
+          </div>
+          <div class="form-group col-6" style="margin-bottom: 0px;">
+            <input type="text" class="form-control" placeholder="Value" [(ngModel)]="field.value">
+          </div>
+          <div class="col-1">
+            <button (click)="removeFormData(i)" class="float-right" style="border: none;background-color:transparent" type="button">
+              <i class="material-icons text-dark" style="font-size: 1.5rem;" placement="left">close</i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+    <div class="list-group-item form-row">
+      <div class="form-row">
+        <div class="form-group col-5" style="margin-bottom: 0px;">
+          <input type="text" class="form-control" placeholder="Key" [(ngModel)]="newFormData.key">
+        </div>
+        <div class="form-group col-6" style="margin-bottom: 0px;">
+          <input type="text" class="form-control" placeholder="Value" [(ngModel)]="newFormData.value">
+        </div>
+        <div class="col-1">
+          <button (click)="newFormData.key = ''; newFormData.value = ''" class="float-right" style="border: none;background-color:transparent" type="button">
+            <i class="material-icons text-dark" style="font-size: 1.5rem;" placement="left">close</i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
