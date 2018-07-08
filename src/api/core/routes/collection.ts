@@ -1,14 +1,11 @@
-import { orm } from './../models/orm';
+import { orm } from '../models/orm';
 import * as express from 'express';
-import { Collection } from './../models/collection.model';
-import { Endpoint } from '../models/endpoint.model';
+import { Collection } from '../models/collection.model';
 
 export const router = express.Router();
 
 router.param('collectionId', (req: any, res, next, id) => {
-  Collection.findById(id, {
-    include: [{model: Endpoint}]
-  })
+  Collection.findById(id)
   .then(((collection) => {
     req.collection = collection;
     next();
@@ -23,8 +20,9 @@ router.get('/collection/categories', (req, res, next) => {
   });
 });
 
-router.get('/collection/:collectionId', (req: any, res, next) => {
+router.get('/collection/:collectionId', async (req: any, res, next) => {
   if (req.collection) {
+    await req.collection.attatchEndpoints();
     res.json(req.collection);
   } else {
     res.status(404).send();

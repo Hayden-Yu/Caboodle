@@ -19,7 +19,7 @@ export class ApiAuthInterceptor implements HttpInterceptor {
       this.userService = this.injector.get(UserService);
 
       this.loggedIn = true;
-      if (this.userService.getAuthToken() === null) {
+      if (!this.userService.getAuthToken()) {
         this.loggedIn = false;
       }
       this.loginSubscription = this.userService.loggedIn$.subscribe(v => {

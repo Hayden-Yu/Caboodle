@@ -11,6 +11,8 @@ import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ForumComponent } from './forum/forum.component';
 import { ForumContentComponent } from './forum-content/forum-content.component';
 import { ForumSubjectCreateComponent } from './forum-subject-create/forum-subject-create.component';
+import { EndpointComponent } from './endpoint/endpoint.component';
+import { ApiCreateComponent } from './api-create/api-create.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -22,6 +24,8 @@ export const appRoutes: Routes = [
   { path: 'forum', component: ForumComponent },
   { path: 'collection', component: ApiCollectionComponent },
   { path: 'collection/:id', component: ApiCollectionComponent },
+  { path: 'endpoint/:id', component: EndpointComponent },
+  { path: 'createApi', component: ApiCreateComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'profile', component: AccountProfileComponent },

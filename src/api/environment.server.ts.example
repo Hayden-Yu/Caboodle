@@ -10,6 +10,13 @@ export const environment: any = {
     password: 'P@ssw03d',
     database: 'caboodle'
   },
+  mongodb: {
+    host: 'localhost',
+    port: 27017,
+    username: 'caboodle',
+    password: 'P@ssw03d',
+    database: 'caboodle'
+  },
   email: {
     username: 'caboodle.api@gmail.com',
     password: 'P@ssw03d'

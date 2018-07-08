@@ -8,6 +8,7 @@ import * as express from 'express';
 import { join } from 'path';
 
 import router from './src/api/router';
+import './src/api/architecture/mongoose';
 import { orm } from './src/api/core/models/orm';
 orm.sync();
 // Faster server renders w/ Prod mode (dev mode never needed)

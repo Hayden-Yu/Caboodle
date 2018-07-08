@@ -30,6 +30,10 @@ import { UpdateAccountComponent } from './account-profile/update-account/update-
 import { CollectionEndpointListDeleteConfirmationComponent } from './collection-endpoint-list/delete-confirmation/delete-confirmation.component';
 import { ApiSearchComponent } from './api-search/api-search.component';
 import { LoadingSpinnerComponent } from './shell/loading-spinner/loading-spinner.component';
+import { EndpointComponent } from './endpoint/endpoint.component';
+import { EndpointRequestComponent } from './endpoint/endpoint-request/endpoint-request.component';
+import { EndpointResultComponent } from './endpoint/endpoint-result/endpoint-result.component';
+import { ApiCreateComponent } from './api-create/api-create.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +60,10 @@ import { LoadingSpinnerComponent } from './shell/loading-spinner/loading-spinner
     CollectionEndpointListDeleteConfirmationComponent,
     ApiSearchComponent,
     LoadingSpinnerComponent,
+    EndpointComponent,
+    EndpointRequestComponent,
+    EndpointResultComponent,
+    ApiCreateComponent,
   ],
   imports: [
     NgbModule.forRoot(),
