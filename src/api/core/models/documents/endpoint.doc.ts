@@ -37,7 +37,7 @@ export class IRequestBody {
 
   raw?: string;
 
-  formData?: Map<string, any>;
+  formData?: IParam[];
 }
 
 export const RequestBodySchema = new mongoose.Schema({
