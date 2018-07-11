@@ -1,3 +1,11 @@
-div {
-  padding: 50px;
+.search-button {
+  padding-top: 1%;
+}
+
+.row {
+  margin: auto;
+}
+
+#right-col {
+  margin: 0 0 0 auto;
 }
