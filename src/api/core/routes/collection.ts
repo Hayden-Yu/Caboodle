@@ -25,7 +25,10 @@ router.get('/collection/:collectionId', async (req: any, res, next) => {
     await req.collection.attatchEndpoints();
     res.json(req.collection);
   } else {
-    res.status(404).send();
+    next({
+      status: 404,
+      message: 'collection not found',
+    });
   }
 });
 

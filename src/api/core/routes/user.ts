@@ -23,14 +23,20 @@ router.param('userId', (req: any, res, next, id) => {
 
 router.get('/user/:userId', (req: any, res, next) => {
   if (!req.auth) {
-    res.status(401).send();
+    next({
+      status: 401,
+      message: 'not authorized',
+    });
   } else if (req.user) {
     req.user.password = undefined;
     req.user.salt = undefined;
     req.user.updatedAt = undefined;
     res.json(req.user);
   } else {
-    res.status(404).send();
+    next({
+      status: 404,
+      message: 'user does not exist',
+    });
   }
 });
 

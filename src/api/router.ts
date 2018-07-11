@@ -9,6 +9,7 @@ import * as user from './core/routes/user';
 import * as collection from './core/routes/collection';
 import * as activation from './core/routes/activation';
 import * as endpoint from './core/routes/endpoint';
+import { serverErrorHandler } from './architecture/error/server-error-handler';
 
 const router = express.Router();
 router.use(cors);
@@ -24,5 +25,11 @@ router.use(activation.router);
 router.use(endpoint.router);
 
 router.use(jwtErrorHandler);
-router.use((req, res) => res.status(404).send());
+router.use(serverErrorHandler);
+router.use((req, res) => res.status(404).json({
+  message: 'you are lost'
+}));
+router.use((err, req, res, next) => {
+  res.status(500).json(err);
+});
 export default router;
