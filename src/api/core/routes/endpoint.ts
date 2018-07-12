@@ -1,7 +1,11 @@
+import { default as fetch, Headers, RequestInit } from 'node-fetch';
+import * as FormData from 'form-data';
 import { URL_REGEX } from './../../../app/common/constants';
 import * as express from 'express';
 import { Collection } from '../models/collection.model';
 import { Endpoint } from './../models/documents/endpoint.doc';
+import { EndpointHistory } from '../models/documents/endpoint-history.doc';
+import logger from '../../architecture/logger';
 
 export const router = express.Router();
 
@@ -29,7 +33,8 @@ router.post('/endpoint', async (req: any, res, next) => {
   res.json(collection);
 });
 
-router.post('/endpoint/invocation', (req: any, res, next) => {
+router.post('/endpoint/invocation', async (req: any, res, next) => {
+  // validation
   if (!req.body ||
     !req.body.method || !req.body.url) {
     next({
@@ -43,5 +48,56 @@ router.post('/endpoint/invocation', (req: any, res, next) => {
       status: 400,
       message: 'malformed url',
     });
+  }
+  // prepare request
+  const init: RequestInit = {
+    method: req.body.method
+  };
+  if (req.body.headers) {
+    init.headers = new Headers();
+    for (const header of req.body.headers) {
+      init.headers.set(header.key, header.value);
+    }
+  }
+  if (req.body.body) {
+    const body = req.body.body.type === 'form-data' ? new FormData() : req.body.body.raw;
+    if (req.body.body.type === 'form-data') {
+      for (const el of req.body.body.formData) {
+        body.append(el.key, el.value);
+      }
+    }
+    init.body = body;
+  }
+  // make request
+  try {
+    logger.info(`http request to [${req.body.url}]`);
+    const result = await fetch(req.body.url, init)
+      .then(async response => {
+        const r: any = {
+          status: response.status,
+          headers: []
+        };
+        response.headers.forEach((k, v) => r.headers.push({key: k, value: v}));
+        r.body = await response.text();
+        logger.info(`response status [${r.status}]`);
+        logger.silly(`response body: ${r.body}`);
+        return r;
+      });
+    res.json(result);
+    // verify endpoint
+    if (req.body._id) {
+      const endpoint = await Endpoint.findById(req.body._id);
+      if (endpoint) {
+        result.endpoint = endpoint._id;
+      }
+    }
+    // save history
+    EndpointHistory.create(result, err => {
+      if (err) {
+        logger.error(err);
+      }
+    });
+  } catch (err) {
+    next(err);
   }
 });
