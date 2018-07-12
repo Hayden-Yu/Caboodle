@@ -1,6 +1,7 @@
 div {
-  padding: 50px;
+  padding: 10px 50px 50px 50px;
 }
 .background{
-  background: linear-gradient(#ff6666, #ffff44,#ff6666)
+  background: linear-gradient(dodgerblue, skyblue,dodgerblue);
+  
 }

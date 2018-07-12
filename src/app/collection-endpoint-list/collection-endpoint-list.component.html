@@ -1,4 +1,4 @@
-<div class="background">
+
   <div class="row" *ngIf="collections && collections.length; else noCol">
   <div class="col-4 pr-0">
     <div class="list-group" id="list">
@@ -21,14 +21,11 @@
     </div>
   </div>
 </div>
-</div>
 <ng-template #noCol>
-  <div class="background">
   <div class="card bg-secondary text-white" style="height: 400px;">
     <div class="card-body" style="padding-top: 170px;text-align: center;">
       <h5>No collection Available</h5>
       <a routerLink="/collection" class="text-white">add collection to your profile</a>
     </div>
-  </div>
 </div>
 </ng-template>

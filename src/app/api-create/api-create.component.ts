@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-api-create',
   templateUrl: './api-create.component.html',
-  styles: []
+  styleUrls: ['./api-create.component.css']
 })
 export class ApiCreateComponent implements OnInit {
 
