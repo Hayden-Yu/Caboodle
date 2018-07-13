@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 .background{
     position: fixed;
@@ -7,3 +8,12 @@
     min-height: 100%;
     z-index: -9999;
 }
+=======
+.container {
+    padding-top: 3%;
+}
+
+.create-topic {
+    padding-bottom: 1%;
+}
+>>>>>>> 5b4a03c2b8f072342a03e509ea078752d0be07a9

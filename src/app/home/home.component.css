@@ -1,7 +1,20 @@
-div {
+<<<<<<< HEAD
+/* div {
   padding: 10px 50px 50px 50px;
 }
 .background{
   background: linear-gradient(dodgerblue, skyblue,dodgerblue);
   
+=======
+.search-button {
+  padding-top: 1%;
 }
+
+.row {
+  margin: auto;
+}
+
+#right-col {
+  margin: 0 0 0 auto;
+>>>>>>> 5b4a03c2b8f072342a03e509ea078752d0be07a9
+} */
