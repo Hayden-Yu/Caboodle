@@ -1,3 +1,13 @@
-<div>
-  <app-endpoint-request></app-endpoint-request>
+<div class="container-fluid">
+  <div class="row">
+    <div class="btn-toolbar col-md-6 justify-content-end" role="toolbar">
+      <button class="btn btn-outline-secondary" style="margin-right: 10px">Save</button>
+      <button class="btn btn-primary" (click)="sendRequest()">Send Request</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <app-endpoint-request></app-endpoint-request>
+    </div>
+  </div>
 </div>

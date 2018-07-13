@@ -48,6 +48,7 @@ router.post('/endpoint/invocation', async (req: any, res, next) => {
       status: 400,
       message: 'malformed url',
     });
+    return;
   }
   // prepare request
   const init: RequestInit = {

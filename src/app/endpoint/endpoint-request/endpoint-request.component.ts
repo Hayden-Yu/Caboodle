@@ -1,5 +1,6 @@
+import { URL_REGEX } from './../../common/constants';
 import { Endpoint, Param } from './../../common/models/endpoint';
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-endpoint-request',
@@ -9,13 +10,55 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 export class EndpointRequestComponent implements OnInit {
 
   @Input() endpoint: Endpoint;
-  @Output() send: EventEmitter<Endpoint>;
 
   requestBody: boolean;
   newHeader: Param;
   newFormData: Param;
+  urlTouched: boolean;
   constructor() {
-    this.send = new EventEmitter();
+  }
+
+  getEndpoint(): Endpoint {
+    const endpoint = new Endpoint();
+    endpoint.method = this.endpoint.method;
+    endpoint.url = this.endpoint.url;
+    if (this.endpoint._id) {
+      endpoint._id = this.endpoint._id;
+    }
+    if (this.requestBody) {
+      endpoint.body = {
+        type: this.endpoint.body.type,
+      };
+      if (endpoint.body.type === 'form-data') {
+        this.endpoint.body.formData.forEach((el) => {
+          endpoint.body.formData.push({
+            key: el.key,
+            value: el.value,
+          });
+        });
+        if (this.newFormData.key) {
+          endpoint.body.formData.push({
+            key: this.newFormData.key,
+            value: this.newFormData.value,
+          });
+        }
+      } else {
+        endpoint.body.raw = this.endpoint.body.raw;
+      }
+      this.endpoint.headers.forEach((el) => {
+        endpoint.headers.push({
+          key: el.key,
+          value: el.value,
+        });
+      });
+      if (this.newHeader.key) {
+        endpoint.headers.push({
+          key: this.newHeader.key,
+          value: this.newHeader.value,
+        });
+      }
+    }
+    return endpoint;
   }
 
   ngOnInit() {
@@ -49,7 +92,8 @@ export class EndpointRequestComponent implements OnInit {
       key: '',
       value: '',
     };
-    this.requestBody = !!this.endpoint.body;
+    this.requestBody = (!!this.endpoint.body) && (this.endpoint.method !== 'GET');
+    this.urlTouched = false;
   }
 
   addHeader() {
@@ -88,9 +132,8 @@ export class EndpointRequestComponent implements OnInit {
     }
   }
 
-  toggleRequestBody() {
-    if (this.requestBody) {
-
-    }
+  invalidUrl() {
+    return this.urlTouched && !URL_REGEX.test(this.endpoint.url);
   }
+
 }
