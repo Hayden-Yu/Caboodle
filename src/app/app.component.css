@@ -1,0 +1,6 @@
+#appBody{
+    min-height: 100vh; 
+    background: linear-gradient(dodgerblue, skyblue,dodgerblue); 
+    /* background-size: 57.74px 100.00px; */
+    padding-top: 3.6rem;
+}
