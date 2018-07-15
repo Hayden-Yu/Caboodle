@@ -1,6 +1,7 @@
 import * as express from 'express';
 import { Collection } from '../models/collection.model';
 import { User } from '../models/user.model';
+import { URL_REGEX } from '../../../app/common/constants';
 
 export const router = express.Router();
 
@@ -46,4 +47,28 @@ router.get('/collection', (req: any, res, next) => {
   })
   .then(collections => res.json(collections))
   .catch(next);
+});
+
+router.post('/collection', async (req: any, res, next) => {
+  if (!req.auth) {
+    next({
+      status: 401,
+      message: 'unaothorized',
+    });
+    return;
+  }
+  if (!req.body.name) {
+    next({ status: 400, message: 'name is required' });
+    return;
+  }
+  if (req.body.website && !URL_REGEX.test(req.body.website)) {
+    next({ status: 400, message: 'invalid url' });
+    return;
+  }
+  req.body.createdBy = req.auth.id;
+  try {
+    res.json(await Collection.create(req.body));
+  } catch (err) {
+    next(err);
+  }
 });
