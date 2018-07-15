@@ -24,10 +24,15 @@ export const appRoutes: Routes = [
   { path: 'forum-content', component: ForumContentComponent },
   { path: 'forum-subject-create', component: ForumSubjectCreateComponent },
   { path: 'forum', component: ForumComponent },
-  { path: 'collection', component: ApiCollectionComponent },
-  { path: 'collection/detail/:id', component: ApiCollectionProfileComponent },
+  {
+    path: 'collection',
+    component: ApiCollectionComponent,
+    children: [
+      { path: 'detail/:id', component: ApiCollectionProfileComponent },
+      { path: 'create', component: ApiCollectionCreateComponent },
+    ]
+  },
   { path: 'endpoint/:id', component: EndpointComponent },
-  { path: 'collection/create', component: ApiCollectionCreateComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'home', component: AccountProfileComponent },

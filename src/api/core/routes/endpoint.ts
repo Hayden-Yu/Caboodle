@@ -155,20 +155,9 @@ router.get('/endpoint', async (req, res, next) => {
 
   Collection.findAll({
     where: { id: { $in: collectionIds } },
-    include: [{
-      model: User,
-      attributes: {
-        exclude: ['password', 'salt', 'updatedAt']
-      }
-    }],
     limit: req.query.limit || 200,
     offset: req.query.offset || 0
   })
-  .then(async collections => {
-    for (const c of collections) {
-      await c.attatchEndpoints();
-    }
-    res.json(collections);
-  })
+  .then(res.json.bind(res))
   .catch(next);
 });

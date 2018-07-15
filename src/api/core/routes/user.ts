@@ -105,7 +105,7 @@ router.post('/user/:userId/collection/:collectionId', (req: any, res, next) => {
     res.send(401);
   } else {
     Collection.findById(req.params.collectionId)
-    .then(collection => collection ? req.user.addCollection(collection) : new Promise(resolve => resolve()))
+    .then(collection => collection ? req.user.addBookmark(collection) : new Promise(resolve => resolve()))
     .then(() => (<User>req.user).reload({
       include: [
         { model: Collection, as: 'bookmarks' },
