@@ -12,6 +12,7 @@ import { isPlatformServer } from '@angular/common';
 })
 export class UserService {
   private isLoggedIn = new Subject<boolean>();
+  private currentUser: User;
   loggedIn$ = this.isLoggedIn.asObservable();
 
   constructor(private http: HttpClient,
@@ -51,6 +52,7 @@ export class UserService {
     localStorage.removeItem(AUTH_TOKEN_KEY);
     localStorage.removeItem(AUTH_LAST_REFRESH_KEY);
     this.isLoggedIn.next(false);
+    this.currentUser = undefined;
   }
 
   refreshToken(): void {
@@ -110,8 +112,10 @@ export class UserService {
   }
 
   getCurrentUser(): Observable<User> {
-    return this.http.get(`${environment.api}me`)
-      .pipe(map((res: any) => res));
+    return this.currentUser ?
+      of(this.currentUser) :
+      this.http.get(`${environment.api}me`)
+        .pipe(map((res: any) => this.currentUser = res));
   }
 
   updateUser(id: number, user: User): Observable<User> {

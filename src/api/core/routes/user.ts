@@ -11,9 +11,13 @@ export const router = express.Router();
 
 router.param('userId', (req: any, res, next, id) => {
   User.findById(id, {
-    include: [{
-      model: Collection
-    }]
+    include: [
+      { model: Collection, as: 'bookmarks' },
+      { model: Collection, as: 'collections' },
+    ],
+    attributes: {
+      exclude: ['password', 'salt', 'updatedAt']
+    }
   })
   .then((user) => {
     req.user = user;
@@ -21,16 +25,19 @@ router.param('userId', (req: any, res, next, id) => {
   });
 });
 
-router.get('/user/:userId', (req: any, res, next) => {
+router.get('/user/:userId', async (req: any, res, next) => {
   if (!req.auth) {
     next({
       status: 401,
       message: 'not authorized',
     });
   } else if (req.user) {
-    req.user.password = undefined;
-    req.user.salt = undefined;
-    req.user.updatedAt = undefined;
+    for (const c of req.user.bookmarks) {
+      await c.attatchEndpoints();
+    }
+    for (const c of req.user.collections) {
+      await c.attatchEndpoints();
+    }
     res.json(req.user);
   } else {
     next({
@@ -87,9 +94,6 @@ router.put('/user/:userId', (req: any, res, next) => {
       firstName: req.body.firstName,
       lastName: req.body.lastName
     }).then(() => {
-      req.user.password = undefined;
-      req.user.salt = undefined;
-      req.user.updatedAt = undefined;
       res.json(req.user);
     })
     .catch(next);
@@ -101,16 +105,17 @@ router.post('/user/:userId/collection/:collectionId', (req: any, res, next) => {
     res.send(401);
   } else {
     Collection.findById(req.params.collectionId)
-    .then(collection => collection ? req.user.addCollection(collection) : new Promise(resolve => resolve()))
+    .then(collection => collection ? req.user.addBookmark(collection) : new Promise(resolve => resolve()))
     .then(() => (<User>req.user).reload({
-      include: [{
-        model: Collection
-      }]
+      include: [
+        { model: Collection, as: 'bookmarks' },
+        { model: Collection, as: 'collections' },
+      ],
+      attributes: {
+        exclude: ['password', 'salt', 'updatedAt']
+      }
     }))
     .then((user) => {
-      user.password = undefined;
-      user.salt = undefined;
-      user.updatedAt = undefined;
       res.json(user);
     })
     .catch(next);
@@ -122,16 +127,17 @@ router.delete('/user/:userId/collection/:collectionId', (req: any, res, next) =>
     res.send(401);
   } else {
     Collection.findById(req.params.collectionId)
-    .then(collection => collection ? req.user.removeCollection(collection) : new Promise(resolve => resolve()))
+    .then(collection => collection ? req.user.removeBookmark(collection) : new Promise(resolve => resolve()))
     .then(() => (<User>req.user).reload({
-      include: [{
-        model: Collection
-      }]
+      include: [
+        { model: Collection, as: 'bookmarks' },
+        { model: Collection, as: 'collections' },
+      ],
+      attributes: {
+        exclude: ['password', 'salt', 'updatedAt']
+      }
     }))
     .then((user) => {
-      user.password = undefined;
-      user.salt = undefined;
-      user.updatedAt = undefined;
       res.json(user);
     })
     .catch(next);

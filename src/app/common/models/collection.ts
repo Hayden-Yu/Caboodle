@@ -1,4 +1,5 @@
 import { Endpoint } from './endpoint';
+import { User } from './user';
 
 export class Collection {
   id: number;
@@ -8,4 +9,5 @@ export class Collection {
   website: string;
   description: string;
   endpoints: Endpoint[];
+  creator?: User;
 }

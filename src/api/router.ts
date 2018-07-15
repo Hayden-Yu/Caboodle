@@ -10,6 +10,7 @@ import * as collection from './core/routes/collection';
 import * as activation from './core/routes/activation';
 import * as endpoint from './core/routes/endpoint';
 import { serverErrorHandler } from './architecture/error/server-error-handler';
+import logger from './architecture/logger';
 
 const router = express.Router();
 router.use(cors);
@@ -30,6 +31,7 @@ router.use((req, res) => res.status(404).json({
   message: 'you are lost'
 }));
 router.use((err, req, res, next) => {
+  logger.error(err);
   res.status(500).json(err);
 });
 export default router;

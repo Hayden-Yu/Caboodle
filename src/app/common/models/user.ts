@@ -6,4 +6,5 @@ export class User {
   firstName?: string;
   lastName?: string;
   collections?: Collection[];
+  bookmarks?: Collection[];
 }

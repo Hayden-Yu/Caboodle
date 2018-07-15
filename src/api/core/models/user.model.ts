@@ -1,5 +1,5 @@
 // tslint:disable-next-line:max-line-length
-import { Table, Model, PrimaryKey, Column, Sequelize, Unique, IsEmail, HasMany, BelongsToMany, AllowNull, Default } from 'sequelize-typescript';
+import { Table, Model, Column, Sequelize, Unique, IsEmail, HasMany, BelongsToMany, AllowNull, Default } from 'sequelize-typescript';
 import { Collection, UserCollection } from './collection.model';
 import * as crypto from 'crypto';
 
@@ -31,6 +31,9 @@ export class User extends Model<User> {
   active: boolean;
 
   @BelongsToMany(() => Collection, () => UserCollection)
+  bookmarks: Collection[];
+
+  @HasMany(() => Collection)
   collections: Collection[];
 
   setPassword(password: string) {
