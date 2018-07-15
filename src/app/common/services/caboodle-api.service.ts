@@ -1,6 +1,5 @@
 import { EndpointResponse } from './../models/endpoint-response';
 import { Collection } from './../models/collection';
-import { Category } from './../models/category';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
@@ -26,20 +25,12 @@ export class CaboodleApiService {
       .pipe(map((res: any) => res));
   }
 
-  getAllCategories(): Observable<Category[]> {
-    return this.http.get(`${environment.api}collection/categories`)
-      .pipe(map((res: any) => res));
-  }
-
-  getCollections(name?: string, category?: string): Observable<Collection[]> {
+  findCollections(queryType: 'collection' | 'endpoint', name?: string): Observable<Collection[]> {
     let param = '';
     if (name) {
       param += `query=${name}`;
     }
-    if (category) {
-      param += `${param ? '&' : ''}category=${category}`;
-    }
-    return this.http.get(`${environment.api}collection${param ? '?' : ''}${param}`)
+    return this.http.get(`${environment.api}${queryType}${param ? '?' : ''}${param}`)
       .pipe(map((res: any) => res));
   }
 

@@ -138,3 +138,37 @@ router.post('/endpoint/invocation', async (req: any, res, next) => {
     next(err);
   }
 });
+
+router.get('/endpoint', async (req, res, next) => {
+  const where: any = {};
+  if (req.query.query) {
+    where.$or = [
+      { name: new RegExp(`.*${req.query.query}.*`) },
+      { url: new RegExp(`.*${req.query.query}.*`) },
+    ];
+  }
+  const collectionIds = await Endpoint.distinct('collectionId', where).exec();
+  if (!collectionIds) {
+    res.json([]);
+    return;
+  }
+
+  Collection.findAll({
+    where: { id: { $in: collectionIds } },
+    include: [{
+      model: User,
+      attributes: {
+        exclude: ['password', 'salt', 'updatedAt']
+      }
+    }],
+    limit: req.query.limit || 200,
+    offset: req.query.offset || 0
+  })
+  .then(async collections => {
+    for (const c of collections) {
+      await c.attatchEndpoints();
+    }
+    res.json(collections);
+  })
+  .catch(next);
+});
