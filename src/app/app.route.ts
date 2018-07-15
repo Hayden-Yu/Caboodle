@@ -12,10 +12,12 @@ import { ForumComponent } from './forum/forum.component';
 import { ForumContentComponent } from './forum-content/forum-content.component';
 import { ForumSubjectCreateComponent } from './forum-subject-create/forum-subject-create.component';
 import { EndpointComponent } from './endpoint/endpoint.component';
-import { ApiCreateComponent } from './api-create/api-create.component';
+import { ApiCollectionCreateComponent } from './api-collection/api-collection-create/api-collection-create.component';
+import { ApiCollectionProfileComponent } from './api-collection/api-collection-profile/api-collection-profile.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', redirectTo: 'signup' },
   { path: 'signup', component: RegisterComponent },
   { path: 'activate/:code', component: ActivateAccountComponent},
   { path: '', component: HomeComponent },
@@ -23,9 +25,9 @@ export const appRoutes: Routes = [
   { path: 'forum-subject-create', component: ForumSubjectCreateComponent },
   { path: 'forum', component: ForumComponent },
   { path: 'collection', component: ApiCollectionComponent },
-  { path: 'collection/detail/:id', component: ApiCollectionComponent },
+  { path: 'collection/detail/:id', component: ApiCollectionProfileComponent },
   { path: 'endpoint/:id', component: EndpointComponent },
-  { path: 'collection/create', component: ApiCreateComponent },
+  { path: 'collection/create', component: ApiCollectionCreateComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'home', component: AccountProfileComponent },

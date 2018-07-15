@@ -1,16 +1,16 @@
-import { UserService } from './../common/services/user.service';
-import { CaboodleApiService } from './../common/services/caboodle-api.service';
+import { UserService } from './../../common/services/user.service';
+import { CaboodleApiService } from './../../common/services/caboodle-api.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { Collection } from '../common/models/collection';
+import { Collection } from '../../common/models/collection';
 import { DomSanitizer } from '@angular/platform-browser';
-import { User } from '../common/models/user';
+import { User } from '../../common/models/user';
 
 @Component({
   selector: 'app-api-profile',
-  templateUrl: './api-profile.component.html',
-  styleUrls: ['./api-profile.component.css']
+  templateUrl: './api-collection-profile.component.html',
+  styleUrls: ['./api-collection-profile.component.css']
 })
-export class ApiProfileComponent implements OnInit {
+export class ApiCollectionProfileComponent implements OnInit {
   collection: Collection;
   @Input() user: User;
   @Input() loadUser = false;

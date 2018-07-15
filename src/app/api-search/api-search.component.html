@@ -1,7 +1,7 @@
 <div style="position: relative;">
   <div class="input-group">
     <div class="input-group-prepend" ngbDropdown>
-      <button class="btn btn-outline-secondary" type="button" id="category-toggle" ngbDropdownToggle>{{ this.selectedCategory }}</button>
+      <button class="btn btn-light search-toggle" type="button" ngbDropdownToggle>{{ this.selectedCategory }}</button>
       <div class="dropdown-menu" ngbDropdownMenu>
         <button class="dropdown-item" (click)="updateCategory('All')">All</button>
         <div role="separator" class="dropdown-divider"></div>

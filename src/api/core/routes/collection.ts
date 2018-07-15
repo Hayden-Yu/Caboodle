@@ -1,11 +1,18 @@
 import { orm } from '../models/orm';
 import * as express from 'express';
 import { Collection } from '../models/collection.model';
+import { User } from '../models/user.model';
 
 export const router = express.Router();
 
 router.param('collectionId', (req: any, res, next, id) => {
-  Collection.findById(id)
+  Collection.findById(id, {
+    include: [{
+    model: User,
+    attributes: {
+      exclude: ['password', 'salt', 'active']
+    }
+  }]})
   .then(((collection) => {
     req.collection = collection;
     next();

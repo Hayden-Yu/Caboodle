@@ -6,6 +6,8 @@ import logger from '../../../architecture/logger';
 export interface IEndpointHistory extends mongoose.Document {
   status: number;
 
+  userId: number;
+
   body?: string;
 
   headers?: IParam[];
@@ -17,6 +19,7 @@ export interface IEndpointHistory extends mongoose.Document {
 
 export const EndpointHistorySchema = new mongoose.Schema({
   status: { type: Number, required: true },
+  userId: { type: Number, required: true },
   body: String,
   headers: [ParamSchema],
   endpoint: { type: mongoose.Schema.Types.ObjectId, ref: 'Endpoint'}

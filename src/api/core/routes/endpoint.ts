@@ -6,6 +6,7 @@ import { Collection } from '../models/collection.model';
 import { Endpoint } from './../models/documents/endpoint.doc';
 import { EndpointHistory } from '../models/documents/endpoint-history.doc';
 import logger from '../../architecture/logger';
+import { User } from '../models/user.model';
 
 export const router = express.Router();
 
@@ -20,7 +21,14 @@ router.post('/endpoint', async (req: any, res, next) => {
     return;
   }
 
-  const collection = await Collection.findById(req.body.collectionId);
+  const collection = await Collection.findById(req.body.collectionId, {
+    include: [{
+      model: User,
+      attributes: {
+        exclude: ['password', 'salt', 'active']
+      }
+    }]
+  });
   if (!collection) {
     next({
       status: 400,
@@ -28,12 +36,39 @@ router.post('/endpoint', async (req: any, res, next) => {
     });
     return;
   }
-  await Endpoint.create(req.body);
 
+  if (!req.auth || req.auth.id !== collection.creator.id) {
+    next({
+      status: 401,
+      message: 'not authorized',
+    });
+    return;
+  }
+  await collection.attatchEndpoints();
+  for (const endpoint of collection._endpoints) {
+    if (endpoint.name === req.body.name
+      && endpoint.method === req.body.method) {
+        next({
+          status: 400,
+          message: 'endpoint already exists',
+        });
+        return;
+    }
+  }
+
+  await Endpoint.create(req.body);
+  await collection.attatchEndpoints();
   res.json(collection);
 });
 
 router.post('/endpoint/invocation', async (req: any, res, next) => {
+  if (!req.auth) {
+    next({
+      status: 401,
+      message: 'not authorized',
+    });
+    return;
+  }
   // validation
   if (!req.body ||
     !req.body.method || !req.body.url) {
@@ -85,6 +120,7 @@ router.post('/endpoint/invocation', async (req: any, res, next) => {
         return r;
       });
     res.json(result);
+    result.userId = req.auth.id;
     // verify endpoint
     if (req.body._id) {
       const endpoint = await Endpoint.findById(req.body._id);
