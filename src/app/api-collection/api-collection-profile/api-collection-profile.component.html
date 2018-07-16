@@ -17,7 +17,7 @@
       <br>
       <span *ngIf="collection.description">Description: {{ collection.description }}</span>
     </p>
-    <div>
+    <div *ngIf="user">
       <button *ngIf="!hasFavorite()" type="button" class="btn btn-outline-success" style="margin-right: 3px;" (click)="favorite()"><i class="material-icons" style="font-size:16px;">playlist_add</i> Bookmark</button>
       <button *ngIf="hasFavorite()" type="button" class="btn btn-outline-danger" style="margin-right: 3px;" (click)="unfavorite()"><i class="material-icons" style="font-size:16px;">delete_outline</i> Unbookmark</button>
     </div>

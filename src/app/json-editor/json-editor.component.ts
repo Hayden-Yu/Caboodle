@@ -6,7 +6,7 @@ import JSONEditor, { JSONEditorOptions as IJSONEditorOptions, JSONEditorMode, JS
   // tslint:disable-next-line:component-selector
   selector: 'json-editor',
   template: `
-    <div #jsonEditor></div>
+    <div #jsonEditor [ngStyle]="{'height': height}"></div>
   `,
   styles: []
 })
@@ -18,6 +18,7 @@ export class JsonEditorComponent implements OnInit {
 
   @Input() options: JSONEditorOptions = new JSONEditorOptions();
   @Input() data: Object = {};
+  @Input() height = '300px';
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
