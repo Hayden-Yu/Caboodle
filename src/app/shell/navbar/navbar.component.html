@@ -7,7 +7,7 @@
   <div class="navbar-collapse collapse show" [ngbCollapse]="navCollapse">
     <ul class="navbar-nav mr-auto">
     <li class="nav-item">
-      <a class="nav-link" routerLink="/collection" [ngClass]="{'active': route==='/collection'}">API Catalog</a>
+      <a class="nav-link" routerLink="/collection" [ngClass]="{'active': route && route.indexOf('/collection') === 0}">API Catalog</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" routerLink="/forum" [ngClass]="{'active': route==='/forum'}">Forum</a>
