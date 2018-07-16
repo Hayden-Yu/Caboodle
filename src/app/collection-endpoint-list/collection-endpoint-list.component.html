@@ -1,16 +1,16 @@
 <div class="row" *ngIf="collections && collections.length; else noCol">
-  <div class="col-4 pr-0">
-    <div class="list-group" id="list">
+  <div class="col-4 pr-0 pl-0" id="list">
+    <div class="list-group list-group-flush">
       <button type="button" class="list-group-item list-group-item-action" (click)="active=collection" *ngFor="let collection of collections">{{ collection.name }}
-          <i  *ngIf="needDeleteCol" class="material-icons text-dark float-right" style="font-size: 1.5rem;" (click)="deleteCollection(collection.id)" placement="left" ngbTooltip="Remove from Favorite">delete</i>
+          <i *ngIf="needDeleteCol" class="material-icons text-dark float-right" style="font-size: 1.5rem;" (click)="deleteCollection(collection.id)" placement="left" ngbTooltip="Remove from Favorite">delete</i>
       </button>
     </div>
   </div>
-  <div class="col-8 pl-0">
-    <div class="card" id="detail">
+  <div class="col-8 pl-0" id="detail">
+    <div class="card">
       <div class="card-header">
-        <span>{{ active.name }} </span>
-        <ng-container *ngIf="active.tag">
+        <span><a [routerLink]="['/collection', 'detail', active.id]">{{ active.name }}</a> </span>
+        <ng-container *ngIf="active.category">
             <span class="badge badge-info float-right">{{ active.category.toLowerCase() }}</span>
         </ng-container>
       </div>
@@ -25,7 +25,7 @@
   <div class="card bg-secondary text-white" style="height: 400px;">
     <div class="card-body" style="padding-top: 170px;text-align: center;">
       <h5>No collection Available</h5>
-      <a routerLink="/collection" class="text-white">add collection to your profile</a>
+      <a routerLink="/collection" class="text-white">find collection</a>
     </div>
   </div>
 </ng-template>

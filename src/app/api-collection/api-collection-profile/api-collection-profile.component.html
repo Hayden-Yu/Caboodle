@@ -1,0 +1,33 @@
+<div style="text-align: center;" *ngIf="!collection">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="card" *ngIf="collection">
+  <div class="card-header">
+    <span>{{ collection.name }}</span>
+    <ng-container *ngIf="collection.category">
+        <span class="badge badge-info float-right">{{ collection.category.toLowerCase() }}</span>
+    </ng-container>
+  </div>
+  <div class="card-body">
+    <p class="card-text text-muted">
+      <span>Author: {{ collection.creator.email.replace(emailName, '$1') }}</span><br>
+      <span *ngIf="collection.website">Source: <a [href]="collection.website" target="_blank">{{ collection.website }}</a></span><br>
+      <span *ngIf="collection.tag">{{ collection.tag }}</span><br *ngIf="collection.tag">
+      <br>
+      <span *ngIf="collection.description">Description: {{ collection.description }}</span>
+    </p>
+    <div>
+      <button *ngIf="!hasFavorite()" type="button" class="btn btn-outline-success" style="margin-right: 3px;" (click)="favorite()"><i class="material-icons" style="font-size:16px;">playlist_add</i> Bookmark</button>
+      <button *ngIf="hasFavorite()" type="button" class="btn btn-outline-danger" style="margin-right: 3px;" (click)="unfavorite()"><i class="material-icons" style="font-size:16px;">delete_outline</i> Unbookmark</button>
+    </div>
+    <hr>
+    <h6 class="card-title" style="display: inline-block;">Endpoints</h6>
+    <button class="float-right" style="border: none;background-color:transparent"><i class="material-icons text-dark" style="font-size: 1.5rem;" ngbTooltip="Add Endpoint" placement="left">add</i></button>
+    <div class="list-group">
+      <button type="button" class="list-group-item text-left" *ngFor="let endpoint of collection.endpoints">
+        <span class="badge badge-warning mr-2">{{ endpoint.method }}</span> {{ endpoint.name }}
+      </button>
+    </div>
+  </div>
+</div>

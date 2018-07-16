@@ -1,7 +1,12 @@
 <div class="container-fluid">
-  <div class="mx-auto" style="max-width: 600px; padding-top: 1%">
-    <app-api-search (selectCollection)="selectCollection($event)"></app-api-search>
+  <div class="row">
+    <div class="col-md-9 mt-2">
+      <app-api-search (selectCollection)="selectCollection($event)"></app-api-search>
+    </div>
+    <div class="col-md-2 mt-2" *ngIf="user">
+      <a routerLink="/collection/create"><button class="btn btn-success">Create Collection</button></a>
+    </div>
   </div>
   <hr>
-  <app-api-profile [collectionId]="collectionId" [user]="user" *ngIf="collectionId"></app-api-profile>
+  <router-outlet></router-outlet>
 </div>

@@ -4,7 +4,7 @@ video {
   bottom: 0;
   min-width: 100%;
   min-height: 100%;
-  z-index: -9999;
+  z-index: 0;
 }
 
 h3, label {
@@ -17,4 +17,8 @@ h3 {
 
 .invalid-feedback {
   color: var(--warning);
+}
+
+div {
+  z-index: 1;
 }

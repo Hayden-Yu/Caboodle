@@ -1,11 +1,17 @@
-import { orm } from '../models/orm';
 import * as express from 'express';
 import { Collection } from '../models/collection.model';
+import { User } from '../models/user.model';
 
 export const router = express.Router();
 
 router.param('collectionId', (req: any, res, next, id) => {
-  Collection.findById(id)
+  Collection.findById(id, {
+    include: [{
+    model: User,
+    attributes: {
+      exclude: ['password', 'salt', 'updatedAt']
+    }
+  }]})
   .then(((collection) => {
     req.collection = collection;
     next();
@@ -13,29 +19,25 @@ router.param('collectionId', (req: any, res, next, id) => {
   .catch(next);
 });
 
-router.get('/collection/categories', (req, res, next) => {
-  orm.query('SELECT DISTINCT `category` FROM `Collection`', { raw: true })
-  .then((result) => {
-    res.json(result[0]);
-  });
-});
-
 router.get('/collection/:collectionId', async (req: any, res, next) => {
   if (req.collection) {
     await req.collection.attatchEndpoints();
     res.json(req.collection);
   } else {
-    res.status(404).send();
+    next({
+      status: 404,
+      message: 'collection not found',
+    });
   }
 });
 
 router.get('/collection', (req: any, res, next) => {
   const where: any = {};
-  if (req.query.category) {
-    where.category = req.query.category;
-  }
   if (req.query.query) {
-    where.name = {$like: `%${req.query.query}%`};
+    where.$or = {
+      name: {$like: `%${req.query.query}%`},
+      category: {$like: `%${req.query.query}%`}
+    };
   }
   Collection.findAll({
     where: where,

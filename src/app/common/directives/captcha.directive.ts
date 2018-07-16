@@ -1,6 +1,6 @@
 import { environment } from './../../../environments/environment';
 // tslint:disable-next-line:max-line-length
-import { Directive, Input, OnInit, ElementRef, Inject, PLATFORM_ID, OnDestroy, NgZone, Injector, OnChanges, SimpleChanges, forwardRef, HostListener } from '@angular/core';
+import { Directive, Input, OnInit, ElementRef, Inject, PLATFORM_ID, OnDestroy, NgZone, Injector, OnChanges, SimpleChanges, forwardRef, HostListener, HostBinding } from '@angular/core';
 import { ControlValueAccessor, FormControl, NgControl, Validators, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { isPlatformServer, isPlatformBrowser } from '@angular/common';
 
@@ -17,9 +17,12 @@ export interface CaptchaOption {
       provide: NG_VALUE_ACCESSOR,
       multi: true,
       useExisting: forwardRef(() => CaptchaDirective),
-  }]
+  }],
 })
 export class CaptchaDirective implements OnInit, ControlValueAccessor, OnChanges {
+  @HostBinding('style.overflow')
+  hostOverflow = 'hidden';
+
   @Input() captchaOptions: CaptchaOption = {};
   private widgetId: string;
   private onChange: ( value: string ) => void;
