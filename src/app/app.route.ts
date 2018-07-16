@@ -33,6 +33,7 @@ export const appRoutes: Routes = [
     ]
   },
   { path: 'endpoint/:id', component: EndpointComponent },
+  { path: 'endpoint', component: EndpointComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
   { path: 'home', component: AccountProfileComponent },

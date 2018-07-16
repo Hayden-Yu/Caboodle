@@ -34,6 +34,7 @@ import { EndpointComponent } from './endpoint/endpoint.component';
 import { EndpointRequestComponent } from './endpoint/endpoint-request/endpoint-request.component';
 import { EndpointResultComponent } from './endpoint/endpoint-result/endpoint-result.component';
 import { ApiCollectionCreateComponent } from './api-collection/api-collection-create/api-collection-create.component';
+import { JsonEditorComponent } from './json-editor/json-editor.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { ApiCollectionCreateComponent } from './api-collection/api-collection-cr
     EndpointRequestComponent,
     EndpointResultComponent,
     ApiCollectionCreateComponent,
+    JsonEditorComponent,
   ],
   imports: [
     NgbModule.forRoot(),

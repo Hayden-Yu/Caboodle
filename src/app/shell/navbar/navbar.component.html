@@ -12,6 +12,9 @@
     <li class="nav-item">
       <a class="nav-link" routerLink="/forum" [ngClass]="{'active': route==='/forum'}">Forum</a>
     </li>
+    <li class="nav-item" *ngIf="loggedIn">
+      <a class="nav-link" routerLink="/endpoint" [ngClass]="{'active': route && route.indexOf('/endpoint') === 0}">IDE</a>
+    </li>
     </ul>
 
     <div class="navbar-nav">

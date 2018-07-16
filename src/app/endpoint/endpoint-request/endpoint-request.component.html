@@ -69,7 +69,7 @@
     <div class="card">
       <div class="card-header" style="padding-top: 8px; padding-bottom: 8px;">
         <div class="form-check">
-          <input type="checkbox" class="form-check-input" [(ngModel)]="requestBody">
+          <input type="checkbox" class="form-check-input" (change)="toggleRequestBody($event)">
           <label class="form-check-label">Request Body</label>
         </div>
       </div>
@@ -88,9 +88,7 @@
           </div>
           <div class="row">
             <ng-container *ngIf="endpoint.body.type === 'raw'; else formData">
-              <div class="form-group col-12">
-                <textarea [(ngModel)]="endpoint.body.raw" rows="20" placeholder="&#123;&#10;&#9;&#34;request&#34;: &#34;Raw Data&#34;&#10;&#125;" class="form-control"></textarea>
-              </div>
+                <json-editor [options]="editorOptions" style="width: 100%"></json-editor>
             </ng-container>
           </div>
         </div>

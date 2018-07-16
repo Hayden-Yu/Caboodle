@@ -1,6 +1,8 @@
+import { JsonEditorComponent } from './../../json-editor/json-editor.component';
 import { URL_REGEX } from './../../common/constants';
 import { Endpoint, Param } from './../../common/models/endpoint';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { JSONEditorOptions } from '../../json-editor/json-editor.component';
 
 @Component({
   selector: 'app-endpoint-request',
@@ -8,6 +10,8 @@ import { Component, OnInit, Input } from '@angular/core';
   styles: []
 })
 export class EndpointRequestComponent implements OnInit {
+  @ViewChild(JsonEditorComponent)
+  private editor: JsonEditorComponent;
 
   @Input() endpoint: Endpoint;
 
@@ -15,6 +19,7 @@ export class EndpointRequestComponent implements OnInit {
   newHeader: Param;
   newFormData: Param;
   urlTouched: boolean;
+  editorOptions: JSONEditorOptions;
   constructor() {
   }
 
@@ -43,7 +48,7 @@ export class EndpointRequestComponent implements OnInit {
           });
         }
       } else {
-        endpoint.body.raw = this.endpoint.body.raw;
+        endpoint.body.raw = this.editor.getText();
       }
       this.endpoint.headers.forEach((el) => {
         endpoint.headers.push({
@@ -71,6 +76,7 @@ export class EndpointRequestComponent implements OnInit {
         body: {
           type: 'raw',
           formData: [],
+          raw: '',
         }
       };
     }
@@ -81,6 +87,7 @@ export class EndpointRequestComponent implements OnInit {
       this.endpoint.body = {
         type: 'raw',
         formData: [],
+        raw: '',
       };
     }
 
@@ -94,6 +101,9 @@ export class EndpointRequestComponent implements OnInit {
     };
     this.requestBody = (!!this.endpoint.body) && (this.endpoint.method !== 'GET');
     this.urlTouched = false;
+    this.editorOptions = new JSONEditorOptions();
+    this.editorOptions.modes = ['code', 'text'];
+    this.editorOptions.mode = 'text';
   }
 
   addHeader() {
@@ -136,4 +146,9 @@ export class EndpointRequestComponent implements OnInit {
     return this.urlTouched && !URL_REGEX.test(this.endpoint.url);
   }
 
+  toggleRequestBody($event) {
+    if (this.requestBody = $event.target.checked) {
+      setTimeout(() => this.editor.setText(this.endpoint.body.raw), 10);
+    }
+  }
 }
