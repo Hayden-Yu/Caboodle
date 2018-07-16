@@ -7,8 +7,20 @@ import { Endpoint } from './../models/documents/endpoint.doc';
 import { EndpointHistory } from '../models/documents/endpoint-history.doc';
 import logger from '../../architecture/logger';
 import { User } from '../models/user.model';
+import { CastError } from 'mongoose';
 
 export const router = express.Router();
+
+router.param('endpointId', async (req: any, res, next, id) => {
+  try {
+    req.endpoint = await Endpoint.findById(id).exec();
+  } catch (err) {
+    if (!(err instanceof CastError)) {
+      next(err);
+    }
+  }
+  next();
+});
 
 router.post('/endpoint', async (req: any, res, next) => {
   if (!req.body || !req.body.collectionId ||
@@ -136,6 +148,18 @@ router.post('/endpoint/invocation', async (req: any, res, next) => {
     });
   } catch (err) {
     next(err);
+  }
+});
+
+router.get('/endpoint/:endpointId', (req: any, res, next) => {
+  if (req.endpoint) {
+    req.endpoint.__v = undefined;
+    res.json(req.endpoint);
+  } else {
+    next({
+      status: 404,
+      message: 'collection not found',
+    });
   }
 });
 
