@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild, ElementRef, Input } from '@angular/core';
-import JSONEditor, { JSONEditorMode, JSONEditorOptions as IJSONEditorOptions, JSONEditorNode } from 'jsoneditor';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, OnInit, ViewChild, ElementRef, Input, Inject, PLATFORM_ID } from '@angular/core';
+import JSONEditor, { JSONEditorOptions as IJSONEditorOptions, JSONEditorMode, JSONEditorNode } from 'jsoneditor';
 
 @Component({
   // tslint:disable-next-line:component-selector
@@ -18,10 +19,12 @@ export class JsonEditorComponent implements OnInit {
   @Input() options: JSONEditorOptions = new JSONEditorOptions();
   @Input() data: Object = {};
 
-  constructor() { }
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
 
   ngOnInit() {
-    this.editor = new JSONEditor(this.jsonEditorContainer.nativeElement, this.options, this.data);
+    if (isPlatformBrowser(this.platformId)) {
+      this.editor = new JSONEditor(this.jsonEditorContainer.nativeElement, this.options, this.data);
+    }
   }
 
   public collapseAll() {

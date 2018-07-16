@@ -125,7 +125,7 @@ router.post('/endpoint/invocation', async (req: any, res, next) => {
           status: response.status,
           headers: []
         };
-        response.headers.forEach((k, v) => r.headers.push({key: k, value: v}));
+        response.headers.forEach((v, k) => r.headers.push({key: k, value: v}));
         r.body = await response.text();
         logger.info(`response status [${r.status}]`);
         logger.silly(`response body: ${r.body}`);

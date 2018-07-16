@@ -2,6 +2,6 @@ import { Param } from './endpoint';
 
 export class EndpointResponse {
   status: number;
-  headers: Param;
+  headers: Param[];
   body: string;
 }

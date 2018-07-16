@@ -37,7 +37,7 @@ router.get('/activation', (req, res, next) => {
           res.send();
         });
       } else {
-        res.send(401);
+        res.sendStatus(401);
       }
     })
     .catch(next);
