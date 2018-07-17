@@ -116,7 +116,7 @@ export class EndpointComponent implements OnInit, OnDestroy {
     }
     this.invalidRequest = false;
     if (request._id) {
-      this.apiSercice.updateEndpoint(request._id, this.request)
+      this.apiSercice.updateEndpoint(request._id, request)
         .subscribe(res => {
           if (res) {
             this.request = res;

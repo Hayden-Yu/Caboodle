@@ -36,6 +36,11 @@ export class EndpointRequestComponent implements OnInit {
       if (!this._endpoint.headers) {
         this._endpoint.headers = [];
       }
+      this.requestBody = (!!this._endpoint.body) && (this._endpoint.method !== 'GET');
+      this.urlTouched = false;
+      if (this._endpoint.body.raw) {
+        setTimeout(() => this.editor.setText(this._endpoint.body.raw), 10);
+      }
     }
   }
 
@@ -45,6 +50,9 @@ export class EndpointRequestComponent implements OnInit {
     endpoint.url = this._endpoint.url;
     if (this._endpoint._id) {
       endpoint._id = this._endpoint._id;
+    }
+    if (this._endpoint.name) {
+      endpoint.name = this._endpoint.name;
     }
     if (this.requestBody) {
       endpoint.body = {
@@ -66,6 +74,7 @@ export class EndpointRequestComponent implements OnInit {
         }
       } else {
         endpoint.body.raw = this.editor.getText();
+        console.log(endpoint.body.raw);
       }
       endpoint.headers = [];
       this._endpoint.headers.forEach((el) => {
@@ -89,7 +98,7 @@ export class EndpointRequestComponent implements OnInit {
 
   ngOnInit() {
     if (!this._endpoint) {
-      this._endpoint = {
+      this.endpoint = {
         name: '',
         url: '',
         method: 'GET',
@@ -101,16 +110,7 @@ export class EndpointRequestComponent implements OnInit {
         }
       };
     }
-    if (!this._endpoint.body) {
-      this._endpoint.body = {
-        type: 'raw',
-        formData: [],
-        raw: '',
-      };
-    }
-    if (!this._endpoint.headers) {
-      this._endpoint.headers = [];
-    }
+
     this.newHeader = {
       key: '',
       value: '',
@@ -119,8 +119,6 @@ export class EndpointRequestComponent implements OnInit {
       key: '',
       value: '',
     };
-    this.requestBody = (!!this._endpoint.body) && (this._endpoint.method !== 'GET');
-    this.urlTouched = false;
     this.editorOptions = new JSONEditorOptions();
     this.editorOptions.modes = ['code', 'text'];
     this.editorOptions.mode = 'text';
