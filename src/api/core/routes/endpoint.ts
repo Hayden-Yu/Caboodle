@@ -59,7 +59,8 @@ router.post('/endpoint', async (req: any, res, next) => {
   await collection.attatchEndpoints();
   for (const endpoint of collection._endpoints) {
     if (endpoint.name === req.body.name
-      && endpoint.method === req.body.method) {
+      && endpoint.method === req.body.method
+      && endpoint.method === 'GET') {
         next({
           status: 400,
           message: 'endpoint already exists',
@@ -68,9 +69,9 @@ router.post('/endpoint', async (req: any, res, next) => {
     }
   }
 
-  await Endpoint.create(req.body);
-  await collection.attatchEndpoints();
-  res.json(collection);
+  const e = await Endpoint.create(req.body);
+  e.__v = undefined;
+  res.json(e);
 });
 
 router.post('/endpoint/invocation', async (req: any, res, next) => {
@@ -185,4 +186,54 @@ router.get('/endpoint', async (req, res, next) => {
   })
   .then(res.json.bind(res))
   .catch(next);
+});
+
+router.put('/endpoint/:endpointId', async (req: any, res, next) => {
+  if (!req.auth || !req.endpoint) {
+    next({
+      status: 401,
+      message: 'not authorized',
+    });
+    return;
+  }
+  const collection = await Collection.findById(req.endpoint.collectionId);
+  if (!collection || req.auth.id !== collection.createdBy) {
+    next({
+      status: 401,
+      message: 'not authorized',
+    });
+    return;
+  }
+
+  if (!req.body || !req.body.collectionId ||
+    !req.body.method || !req.body.url ||
+    !URL_REGEX.test(req.body.url)) {
+    next({
+      status: 400,
+      message: 'malformed request'
+    });
+    return;
+  }
+
+  await collection.attatchEndpoints();
+  for (const endpoint of collection._endpoints) {
+    if (endpoint.name === req.body.name
+      && endpoint.method === req.body.method
+      && endpoint.method === 'GET'
+      && endpoint._id !== req.endpoint._id) {
+        next({
+          status: 400,
+          message: 'endpoint already exists',
+        });
+        return;
+    }
+  }
+
+   if (req.body._id) {
+     delete req.body._id;
+   }
+  const e = await Endpoint.findByIdAndUpdate(req.endpoint._id , { $set: req.body },
+    { new: true }).exec();
+  e.__v = undefined;
+  res.json(e);
 });
