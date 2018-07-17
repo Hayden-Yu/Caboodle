@@ -81,6 +81,9 @@ export class EndpointRequestComponent implements OnInit {
         });
       }
     }
+    if (this._endpoint.collectionId) {
+      endpoint.collectionId = this._endpoint.collectionId;
+    }
     return endpoint;
   }
 

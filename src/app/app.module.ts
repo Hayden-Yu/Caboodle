@@ -35,6 +35,8 @@ import { EndpointRequestComponent } from './endpoint/endpoint-request/endpoint-r
 import { EndpointResultComponent } from './endpoint/endpoint-result/endpoint-result.component';
 import { ApiCollectionCreateComponent } from './api-collection/api-collection-create/api-collection-create.component';
 import { JsonEditorComponent } from './json-editor/json-editor.component';
+import { SelectCollectionComponent } from './endpoint/select-collection/select-collection.component';
+import { EndpointCreateComponent } from './endpoint/endpoint-create/endpoint-create.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +68,8 @@ import { JsonEditorComponent } from './json-editor/json-editor.component';
     EndpointResultComponent,
     ApiCollectionCreateComponent,
     JsonEditorComponent,
+    SelectCollectionComponent,
+    EndpointCreateComponent,
   ],
   imports: [
     NgbModule.forRoot(),
@@ -86,7 +90,8 @@ import { JsonEditorComponent } from './json-editor/json-editor.component';
   entryComponents: [
     ForgetPasswordComponent,
     UpdateAccountComponent,
-    CollectionEndpointListDeleteConfirmationComponent
+    CollectionEndpointListDeleteConfirmationComponent,
+    EndpointCreateComponent,
   ]
 })
 export class AppModule { }
