@@ -1,5 +1,9 @@
+import { User } from './user';
 export class Forum {
-    forumID: number;
-    topic: string;
-    message: string;
+    id?: number;
+    title: string;
+    description: string;
+    createdDate?: Date;
+    user_id: number;
+    user?: User;
 }

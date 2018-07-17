@@ -1,4 +1,4 @@
-import { User } from './../../core/models/user.model';
+import { User } from '../../core/models/user.model';
 import * as jwt from 'jsonwebtoken';
 import { environment } from '../../environment.server';
 import logger from '../logger';
