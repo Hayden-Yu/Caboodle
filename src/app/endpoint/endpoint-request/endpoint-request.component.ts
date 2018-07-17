@@ -97,19 +97,17 @@ export class EndpointRequestComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (!this._endpoint) {
-      this.endpoint = {
-        name: '',
-        url: '',
-        method: 'GET',
-        headers: [],
-        body: {
-          type: 'raw',
-          formData: [],
-          raw: '',
-        }
-      };
-    }
+    this.endpoint = {
+      name: '',
+      url: '',
+      method: 'GET',
+      headers: [],
+      body: {
+        type: 'raw',
+        formData: [],
+        raw: '',
+      }
+    };
 
     this.newHeader = {
       key: '',

@@ -2,7 +2,7 @@ import { EndpointCreateComponent } from './endpoint-create/endpoint-create.compo
 import { isPlatformBrowser } from '@angular/common';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { User } from './../common/models/user';
 import { UserService } from './../common/services/user.service';
 import { EndpointResponse } from './../common/models/endpoint-response';
@@ -34,6 +34,7 @@ export class EndpointComponent implements OnInit, OnDestroy {
   constructor(private apiSercice: CaboodleApiService,
     private route: ActivatedRoute,
     private userSerivce: UserService,
+    private router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private injector: Injector) {
       if (isPlatformBrowser(platformId)) {
@@ -105,6 +106,12 @@ export class EndpointComponent implements OnInit, OnDestroy {
       clearTimeout(this.alertTimer);
     }
     this.alertTimer = setTimeout(() => this.saved = false, 10000);
+  }
+
+  resetRequest() {
+    this.router.navigate(['/endpoint']);
+    this.request = undefined;
+    this.requestComponent.ngOnInit();
   }
 
   save() {
