@@ -2,7 +2,7 @@
   <div class="col-12">
     <div class="input-group">
       <div class="input-group-prepend">
-        <select class="custom-select" [(ngModel)]="endpoint.method">
+        <select class="custom-select" [(ngModel)]="_endpoint.method">
           <option>GET</option>
           <option>POST</option>
           <option>PUT</option>
@@ -10,7 +10,7 @@
           <option>HEAD</option>
         </select>
       </div>
-      <input type="text" class="form-control" placeholder="URL" [(ngModel)]="endpoint.url" [ngClass]="{'is-invalid': invalidUrl()}" (blur)="urlTouched=true">
+      <input type="text" class="form-control" placeholder="URL" [(ngModel)]="_endpoint.url" [ngClass]="{'is-invalid': invalidUrl()}" (blur)="urlTouched=true">
     </div>
   </div>
 </div>
@@ -26,8 +26,8 @@
       </div>
       <div class="card-body" style="padding-top: 0px; padding-bottom: 0px;">
         <div class="list-group list-group-flush">
-          <ng-container *ngIf="this.endpoint.headers">
-            <div class="list-group-item" *ngFor="let header of endpoint.headers;let i = index">
+          <ng-container *ngIf="_endpoint.headers">
+            <div class="list-group-item" *ngFor="let header of _endpoint.headers;let i = index">
               <div class="form-row">
                 <div class="form-group col-5" style="margin-bottom: 0px;">
                   <input type="text" class="form-control" placeholder="Key" [(ngModel)]="header.key">
@@ -64,7 +64,7 @@
   </div>
 </div>
 
-<div class="row" *ngIf="endpoint.method !== 'GET'">
+<div class="row" *ngIf="_endpoint.method !== 'GET'">
   <div class="col-12">
     <div class="card">
       <div class="card-header" style="padding-top: 8px; padding-bottom: 8px;">
@@ -80,14 +80,14 @@
               <label>Type</label>
             </div>
             <div class="col-8">
-              <select class="form-control" [(ngModel)]="endpoint.body.type">
+              <select class="form-control" [(ngModel)]="_endpoint.body.type">
                 <option value="raw">Raw</option>
                 <option value="form-data">Form Data</option>
               </select>
             </div>
           </div>
           <div class="row">
-            <ng-container *ngIf="endpoint.body.type === 'raw'; else formData">
+            <ng-container *ngIf="_endpoint.body.type === 'raw'; else formData">
                 <json-editor [options]="editorOptions" style="width: 100%"></json-editor>
             </ng-container>
           </div>
@@ -104,8 +104,8 @@
         <i class="material-icons" style="font-size: 1.5rem;" placement="left">add</i>
       </button>
     </div>
-    <ng-container *ngIf="this.endpoint.body.formData">
-      <div class="list-group-item" *ngFor="let field of endpoint.body.formData; let i = index">
+    <ng-container *ngIf="this._endpoint.body.formData">
+      <div class="list-group-item" *ngFor="let field of _endpoint.body.formData; let i = index">
         <div class="form-row">
           <div class="form-group col-5" style="margin-bottom: 0px;">
             <input type="text" class="form-control" placeholder="Key" [(ngModel)]="field.key">

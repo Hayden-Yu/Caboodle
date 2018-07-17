@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { User } from './../common/models/user';
 import { UserService } from './../common/services/user.service';
 import { EndpointResponse } from './../common/models/endpoint-response';
-import { EndpointResultComponent } from './endpoint-result/endpoint-result.component';
 import { CaboodleApiService } from './../common/services/caboodle-api.service';
 import { EndpointRequestComponent } from './endpoint-request/endpoint-request.component';
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
