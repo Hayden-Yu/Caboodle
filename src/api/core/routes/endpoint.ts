@@ -220,7 +220,7 @@ router.put('/endpoint/:endpointId', async (req: any, res, next) => {
     if (endpoint.name === req.body.name
       && endpoint.method === req.body.method
       && endpoint.method === 'GET'
-      && endpoint._id !== req.endpoint._id) {
+      && !endpoint._id.equals(req.endpoint._id)) {
         next({
           status: 400,
           message: 'endpoint already exists',
@@ -229,11 +229,11 @@ router.put('/endpoint/:endpointId', async (req: any, res, next) => {
     }
   }
 
-   if (req.body._id) {
-     delete req.body._id;
-   }
-  const e = await Endpoint.findByIdAndUpdate(req.endpoint._id , { $set: req.body },
-    { new: true }).exec();
+  req.body._id = req.endpoint._id;
+  await Endpoint.update({_id: req.endpoint._id}, req.body, { overwrite: true, multi: false }).exec();
+  const e = await Endpoint.findById(req.endpoint._id).exec();
+  // const e = await Endpoint.findByIdAndUpdate(req.endpoint._id , { $set: req.body },
+  //   { new: true }).exec();
   e.__v = undefined;
   res.json(e);
 });
