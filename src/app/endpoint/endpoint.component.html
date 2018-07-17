@@ -1,3 +1,15 @@
-<div>
-  <app-endpoint-request></app-endpoint-request>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="btn-toolbar justify-content-end" role="toolbar">
+        <button class="btn btn-outline-secondary" style="margin-right: 10px" disabled>Save</button>
+        <button class="btn btn-primary" (click)="sendRequest()" [disabled]="!user">Send Request</button>
+      </div>
+      <app-endpoint-request></app-endpoint-request>
+    </div>
+    <div class="col-md-6">
+      <hr class="d-md-none">
+      <app-endpoint-result [result]="response"></app-endpoint-result>
+    </div>
+  </div>
 </div>

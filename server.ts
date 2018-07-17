@@ -14,6 +14,10 @@ orm.sync();
 // Faster server renders w/ Prod mode (dev mode never needed)
 enableProdMode();
 
+// workaround jsoneditor panic on server initialization
+(<any>global).document = {documentElement: {addEventListener() {}}};
+(<any>global).window = {};
+
 // Express server
 const app = express();
 

@@ -17,7 +17,7 @@ import { RegisterComponent } from './register/register.component';
 import { ApiCollectionComponent } from './api-collection/api-collection.component';
 import { ActivateAccountComponent } from './activate-account/activate-account.component';
 import { CaptchaDirective } from './common/directives/captcha.directive';
-import { ApiProfileComponent } from './api-profile/api-profile.component';
+import { ApiCollectionProfileComponent } from './api-collection/api-collection-profile/api-collection-profile.component';
 import { AboutUsComponent } from './about-us/about-us.component';
 import { ContactUsComponent } from './contact-us/contact-us.component';
 import { ForumComponent } from './forum/forum.component';
@@ -33,7 +33,8 @@ import { LoadingSpinnerComponent } from './shell/loading-spinner/loading-spinner
 import { EndpointComponent } from './endpoint/endpoint.component';
 import { EndpointRequestComponent } from './endpoint/endpoint-request/endpoint-request.component';
 import { EndpointResultComponent } from './endpoint/endpoint-result/endpoint-result.component';
-import { ApiCreateComponent } from './api-create/api-create.component';
+import { ApiCollectionCreateComponent } from './api-collection/api-collection-create/api-collection-create.component';
+import { JsonEditorComponent } from './json-editor/json-editor.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,7 @@ import { ApiCreateComponent } from './api-create/api-create.component';
     ApiCollectionComponent,
     ActivateAccountComponent,
     CaptchaDirective,
-    ApiProfileComponent,
+    ApiCollectionProfileComponent,
     AboutUsComponent,
     ContactUsComponent,
     ForumContentComponent,
@@ -63,7 +64,8 @@ import { ApiCreateComponent } from './api-create/api-create.component';
     EndpointComponent,
     EndpointRequestComponent,
     EndpointResultComponent,
-    ApiCreateComponent,
+    ApiCollectionCreateComponent,
+    JsonEditorComponent,
   ],
   imports: [
     NgbModule.forRoot(),

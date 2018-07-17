@@ -1,5 +1,8 @@
+import { JsonEditorComponent } from './../../json-editor/json-editor.component';
+import { URL_REGEX } from './../../common/constants';
 import { Endpoint, Param } from './../../common/models/endpoint';
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { JSONEditorOptions } from '../../json-editor/json-editor.component';
 
 @Component({
   selector: 'app-endpoint-request',
@@ -7,15 +10,60 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
   styles: []
 })
 export class EndpointRequestComponent implements OnInit {
+  @ViewChild(JsonEditorComponent)
+  private editor: JsonEditorComponent;
 
   @Input() endpoint: Endpoint;
-  @Output() send: EventEmitter<Endpoint>;
 
   requestBody: boolean;
   newHeader: Param;
   newFormData: Param;
+  urlTouched: boolean;
+  editorOptions: JSONEditorOptions;
   constructor() {
-    this.send = new EventEmitter();
+  }
+
+  getEndpoint(): Endpoint {
+    const endpoint = new Endpoint();
+    endpoint.method = this.endpoint.method;
+    endpoint.url = this.endpoint.url;
+    if (this.endpoint._id) {
+      endpoint._id = this.endpoint._id;
+    }
+    if (this.requestBody) {
+      endpoint.body = {
+        type: this.endpoint.body.type,
+      };
+      if (endpoint.body.type === 'form-data') {
+        this.endpoint.body.formData.forEach((el) => {
+          endpoint.body.formData.push({
+            key: el.key,
+            value: el.value,
+          });
+        });
+        if (this.newFormData.key) {
+          endpoint.body.formData.push({
+            key: this.newFormData.key,
+            value: this.newFormData.value,
+          });
+        }
+      } else {
+        endpoint.body.raw = this.editor.getText();
+      }
+      this.endpoint.headers.forEach((el) => {
+        endpoint.headers.push({
+          key: el.key,
+          value: el.value,
+        });
+      });
+      if (this.newHeader.key) {
+        endpoint.headers.push({
+          key: this.newHeader.key,
+          value: this.newHeader.value,
+        });
+      }
+    }
+    return endpoint;
   }
 
   ngOnInit() {
@@ -28,6 +76,7 @@ export class EndpointRequestComponent implements OnInit {
         body: {
           type: 'raw',
           formData: [],
+          raw: '',
         }
       };
     }
@@ -38,6 +87,7 @@ export class EndpointRequestComponent implements OnInit {
       this.endpoint.body = {
         type: 'raw',
         formData: [],
+        raw: '',
       };
     }
 
@@ -49,7 +99,11 @@ export class EndpointRequestComponent implements OnInit {
       key: '',
       value: '',
     };
-    this.requestBody = !!this.endpoint.body;
+    this.requestBody = (!!this.endpoint.body) && (this.endpoint.method !== 'GET');
+    this.urlTouched = false;
+    this.editorOptions = new JSONEditorOptions();
+    this.editorOptions.modes = ['code', 'text'];
+    this.editorOptions.mode = 'text';
   }
 
   addHeader() {
@@ -88,9 +142,13 @@ export class EndpointRequestComponent implements OnInit {
     }
   }
 
-  toggleRequestBody() {
-    if (this.requestBody) {
+  invalidUrl() {
+    return this.urlTouched && !URL_REGEX.test(this.endpoint.url);
+  }
 
+  toggleRequestBody($event) {
+    if (this.requestBody = $event.target.checked) {
+      setTimeout(() => this.editor.setText(this.endpoint.body.raw), 10);
     }
   }
 }
