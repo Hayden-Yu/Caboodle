@@ -23,10 +23,10 @@
     </div>
     <hr>
     <h6 class="card-title" style="display: inline-block;">Endpoints</h6>
-    <button class="float-right" style="border: none;background-color:transparent"><i class="material-icons text-dark" style="font-size: 1.5rem;" ngbTooltip="Add Endpoint" placement="left">add</i></button>
+    <button  *ngIf="user && user.id === collection.creator.id" class="float-right" style="border: none;background-color:transparent"><i class="material-icons text-dark" style="font-size: 1.5rem;" ngbTooltip="Add Endpoint" placement="left">add</i></button>
     <div class="list-group">
       <button type="button" class="list-group-item text-left" *ngFor="let endpoint of collection.endpoints">
-        <span class="badge badge-warning mr-2">{{ endpoint.method }}</span> {{ endpoint.name }}
+        <span class="badge badge-warning mr-2">{{ endpoint.method }}</span> <a [routerLink]="['/endpoint', endpoint._id]">{{ endpoint.name }}</a>
       </button>
     </div>
   </div>

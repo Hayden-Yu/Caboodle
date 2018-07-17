@@ -99,7 +99,8 @@ router.post('/endpoint/invocation', async (req: any, res, next) => {
   }
   // prepare request
   const init: RequestInit = {
-    method: req.body.method
+    method: req.body.method,
+    timeout: 15000,
   };
   if (req.body.headers) {
     init.headers = new Headers();

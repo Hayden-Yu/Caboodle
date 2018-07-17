@@ -13,11 +13,11 @@
       <app-collection-endpoint-list [collections]="user.bookmarks" needDeleteCol="true" (deleteCol)="deleteCollection($event)"></app-collection-endpoint-list>
     </div>
   </div>
-  <div class="card" *ngIf="user.collections">
+  <div class="card">
       <div class="card-body">
         <h6 style="display: inline-block;">My Own Collections</h6>
-        <a routerLink="/collection/create"><i class="material-icons text-dark float-right" style="font-size: 1.5rem;" ngbTooltip="Add Collections" placement="left">add</i></a>
-        <app-collection-endpoint-list [collections]="user.collections"></app-collection-endpoint-list>
+        <a routerLink="/collection/create"><i class="material-icons text-dark float-right" style="font-size: 1.5rem;" ngbTooltip="Create Collections" placement="left">add</i></a>
+        <app-collection-endpoint-list *ngIf="user.collections && user.collections.length" [collections]="user.collections"></app-collection-endpoint-list>
       </div>
     </div>
 </div>
