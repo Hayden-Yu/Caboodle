@@ -1,12 +1,10 @@
-import { Collection } from './../../common/models/collection';
-import { isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { CaboodleApiService } from './../../common/services/caboodle-api.service';
 import { URL_REGEX } from './../../common/constants';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit, Output, Inject, PLATFORM_ID, Injector, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UserService } from '../../common/services/user.service';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Collection } from '../../common/models/collection';
 
 @Component({
   selector: 'app-api-collection-create',
@@ -15,18 +13,15 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class ApiCollectionCreateComponent implements OnInit {
 
+  @Input() isChildView = false;
+  @Output() collectionCreated: EventEmitter<Collection> = new EventEmitter();
+
   collectionForm: FormGroup;
-  private activeModal: NgbActiveModal;
   constructor(private fb: FormBuilder,
     private userService: UserService,
     private apiService: CaboodleApiService,
-    private router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    private injector: Injector
+    private router: Router
   ) {
-    if (isPlatformBrowser(platformId)) {
-      this.activeModal = injector.get(NgbActiveModal, null);
-    }
   }
 
   ngOnInit() {
@@ -61,8 +56,8 @@ export class ApiCollectionCreateComponent implements OnInit {
       description: this.collectionForm.get('description').value
     })
     .subscribe(result => {
-      if (this.activeModal) {
-        this.activeModal.close(result);
+      if (this.isChildView) {
+        this.collectionCreated.emit(result);
       } else {
         this.router.navigate(['/collection', 'detail', result.id]);
       }

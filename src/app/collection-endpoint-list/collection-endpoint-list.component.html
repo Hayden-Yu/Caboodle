@@ -16,7 +16,9 @@
         </ng-container>
       </div>
       <div class="list-group list-group-flush" style="border-bottom: 1px solid rgba(0,0,0,.125)">
-        <button type="button" class="list-group-item list-group-item-action" *ngFor="let endpoint of active.endpoints">{{ endpoint.name }}</button>
+        <button type="button" class="list-group-item list-group-item-action" *ngFor="let endpoint of active.endpoints">
+          <span class="badge badge-warning mr-2">{{ endpoint.method }}</span> <a [routerLink]="['/endpoint', endpoint._id]">{{ endpoint.name }}</a>
+        </button>
       </div>
     </div>
   </div>

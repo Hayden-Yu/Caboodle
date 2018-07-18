@@ -1,0 +1,23 @@
+<div class="card" [hidden]="create">
+  <div class="card-header">
+    All Collections
+    <button class="float-right btn btn-outline-primary" (click)="create = true"><i class="material-icons" style="font-size: 16px;" placement="left">add</i><span class="d-none d-sm-inline">Create Collection</span></button>
+  </div>
+  <div style="max-height: 380px; overflow-y: auto;">
+    <div class="list-group">
+      <button type="button" class="list-group-item list-group-item-action"
+      [ngClass]="{'active': active === collection.id}"
+      (click)="active=collection.id;selected.emit(collection.id)" *ngFor="let collection of collections">{{ collection.name }}</button>
+    </div>
+  </div>
+</div>
+
+<div class="card" [hidden]="!create">
+  <div class="card-header">
+    <button class="btn btn-outline-primary" (click)="create = false"><i class="material-icons" style="font-size: 16px;">arrow_back_ios</i>Back</button>
+    <span class="float-right">Create Collection</span>
+  </div>
+  <div class="card-body">
+    <app-api-collection-create isChildView="true"></app-api-collection-create>
+  </div>
+</div>

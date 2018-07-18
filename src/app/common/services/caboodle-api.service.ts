@@ -39,8 +39,23 @@ export class CaboodleApiService {
       .pipe(map((res: any) => res));
   }
 
+  getEndpointById(id: string): Observable<Endpoint> {
+    return this.http.get(`${environment.api}endpoint/${id}`)
+      .pipe(map((res: any) => res));
+  }
+
   createCollection(collection: Collection): Observable<Collection> {
     return this.http.post(`${environment.api}collection`, collection)
+      .pipe(map((res: any) => res));
+  }
+
+  createEndpoint(endpoint: Endpoint): Observable<Endpoint> {
+    return this.http.post(`${environment.api}endpoint`, endpoint)
+      .pipe(map((res: any) => res));
+  }
+
+  updateEndpoint(id: string, endpoint: Endpoint): Observable<Endpoint> {
+    return this.http.put(`${environment.api}endpoint/${id}`, endpoint)
       .pipe(map((res: any) => res));
   }
 

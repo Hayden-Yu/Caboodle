@@ -1,0 +1,21 @@
+<div class="modal-body">
+  <div class="form-group">
+    <label>Endpoint name</label>
+    <input type="text" class="form-control" [(ngModel)]="endpoint.name" [ngClass]="{'is-invalid': !endpoint.name}">
+    <div class="invalid-feedback">
+      Please provide a name
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Select a collection to save to:</label>
+    <app-select-collection [collections]="collections" class="form-control" (selected)="endpoint.collectionId = $event" [ngClass]="{'is-invalid': validationAttempt && !endpoint.collectionId}">
+    </app-select-collection>
+    <div class="invalid-feedback">
+      Please choose a collection to save to
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-lg btn-outline-primary" (click)="save()">Save</button>
+  <button class="btn btn-lg btn-outline-dark" (click)="cancel()">Cancel</button>
+</div>

@@ -1,7 +1,8 @@
+import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from './../../common/services/user.service';
 import { CaboodleApiService } from './../../common/services/caboodle-api.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { Collection } from '../../common/models/collection';
 import { DomSanitizer } from '@angular/platform-browser';
 import { User } from '../../common/models/user';
@@ -11,13 +12,14 @@ import { User } from '../../common/models/user';
   templateUrl: './api-collection-profile.component.html',
   styleUrls: ['./api-collection-profile.component.css']
 })
-export class ApiCollectionProfileComponent implements OnInit {
+export class ApiCollectionProfileComponent implements OnInit, OnDestroy {
   collection: Collection;
   user: User;
   loadUser = false;
   private _collectionId: number;
   iframeLoad: boolean;
   emailName = /^(.*)@.*$/;
+  private _routeSub: Subscription;
   constructor(private apiService: CaboodleApiService,
     private route: ActivatedRoute,
     private userService: UserService,
@@ -26,7 +28,7 @@ export class ApiCollectionProfileComponent implements OnInit {
   ngOnInit() {
     this.iframeLoad = false;
     this.userService.getCurrentUser().subscribe(u => this.user = u);
-    this.route.paramMap.subscribe(param => {
+    this._routeSub = this.route.paramMap.subscribe(param => {
       this.setCollectionId(parseInt(param.get('id'), 10));
     });
     this.userService.getCurrentUser()
@@ -60,5 +62,11 @@ export class ApiCollectionProfileComponent implements OnInit {
 
   iframeUrl() {
     return this.domSanitizer.bypassSecurityTrustResourceUrl(this.collection.website);
+  }
+
+  ngOnDestroy() {
+    if (this._routeSub) {
+      this._routeSub.unsubscribe();
+    }
   }
 }
