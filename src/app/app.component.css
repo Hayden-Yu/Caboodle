@@ -5,3 +5,8 @@
   padding-top: 3.6rem;
   padding-bottom: 96px;
 }
+#appFoot{
+  position: absolute; 
+  bottom: 0px; 
+  width: 100%;
+}

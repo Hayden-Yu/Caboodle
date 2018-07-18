@@ -1,0 +1,7 @@
+.footerRight {
+    width: 100%;
+}
+.footerRight li a {
+    color : rgba(106, 255, 47, 0.897);
+    text-shadow: 1px 1px  forestgreen;
+}
