@@ -46,7 +46,7 @@
     "mongoose": "^5.2.3",
     "mysql": "^2.15.0",
     "node-fetch": "^2.1.2",
-    "nodemailer": "^4.6.5",
+    "nodemailer": "^4.6.7",
     "npm": "^6.1.0",
     "reflect-metadata": "^0.1.12",
     "rxjs": "^6.2.0",

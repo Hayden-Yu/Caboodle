@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {  FormBuilder, FormGroup, Validators} from '@angular/forms';
+import * as nodemailer from 'nodemailer';
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
@@ -14,6 +15,7 @@ export class ContactUsComponent {
    email: string = '';
    issue:string = '';
    message:string = '';
+   
 
   constructor(private fb: FormBuilder) { 
       this.rForm = fb.group({
@@ -29,9 +31,22 @@ export class ContactUsComponent {
   addPost(post){
     this.fName = post.fName;
     this.lName = post.lName;
-    //this.username = post.username;
     this.email = post.email;
     this.issue = post.issue;
     this.message = post.message;
+    let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      secure: false,
+      port: 25,
+      auth:{
+        user: 'CaboodleAPI123@gmail.com',
+        pass: '12345678'
+
+      },
+      tls:{
+        rejectUnauthorized: false
+      }
+    });
+  
   }
 }
