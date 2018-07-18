@@ -4,7 +4,7 @@ export function cors(req, res, next) {
   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 
   if (req.method === 'OPTIONS') {
-    res.status(200).send();
+    res.send();
   } else {
     next();
   }

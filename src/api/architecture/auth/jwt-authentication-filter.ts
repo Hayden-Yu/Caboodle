@@ -12,7 +12,10 @@ import logger from '../logger';
  */
 export function login(req, res, next) {
   if (!req.body || !(req.body.email && req.body.password)) {
-    res.status(401).send();
+    next({
+      status: 401,
+      message: 'malformed request',
+    });
   } else {
     logger.debug('Attempt username password authorization');
     User.findOne({
@@ -28,7 +31,10 @@ export function login(req, res, next) {
         .catch(err => next(err));
       } else {
         logger.debug(`Authorization failed user [${req.body.email}]`);
-        res.status(401).send();
+        next({
+          status: 401,
+          message: 'authorization failed',
+        });
       }
     });
   }

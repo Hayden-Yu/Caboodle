@@ -1,5 +1,5 @@
 import { User } from './user.model';
-import { Table, Model, Column, Sequelize, ForeignKey, AllowNull } from 'sequelize-typescript';
+import { Table, Model, Column, Sequelize, ForeignKey, AllowNull, BelongsTo } from 'sequelize-typescript';
 import { IEndpoint, Endpoint } from './documents/endpoint.doc';
 
 @Table({
@@ -26,6 +26,13 @@ export class Collection extends Model<Collection> {
 
   @Column(Sequelize.STRING)
   description: string;
+
+  @ForeignKey(() => User)
+  @Column(Sequelize.INTEGER)
+  createdBy: number;
+
+  @BelongsTo(() => User)
+  creator: User;
 
   _endpoints: IEndpoint[];
 

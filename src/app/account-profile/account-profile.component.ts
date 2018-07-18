@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class AccountProfileComponent implements OnInit {
 
   user: User;
-
+  emailName = /^(.*)@.*$/;
   modal: NgbModal;
   constructor(private userService: UserService,
     private apiService: CaboodleApiService,

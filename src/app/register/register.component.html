@@ -9,7 +9,7 @@
     <br>
     <div class="row">
       <div class="col-12">
-        <h3 style="overflow: hidden;">Create Account</h3>
+        <h3>Create Account</h3>
       </div>
     </div>
     <br>
@@ -42,8 +42,8 @@
     </div>
     <div class="row form-group">
       <div class="row-md-4">
-        <div appCaptcha formControlName="captcha" class="form-control" style="width:inherit;margin-left:15px;overflow: hidden;"
-        [ngClass]="{'is-invalid': invalidControl('captcha')}"></div>
+        <div appCaptcha formControlName="captcha" class="form-control" style="width:inherit;margin-left:15px;"
+        [ngClass]="{'is-invalid': invalidControl('captcha')}" class="captcha"></div>
         <div class="invalid-feedback" style="margin-left:15px">Please solve the captcha</div>
       </div>
     </div>

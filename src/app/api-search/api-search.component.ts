@@ -1,6 +1,5 @@
 import { CaboodleApiService } from './../common/services/caboodle-api.service';
 import { Component, OnInit, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
-import { Category } from '../common/models/category';
 import { Collection } from '../common/models/collection';
 import { Subscription } from 'rxjs';
 
@@ -12,9 +11,8 @@ import { Subscription } from 'rxjs';
 export class ApiSearchComponent implements OnInit {
   @Output() selectCollection: EventEmitter<Collection>;
 
+  type: 'Collection' | 'Endpoint';
   collections: Collection[];
-  categories: Category[];
-  selectedCategory: string;
   dropdown: boolean;
 
   query: string;
@@ -26,17 +24,8 @@ export class ApiSearchComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiService.getAllCategories()
-    .subscribe(categories => {
-      this.categories = categories;
-    });
-    this.selectedCategory = 'All';
+    this.type = 'Collection';
     this.dropdown = false;
-  }
-
-  updateCategory(category: string) {
-    this.selectedCategory = category;
-    this.retrieveSearchResult();
   }
 
   queryKeyup() {
@@ -55,7 +44,7 @@ export class ApiSearchComponent implements OnInit {
     if (this.searchSub) {
       this.searchSub.unsubscribe();
     }
-    this.searchSub = this.apiService.getCollections(this.query, this.selectedCategory === 'All' ? '' : this.selectedCategory)
+    this.searchSub = this.apiService.findCollections(<'collection' | 'endpoint'>this.type.toLowerCase(), this.query)
       .subscribe(res => {
         this.collections = res;
         this.dropdown = true;

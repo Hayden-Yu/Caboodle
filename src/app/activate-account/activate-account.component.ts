@@ -33,7 +33,7 @@ export class ActivateAccountComponent implements OnInit {
     });
     this.userService.loggedIn$.subscribe(login => {
       if (login) {
-        this.router.navigate(['/profile']);
+        this.router.navigate(['/home']);
       }
     });
   }

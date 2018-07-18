@@ -1,6 +1,7 @@
 export class Endpoint {
-  _id?: number;
+  _id?: string;
   name?: string;
+  collectionId?: number;
   url: string;
   method: string;
   headers?: Param[];

@@ -12,24 +12,31 @@ import { ForumComponent } from './forum/forum.component';
 import { ForumContentComponent } from './forum-content/forum-content.component';
 import { ForumSubjectCreateComponent } from './forum-subject-create/forum-subject-create.component';
 import { EndpointComponent } from './endpoint/endpoint.component';
-import { ApiCreateComponent } from './api-create/api-create.component';
+import { ApiCollectionCreateComponent } from './api-collection/api-collection-create/api-collection-create.component';
+import { ApiCollectionProfileComponent } from './api-collection/api-collection-profile/api-collection-profile.component';
 
 export const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'register', redirectTo: 'signup' },
   { path: 'signup', component: RegisterComponent },
   { path: 'activate/:code', component: ActivateAccountComponent},
-  { path: 'home', component: HomeComponent },
+  { path: '', component: HomeComponent },
   { path: 'forum-content', component: ForumContentComponent },
   { path: 'forum-subject-create', component: ForumSubjectCreateComponent },
   { path: 'forum', component: ForumComponent },
-  { path: 'collection', component: ApiCollectionComponent },
-  { path: 'collection/:id', component: ApiCollectionComponent },
+  {
+    path: 'collection',
+    component: ApiCollectionComponent,
+    children: [
+      { path: 'detail/:id', component: ApiCollectionProfileComponent },
+      { path: 'create', component: ApiCollectionCreateComponent },
+    ]
+  },
   { path: 'endpoint/:id', component: EndpointComponent },
-  { path: 'createApi', component: ApiCreateComponent },
+  { path: 'endpoint', component: EndpointComponent },
   { path: 'about', component: AboutUsComponent },
   { path: 'contact', component: ContactUsComponent },
-  { path: 'profile', component: AccountProfileComponent },
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: AccountProfileComponent },
   { path: '**', component: PageNotFoundComponent }
 ];
 export const routing = RouterModule.forRoot(appRoutes);
