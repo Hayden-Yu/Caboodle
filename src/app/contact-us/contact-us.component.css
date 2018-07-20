@@ -18,3 +18,12 @@
 .bigText{
     font-size: 36px;
 }
+.alert{
+    color: white;
+    text-shadow:
+		-1px -1px 0 blue,
+		1px -1px 0 blue,
+		-1px 1px 0 blue,
+        1px 1px 0 blue;
+        padding: 0px;
+}
