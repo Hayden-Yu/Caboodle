@@ -2,15 +2,11 @@
 <img class="background" src="../../assets/images/starrySky.jpeg" >
 <div class="container">
   <div *ngIf="!fName; else forminfo">
-  <div class="py-5 text-center, title">
-    <h2>Contact Us</h2>
-    <h4>Leave us a message and we'll get back to you soon!</h4>
-  </div>
-
   <div class="row justify-content-center">
     <div class="col-md-8 order-md-1">
-  
-      
+        <div class="py-5 text-center title">
+            <h1>Contact Us</h1>
+          </div>
       <h4 class="mb-3">Contact Information</h4>
         <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
           <div class="row">
@@ -29,23 +25,12 @@
               </div>
             </div>
           </div>
-
-          <!-- <div class="mb-3">
-            <label for="username">Username</label>
-            <div class="input-group">
-              <input type="text" class="form-control" id="username" formControlName ="username" placeholder="Username" required>
-              <div class="invalid-feedback" style="width: 100%;">
-                Your username is required.
-              </div>
-            </div>
-          </div> -->
-
           <div class="mb-3">
             <label for="email">Email
             </label>
             <input type="email" class="form-control" id="email" placeholder="you@example.com" formControlName ="email">
             <div class="invalid-feedback">
-              
+              Please enter a valid email.
             </div>
           </div>
           <div class="mb-3">
@@ -84,8 +69,6 @@
   <div class="row bigText">
   Name: {{fName}} {{lName}}
   <br/>
-  <!--Username: {{username}}
-  <br/>-->
   Email: {{email}}
   <br/>
   Issue: {{issue}}

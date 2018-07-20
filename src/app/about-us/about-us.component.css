@@ -1,6 +1,6 @@
 .carousel-caption{
-    color : rgba(106, 255, 47, 0.897);
-    text-shadow: 1px 1px  forestgreen;
+    color : yellow;
+    text-shadow: 1px 1px  yellowgreen;
 }
 #ourTeam{
     color: blue;
@@ -13,9 +13,9 @@
     text-align: justify;
 }
 .teamCentred{
-    text-align: center;
-    color: #116611;
-    text-shadow: 1px 1px grey;
+    text-align: center;    
+    color : yellow;
+    text-shadow: 1px 1px  yellowgreen;
 }
 .background{
     position: fixed;

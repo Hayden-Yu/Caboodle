@@ -1,0 +1,12 @@
+.footerRight {
+    width: 100%;
+}
+.footerRight li a {
+    color : yellow;
+    text-shadow: 1px 1px  yellowgreen;
+    font-size: 20px;
+}
+.footerLeft{
+    color : yellow;
+    white-space:nowrap
+}

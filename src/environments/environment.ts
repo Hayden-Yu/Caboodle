@@ -3,22 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  host: 'http://localhost:6237/',
-  
   production: false,
   api: 'http://localhost:4000/api/',
   captchaKey: '6LfldVwUAAAAAItkDn0UjyZihpmWgLwGGMjM_grm',
-  email: {
-    username: 'caboodle.api@gmail.com',
-    password: '%ThUvY1iE$0h'
-  },
-  mongodb: {
-    host: 'myvmlab.senecacollege.ca',
-    username: 'caboodle',
-    password: 'cX8qzpMsN6rb',
-    database: 'caboodle',
-    port: 6241
-  }  
 };
 
 /*

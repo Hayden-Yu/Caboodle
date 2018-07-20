@@ -7,14 +7,12 @@
     z-index: 0;
 }
 .title{
-    color: white;
-    text-shadow: 1px 1px gray;
-    text-align: center;
+    color : yellow;
+    text-shadow: 1px 1px  yellowgreen;
 }
 
 .row{
-    color: white;
-    text-shadow: 1px 1px  gray;
+    color : yellow;
     
 }
 .bigText{

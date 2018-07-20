@@ -1,6 +1,12 @@
 #appBody{
-    min-height: 100vh; 
-    background: linear-gradient(dodgerblue, skyblue,dodgerblue); 
-    /* background-size: 57.74px 100.00px; */
-    padding-top: 3.6rem;
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(dodgerblue, skyblue,dodgerblue);
+  padding-top: 3.6rem;
+  padding-bottom: 96px;
+}
+#appFoot{
+  position: absolute; 
+  bottom: 0px; 
+  width: 100%;
 }

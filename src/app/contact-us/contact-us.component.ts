@@ -11,7 +11,6 @@ export class ContactUsComponent {
    post:any;
    fName:string = '';
    lName:string = '';
-   //username: string = '';
    email: string = '';
    issue:string = '';
    message:string = '';
@@ -21,7 +20,6 @@ export class ContactUsComponent {
       this.rForm = fb.group({
         'fName': [null, Validators.required],
         'lName': [null, Validators.required],
-        //'username': [null, Validators.required],
         'email': [null, Validators.email],
         'issue': [null, Validators.required],
         'message': [null, Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(400)])]
@@ -34,7 +32,7 @@ export class ContactUsComponent {
     this.email = post.email;
     this.issue = post.issue;
     this.message = post.message;
-    let transporter = nodemailer.createTransport({
+ /*   let transporter = nodemailer.createTransport({
       service: 'gmail',
       secure: false,
       port: 25,
@@ -46,7 +44,7 @@ export class ContactUsComponent {
       tls:{
         rejectUnauthorized: false
       }
-    });
+    });*/
   
   }
 }
