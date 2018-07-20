@@ -1,11 +1,20 @@
 .carousel-caption{
-    color : greenyellow;
-    text-shadow: 1px 1px  limegreen;
+    color : white;
+    text-shadow: 		
+    -1px -1px 0 darkblue,
+    1px -1px 0 darkblue,
+    -1px 1px 0 darkblue,
+    1px 1px 0 darkblue;
 }
-#ourTeam{
+.ourTeam{
     color: blue;
-    text-shadow: 1px 1px  forestgreen;
+    text-shadow: 2px 1px  darkgreen;
     text-align: center;
+    position: relative;
+    border: 1px solid white;
+    border-radius: 25px;
+    background-color: dodgerblue;
+    margin-top: 5%;
 }
 .row{
     color: black;
@@ -13,9 +22,10 @@
     text-align: justify;
 }
 .teamCentred{
-    text-align: center;
-    color: #116611;
-    text-shadow: 1px 1px grey;
+    text-align: center;    
+    color : yellow;
+    text-shadow: 1px 1px  yellowgreen;
+    clear: left;
 }
 .background{
     position: fixed;
@@ -24,4 +34,21 @@
     min-width: 100%;
     min-height: 100%;
     z-index: 0;
+}
+.aboutCaboodle{
+    text-align: center;
+    padding-top: 5px;
+    position: relative;
+    border: 1px solid white;
+    border-radius: 25px;
+    background-color: dodgerblue;
+}
+.aboutCaboodle h1{
+    color: blue;
+    text-shadow: 2px 1px  darkgreen;
+}
+.aboutCaboodle p{
+    text-align: center;    
+    color : yellow;
+    font-size: 18px;
 }

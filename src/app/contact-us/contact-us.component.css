@@ -4,19 +4,26 @@
     bottom: 0;
     min-width: 100%;
     min-height: 100%;
-    z-index: -9999;
+    z-index: 0;
 }
 .title{
-    color: white;
-    text-shadow: 1px 1px gray;
-    text-align: center;
+    color : yellow;
+    text-shadow: 1px 1px  yellowgreen;
 }
 
 .row{
-    color: white;
-    text-shadow: 1px 1px  gray;
+    color : yellow;
     
 }
 .bigText{
     font-size: 36px;
+}
+.alert{
+    color: white;
+    text-shadow:
+		-1px -1px 0 blue,
+		1px -1px 0 blue,
+		-1px 1px 0 blue,
+        1px 1px 0 blue;
+        padding: 0px;
 }
