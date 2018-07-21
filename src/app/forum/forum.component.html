@@ -12,7 +12,7 @@
                     <td>Date</td>
                 </tr>
                 <tr *ngFor="let topic of topicList">
-                    <td scope="row"><a routerLink={{topic.id}}>{{topic.title}}</a></td>
+                    <td scope="row"><a [routerLink]="['/forum-content/', topic.id]">{{topic.title}}</a></td>
                     <td scope="row">{{(topic.user.firstName + ' ' + topic.user.lastName)}}</td>
                     <td scope="row">{{topic.createdDate | date : 'yyyy-MM-dd'}}</td>
                 </tr>

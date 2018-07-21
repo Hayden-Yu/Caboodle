@@ -1,16 +1,14 @@
 // tslint:disable-next-line:max-line-length
-import { Table, Model, PrimaryKey, Column, Sequelize, Unique, BelongsTo, BelongsToMany, AllowNull, Default, CreatedAt, ForeignKey, IsUUID } from 'sequelize-typescript';
-import { Collection, UserCollection } from './collection.model';
+import { Table, Model, Column, Sequelize, BelongsTo, CreatedAt, ForeignKey } from 'sequelize-typescript';
 import { User } from './user.model';
-import { SequenceEqualOperator } from 'rxjs/internal/operators/sequenceEqual';
 
 @Table
 export class Forum extends Model<Forum> {
 
-  @Column(Sequelize.STRING(16))
+  @Column(Sequelize.TEXT)
   title: string;
 
-  @Column(Sequelize.STRING(16))
+  @Column(Sequelize.TEXT)
   description: string;
 
   @CreatedAt

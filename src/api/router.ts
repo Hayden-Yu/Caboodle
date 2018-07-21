@@ -10,6 +10,7 @@ import * as collection from './core/routes/collection';
 import * as activation from './core/routes/activation';
 import * as endpoint from './core/routes/endpoint';
 import * as forum from './core/routes/forum';
+import * as comments from './core/routes/comments';
 
 const router = express.Router();
 router.use(cors);
@@ -24,6 +25,7 @@ router.use(collection.router);
 router.use(activation.router);
 router.use(endpoint.router);
 router.use(forum.router);
+router.use(comments.router);
 
 router.use(jwtErrorHandler);
 router.use((req, res) => res.status(404).send());

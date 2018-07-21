@@ -9,12 +9,6 @@ import { SequenceEqualOperator } from 'rxjs/internal/operators/sequenceEqual';
 export class Comments extends Model<Comments> {
 
     @AllowNull(false)
-    @IsUUID(4)
-    @PrimaryKey
-    @Column(Sequelize.UUID)
-    id: number;
-
-    @AllowNull(false)
     @ForeignKey(() => User)
     @Column
     user_id: number;
@@ -24,7 +18,7 @@ export class Comments extends Model<Comments> {
     @Column
     thread_id: number;
 
-    @Column(Sequelize.STRING(16))
+    @Column(Sequelize.TEXT)
     description: string;
 
     @CreatedAt
@@ -32,6 +26,8 @@ export class Comments extends Model<Comments> {
 
     @BelongsTo(() => User)
     user;
+    @BelongsTo(() => Forum)
+    Forum;
 
     findUser(): Promise<Comments> {
         return new Promise((resolve, reject) => {

@@ -6,10 +6,10 @@
   
       <div class="row justify-content-center">
         <div class="col-md-8 order-md-1">
-          <form class="needs-validation" (ngSubmit)="submitForm()" novalidate>
+          <form class="needs-validation" (ngSubmit)="submitForm()" [formGroup]="formForum" novalidate>
   
             <div class="mb-3">
-              <label for="subject">Subject</label>
+              <label for="Subject">Subject</label>
               <input type="text" class="form-control" id="Topic" placeholder="" formControlName="Topic" required>
               <div class="invalid-feedback">
                 Please enter a subject title
