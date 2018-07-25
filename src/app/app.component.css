@@ -1,7 +1,7 @@
 #appBody{
   position: relative;
   min-height: 100vh;
-  background: linear-gradient(dodgerblue, skyblue,dodgerblue);
+  background: linear-gradient(#1e90ff, skyblue,dodgerblue);
   padding-top: 3.6rem;
   padding-bottom: 96px;
 }
