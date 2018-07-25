@@ -18,7 +18,10 @@ router.get('/activation', (req, res, next) => {
           email: activation.user.email,
         });
       } else {
-        res.status(401).send();
+        next({
+          status: 401,
+          message: 'unauthorized',
+        });
       }
     })
     .catch(next);
@@ -31,15 +34,18 @@ router.get('/activation', (req, res, next) => {
           userId: user.id,
         }).then(activation => {
           eventEmitter.emit(FORGET_PASSWORD_EVENT, activation);
-          res.status(200).send();
+          res.send();
         });
       } else {
-        res.send(401);
+        res.sendStatus(401);
       }
     })
     .catch(next);
   } else {
-    res.status(400).send();
+    next({
+      status: 400,
+      message: 'email is missing',
+    });
   }
 });
 
@@ -66,12 +72,18 @@ router.post('/activation', (req, res, next) => {
           user.save().then(() => login(req, res, next));
           activation.destroy();
         } else {
-          res.status(401).send();
+          next({
+            status: 401,
+            message: 'unauthorized',
+          });
         }
       })
       .catch(next);
     }
   } else {
-    res.status(400).send();
+    next({
+      status: 400,
+      message: 'malformed request',
+    });
   }
 });

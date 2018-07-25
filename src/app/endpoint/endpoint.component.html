@@ -1,3 +1,18 @@
-<div>
-  <app-endpoint-request></app-endpoint-request>
+<ngb-alert *ngIf="invalidRequest" type="danger" (close)="!invalidRequest"><span class="fade-in">Invalid Endpoint Request</span></ngb-alert>
+<ngb-alert *ngIf="saved" type="success" (close)="!saved"><span class="fade-in">Saved!</span></ngb-alert>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="btn-toolbar justify-content-end mb-2" role="toolbar">
+        <button (click)="resetRequest()" class="btn btn-outline-secondary" ngbTooltip="Reset" placement="top" style="margin-right: 10px;"><i class="material-icons" style="font-size:16px;">refresh</i></button>
+        <button class="btn btn-outline-secondary" style="margin-right: 10px" [disabled]="!isOwner()" (click)="save()" [hidden]="!user">Save</button>
+        <button class="btn btn-primary" (click)="sendRequest()" [disabled]="!user">Send Request</button>
+      </div>
+      <app-endpoint-request [endpoint]="request"></app-endpoint-request>
+    </div>
+    <div class="col-md-6">
+      <hr class="d-md-none">
+      <app-endpoint-result [result]="response"></app-endpoint-result>
+    </div>
+  </div>
 </div>

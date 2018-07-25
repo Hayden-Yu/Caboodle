@@ -11,6 +11,8 @@ import * as activation from './core/routes/activation';
 import * as endpoint from './core/routes/endpoint';
 import * as forum from './core/routes/forum';
 import * as comments from './core/routes/comments';
+import { serverErrorHandler } from './architecture/error/server-error-handler';
+import logger from './architecture/logger';
 
 const router = express.Router();
 router.use(cors);
@@ -28,5 +30,12 @@ router.use(forum.router);
 router.use(comments.router);
 
 router.use(jwtErrorHandler);
-router.use((req, res) => res.status(404).send());
+router.use(serverErrorHandler);
+router.use((req, res) => res.status(404).json({
+  message: 'you are lost'
+}));
+router.use((err, req, res, next) => {
+  logger.error(err);
+  res.status(500).json(err);
+});
 export default router;

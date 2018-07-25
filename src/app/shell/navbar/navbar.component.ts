@@ -11,11 +11,16 @@ export class NavbarComponent implements OnInit {
   loggedIn;
   navCollapse: boolean;
   route: string;
+  homeLink: string;
 
   constructor(private router: Router,
     private userService: UserService) {
     this.loggedIn = !!this.userService.getAuthToken();
-    this.userService.loggedIn$.subscribe(v => this.loggedIn = v);
+    this.homeLink = this.loggedIn ? '/home' : '/';
+    this.userService.loggedIn$.subscribe(v => {
+      this.loggedIn = v;
+      this.homeLink = this.loggedIn ? '/home' : '/';
+    });
   }
 
   ngOnInit() {

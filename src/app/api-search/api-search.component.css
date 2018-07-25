@@ -6,3 +6,12 @@
   overflow-y: auto;
   background: #f6f6f6;
 }
+
+.search-toggle {
+  border: 1px solid #ced4da;
+  background-color: #ffffff;
+}
+
+.search-toggle:hover {
+  background-color: #e2e6ea;
+}

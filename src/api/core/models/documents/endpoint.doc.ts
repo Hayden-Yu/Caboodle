@@ -1,4 +1,5 @@
 import * as mongoose from 'mongoose';
+import logger from '../../../architecture/logger';
 
 export const methods = [
   'GET',
@@ -23,7 +24,7 @@ export interface IParam {
 
   value: string;
 
-  private: boolean;
+  private?: boolean;
 }
 
 export const ParamSchema = new mongoose.Schema({
@@ -70,6 +71,14 @@ export const EndpointSchema = new mongoose.Schema({
   headers: [ParamSchema],
   query: [ParamSchema],
   body: RequestBodySchema
+});
+EndpointSchema.pre('save', function(next) {
+  logger.debug(`mongo saving ${this}`);
+  next();
+});
+EndpointSchema.pre('update', function(next) {
+  logger.debug(`mongo updating ${this}`);
+  next();
 });
 
 export const Endpoint: mongoose.Model<IEndpoint> = mongoose.model<IEndpoint>('Endpoint', EndpointSchema);

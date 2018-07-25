@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
 @import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~jsoneditor/dist/jsoneditor.min.css";
+
+.jsoneditor-poweredBy {
+  display: none !important;
+}
 
 .fade-in {
   animation: fadein 1.5s;
@@ -59,4 +64,10 @@
         -ms-user-select: none; /* Internet Explorer/Edge */
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
+}
+.carousel-control-prev-icon{
+  background-image: url('https://apufpel.com.br/assets/img/seta_prim.png');
+}
+.carousel-control-next-icon{
+ background-image: url('https://apufpel.com.br/assets/img/seta_ult.png');
 }
