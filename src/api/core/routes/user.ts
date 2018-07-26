@@ -145,7 +145,6 @@ router.delete('/user/:userId/collection/:collectionId', (req: any, res, next) =>
 });
 
 router.get('/me', (req: any, res, next) => {
-  res.redirect(`/${clientEnv.environment.api}user/${req.auth.id}`);
   if (!req.auth) {
     res.send(401);
     return;
