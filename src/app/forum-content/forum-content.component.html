@@ -1,1 +1,45 @@
-<p>Forum content & thread goes here.</p>
+<div class="container">
+    <div class="detail-topic" align="center" >
+        <table class="table table-bordered">
+            <tr>
+                <td><h2>{{article.title}}</h2></td>
+            </tr>
+            <tr>
+                <td><h3>{{article.description}}</h3></td>
+            </tr>
+            <tr>
+                <td><p>Created by: {{(article.user.firstName + ' ' + article.user.lastName)}}</p></td>
+            </tr>
+        </table>
+        <div class="row justify-content-center">
+            <div class="col-md-8 order-md-1">
+                <form class="needs-validation" (ngSubmit)="submitForm()" [formGroup]="formComment" novalidate>
+
+                <div class="mb-4">
+                <label for="Message">Comment</label>
+                <textarea type="textbox" class="form-control" id="Comment" formControlName="Comment" required></textarea>
+                <div class="invalid-feedback">
+                    Comment cannot be blank!
+                </div>
+            </div>
+            <hr class="mb-4">
+          
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Post</button>
+                </form>
+        </div>
+        <br/>
+    </div>
+    <table class="table table-bordered">
+            <tr>
+                <td>Comment</td>
+                <td>User</td>
+                <td>Date Posted</td>
+            </tr>
+            <tr *ngFor="let comments of commentList">
+                <td scope="row">{{comments.description}}</td>
+                <td scope="row">{{comments.user.firstName + ' ' + comments.user.lastName}}</td>
+                <td scope="row">{{comments.timestamps | date : 'yyyy-MM-dd'}}</td>
+            </tr>
+        </table>
+</div>
