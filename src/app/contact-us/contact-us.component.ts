@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import {  FormBuilder, FormGroup, Validators} from '@angular/forms';
-
 @Component({
   selector: 'app-contact-us',
   templateUrl: './contact-us.component.html',
@@ -14,16 +13,16 @@ export class ContactUsComponent {
    email: string = '';
    issue:string = '';
    message:string = '';
-   
 
-  constructor(private fb: FormBuilder) { 
+
+  constructor(private fb: FormBuilder) {
       this.rForm = fb.group({
         'fName': [null, Validators.required],
         'lName': [null, Validators.required],
         'email': [null, Validators.compose([Validators.required, Validators.email])],
         'issue': [null, Validators.required],
         'message': [null, Validators.compose([Validators.required, Validators.minLength(10),Validators.maxLength(400)])]
-        
+
       })
   }
   addPost(post){
