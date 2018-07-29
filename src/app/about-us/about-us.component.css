@@ -1,6 +1,6 @@
 .carousel-caption{
     color : white;
-    text-shadow: 		
+    text-shadow:
     -1px -1px 0 darkblue,
     1px -1px 0 darkblue,
     -1px 1px 0 darkblue,
@@ -22,7 +22,7 @@
     text-align: justify;
 }
 .teamCentred{
-    text-align: center;    
+    text-align: center;
     color : yellow;
     text-shadow: 1px 1px  yellowgreen;
     clear: left;
@@ -48,7 +48,7 @@
     text-shadow: 2px 1px  darkgreen;
 }
 .aboutCaboodle p{
-    text-align: center;    
+    text-align: center;
     color : yellow;
     font-size: 18px;
 }

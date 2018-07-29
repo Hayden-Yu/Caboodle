@@ -21,7 +21,7 @@ export const appRoutes: Routes = [
   { path: 'signup', component: RegisterComponent },
   { path: 'activate/:code', component: ActivateAccountComponent},
   { path: '', component: HomeComponent },
-  { path: 'forum-content', component: ForumContentComponent },
+  { path: 'forum-content/:id', component: ForumContentComponent },
   { path: 'forum-subject-create', component: ForumSubjectCreateComponent },
   { path: 'forum', component: ForumComponent },
   {

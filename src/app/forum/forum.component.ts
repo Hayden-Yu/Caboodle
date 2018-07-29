@@ -1,6 +1,6 @@
 import { Component, OnInit, SimpleChange } from '@angular/core';
-import { Observable, Subject, BehaviorSubject } from 'rxjs';
-import { toDate } from '@angular/common/src/i18n/format_date';
+import { ForumService } from '../common/services/forum.service';
+import { Forum } from '../common/models/forum';
 
 @Component({
   selector: 'app-forum',
@@ -10,32 +10,13 @@ import { toDate } from '@angular/common/src/i18n/format_date';
 
 export class ForumComponent implements OnInit {
 
-  topicList: any[] = [
-    {
-      subject: 'Introduction',
-      user: 'Caboodle',
-      date: '2018-06-15',
-      link: '/forum-content'
-    },
-    {
-      subject: 'API Suggestion',
-      user: 'Caboodle',
-      date: '2018-06-16',
-      link: '/forum-content'
-    }
-  ];
+  topicList: Forum;
 
-  constructor() { }
+  constructor(private forumService: ForumService) { }
   ngOnInit() {
-  }
-
-  setTopic(newSubject, newMessage) {
-    this.topicList.unshift({
-      subject: newSubject,
-      user: 'Caboodle (New)',
-      date: '2018-06-15',
-      link: '/forum-subject-create'
-    });
+    this.forumService.getArticleList().subscribe(topics => {
+      this.topicList = topics;
+      });
   }
 
 }
