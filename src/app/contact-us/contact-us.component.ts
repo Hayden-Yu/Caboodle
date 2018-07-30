@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { EMAIL_REGEX } from '../common/constants';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { ContactService } from './../common/services/contact.service';
 
 @Component({
   selector: 'app-contact-us',
@@ -20,7 +21,7 @@ export class ContactUsComponent implements OnInit {
    issue;
    message;
 
-  constructor(private fb: FormBuilder, private router: Router) { }
+  constructor(private fb: FormBuilder, private router: Router, private contactService: ContactService) { }
 
   ngOnInit() {
       this.rForm = this.fb.group({
@@ -31,10 +32,14 @@ export class ContactUsComponent implements OnInit {
         'message': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(400)])]
       });
   }
-  // when submitting the form, it should automatically send confirmation email to client and an email to caboodle email.
   submitForm() {
-    // this is getting a password. How to send?
-    return this.http.get(`${environment.api}activation?email=${encodeURI(this.email)}`, {observe: 'response'});
+    this.contactService.contactMail({
+      firstName: this.rForm.get('firstName').value.trim(),
+      lastName: this.rForm.get('lastName').value.trim(),
+      email: this.rForm.get('email').value.trim(),
+      issue: this.rForm.get('issue').value.trim(),
+      message: this.rForm.get('message').value.trim()
+    });
   }
   addPost(post) {
     this.fName = post.fName;

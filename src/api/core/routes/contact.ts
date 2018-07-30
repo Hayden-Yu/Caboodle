@@ -13,7 +13,7 @@ router.post('/contact', (req, res, next) => {
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
-    topic: req.body.topic,
+    issue: req.body.issue,
     message: req.body.message
   });
   contact.save()

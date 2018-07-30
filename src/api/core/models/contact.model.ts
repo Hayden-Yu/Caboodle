@@ -19,7 +19,7 @@ export class Contact extends Model<Contact> {
   email: string;
 
   @Column(Sequelize.STRING)
-  topic: string;
+  issue: string;
 
   @Column(Sequelize.STRING(512))
   message: string;

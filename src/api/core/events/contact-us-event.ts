@@ -9,7 +9,7 @@ eventEmitter.on(CONTACT_US_EVENT, (contact: Contact) => {
     mail.sendMail({
       from: senderAddress,
       to: senderAddress,
-      subject: 'Caboodle Contact: ' + contact.topic,
+      subject: 'Caboodle Contact: ' + contact.issue,
       html: `<h3>API Caboodle</h3>
       <p>` +
       contact.firstName + ` ` + contact.lastName +
