@@ -1,7 +1,3 @@
-.search-button {
-  padding-top: 1%;
-}
-
 .row {
   margin: auto;
 }
@@ -9,14 +5,12 @@
 #right-col {
   margin: 0 0 0 auto;
 } 
-.standardButton{
-  margin-top: 2%;
+.title{
+  margin-top: 5%;
   margin-bottom: 2%;
-  background-color: #1eff8f;
-  color: white;
-  text-shadow:     
-  -1px -1px 0 #0dde6e,
-  1px -1px 0 #0dde6e,
-  -1px 1px 0 #0dde6e,
-  1px 1px 0 #0dde6e;
+}
+.standardButton{
+  
+  width: 50%;
+  margin: 0.5%;
 }

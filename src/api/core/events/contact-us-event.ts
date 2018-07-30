@@ -8,7 +8,7 @@ eventEmitter.on(CONTACT_US_EVENT, (contact: Contact) => {
 
     mail.sendMail({
       from: senderAddress,
-      to: contact.email,
+      to: senderAddress,
       subject: 'Caboodle Contact: ' + contact.topic,
       html: `<h3>API Caboodle</h3>
       <p>` +
