@@ -1,6 +1,5 @@
 // tslint:disable-next-line:max-line-length
-import { Table, Model, Column, Sequelize, Unique, IsEmail, HasMany, BelongsToMany, AllowNull, Default } from 'sequelize-typescript';
-import * as crypto from 'crypto';
+import { Table, Model, Column, Sequelize, Unique, IsEmail, AllowNull, Default } from 'sequelize-typescript';
 
 @Table({
   timestamps: true

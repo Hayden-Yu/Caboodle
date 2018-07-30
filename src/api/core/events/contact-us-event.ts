@@ -1,6 +1,5 @@
-import { environment } from './../../environment.server';
 import { mail, senderAddress } from './../../architecture/mail';
-import { Contact } from '../models/contact.model';
+import { Contact } from '../../../app/common/models/contact';
 import { eventEmitter } from './../../architecture/event-emitter';
 import logger from '../../architecture/logger';
 

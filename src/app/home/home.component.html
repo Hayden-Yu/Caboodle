@@ -1,137 +1,23 @@
 <div class="container">
-    <div class="search-button" align="center" >
+    <div class="Title" align="center">
+        <img class="Title-Img" src="../../assets/images/caboodle.png" alt="Generic placeholder image">
+    </div>
+    <br/>
+    <div class="search" align="center">
         <a routerLink="/collection">
-        <button class="btn btn-lg btn-block standardButton">API Search</button>
+            <button class="btn standardButton btn-lg">Search Catalog</button>
         </a>
-    </div>                           <!--Placeholder values until APIs are stored and can be retrieved.-->
-    <div class="row">
-        <div class="column">
-            <div class="company-recent-api">
-                <p style="font-weight: bold; font-size: 25px">Recently Added Company APIs</p>
-                <table border="1" style="width: 50%" class="table table-bordered">                               <!--Wrap content or have a fixed size for tables?-->
-                    <tr>
-                        <td style="font-weight: bold">#</td>
-                        <td style="font-weight: bold">Company</td>
-                        <td style="font-weight: bold">Content</td>
-                        <td style="font-weight: bold">Category</td>
-                        <td style="font-weight: bold">Date</td>
-                    </tr>
-                    <tr>                                                            <!--Values & Content to be retrived from server APIs-->
-                        <td>1</td>
-                        <td>Caboodle</td>
-                        <td>NHL Stats</td>
-                        <td>Sports</td>
-                        <td>2018-05-28</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Caboodle</td>
-                        <td>NBA Stats</td>
-                        <td>Sports</td>
-                        <td>2018-05-22</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Caboodle</td>
-                        <td>Movies 2018</td>
-                        <td>Movies</td>
-                        <td>2018-04-16</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Caboodle</td>
-                        <td>Company Sales</td>
-                        <td>Business</td>
-                        <td>2018-04-11</td>
-                    </tr>
-                </table>
-                <a routerLink="/CompanyrecentAPIs/1"> < </a>
-                <a routerLink="/CompanyrecentAPIs/1"> 1 </a>
-                <a routerLink="/CompanyrecentAPIs/2"> 2 </a>
-                <a routerLink="/CompanyrecentAPIs/3"> 3 </a>
-                <a routerLink="/CompanyrecentAPIs/2"> > </a>
-
-            </div>
-        </div> <!--- col -->
-        <div class="column" id="right-col">
-            <div class="recently-visited-api">
-                <p style="font-weight: bold; font-size: 25px">Recently Visited APIs</p>
-                <table border="1" style="width: 40%" class="table table-bordered">                               <!--Wrap content or have a fixed size for tables?-->
-                    <tr>
-                        <td style="font-weight: bold">API Name</td>
-                        <td style="font-weight: bold">Date</td>
-                    </tr>
-                    <tr>                                                            <!--Values & Content to be retrived from server APIs-->
-                        <td>NBA Stats</td>
-                        <td>15 May, 8:15PM</td>
-                    </tr>
-                    <tr>
-                        <td>NHL Stats</td>
-                        <td>13 Sept, 4:35AM</td>
-                    </tr>
-                    <tr>
-                        <td>World Records</td>
-                        <td>10 Oct, 5:00PM</td>
-                    </tr>
-                    <tr>
-                        <td>MLB Stats</td>
-                        <td>01 Sept, 3:31PM</td>
-                    </tr>
-                    <tr>
-                        <td>Google Maps API</td>
-                        <td>11 Aug, 9:21AM</td>
-                    </tr>
-                </table>
-            </div>
-        </div> <!-- col -->
-    </div>  <!-- row -->
-    <div class="row">
-        <div class="col">
-            <div class="recently-added-user-api">
-                <p style="font-weight: bold; font-size: 25px">Recently Added User APIs</p>
-                <table class="table table-bordered" border="1" style="width: 50%">                               <!--Wrap content or have a fixed size for tables?-->
-                    <tr>
-                        <td style="font-weight: bold">#</td>
-                        <td style="font-weight: bold">User</td>
-                        <td style="font-weight: bold">Content</td>
-                        <td style="font-weight: bold">Category</td>
-                        <td style="font-weight: bold">Date</td>
-                    </tr>
-                    <tr>                                                            <!--Values & Content to be retrived from server APIs-->
-                        <td>1</td>
-                        <td>Matteo</td>
-                        <td>NHL Stats</td>
-                        <td>Sports</td>
-                        <td>2018-05-28</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Hayden</td>
-                        <td>NBA Stats</td>
-                        <td>Sports</td>
-                        <td>2018-05-22</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>Shan</td>
-                        <td>Movies 2018</td>
-                        <td>Movies</td>
-                        <td>2018-04-16</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>Mark</td>
-                        <td>Company Sales</td>
-                        <td>Business</td>
-                        <td>2018-04-11</td>
-                    </tr>
-                </table>
-                <a routerLink="/CompanyrecentAPIs/1"> < </a>
-                <a routerLink="/CompanyrecentAPIs/1"> 1 </a>
-                <a routerLink="/CompanyrecentAPIs/2"> 2 </a>
-                <a routerLink="/CompanyrecentAPIs/3"> 3 </a>
-                <a routerLink="/CompanyrecentAPIs/2"> > </a>
-            </div>
-        </div>
+    </div>
+    <br/>
+    <div class="forum" align="center">
+        <a routerLink="/forum">
+            <button class="btn btn-primary btn-lg">Forum</button>
+        </a>
+    </div>
+    <br/>
+    <div class="about-us" align="center">
+        <a routerLink="/about">
+            <button class="btn btn-primary btn-lg">About Us</button>
+        </a>
     </div>
 </div>
