@@ -20,7 +20,7 @@
     <div class="card">
       <div class="card-header" style="padding-top: 8px; padding-bottom: 8px;">
           Headers
-        <button type="button" class="float-right " style="border: none;background-color:transparent" (click)="addHeader()">
+        <button type="button" class="float-right" style="border: none;background-color:transparent" (click)="addHeader()">
           <i class="material-icons text-dark" style="font-size: 1.5rem;" placement="left">add</i>
         </button>
       </div>
@@ -36,7 +36,7 @@
                   <input type="text" class="form-control" placeholder="Value" [(ngModel)]="header.value">
                 </div>
                 <div class="col-1">
-                  <button (click)="removeHeader(i)" class="float-right " style="border: none;background-color:transparent" type="button">
+                  <button (click)="removeHeader(i)" class="float-right" style="border: none;background-color:transparent" type="button">
                     <i class="material-icons text-dark" style="font-size: 1.5rem;" placement="left">close</i>
                   </button>
                 </div>
@@ -52,7 +52,7 @@
                 <input type="text" class="form-control" placeholder="Value" [(ngModel)]="newHeader.value">
               </div>
               <div class="col-1">
-                <button (click)="newHeader.key = ''; newHeader.value = ''" class="float-right " style="border: none;background-color:transparent" type="button">
+                <button (click)="newHeader.key = ''; newHeader.value = ''" class="float-right" style="border: none;background-color:transparent" type="button">
                   <i class="material-icons text-dark" style="font-size: 1.5rem;" placement="left">close</i>
                 </button>
               </div>
