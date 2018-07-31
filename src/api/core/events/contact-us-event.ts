@@ -1,5 +1,5 @@
 import { mail, senderAddress } from './../../architecture/mail';
-import { Contact } from '../../../app/common/models/contact';
+import { Contact } from '../models/contact.model';
 import { eventEmitter } from './../../architecture/event-emitter';
 import logger from '../../architecture/logger';
 

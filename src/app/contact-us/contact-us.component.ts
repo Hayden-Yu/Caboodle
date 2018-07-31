@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {  FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import { EMAIL_REGEX } from '../common/constants';
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { ContactService } from './../common/services/contact.service';
 
