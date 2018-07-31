@@ -12,6 +12,6 @@ export class ContactService {
 
   constructor(private http: HttpClient) {}
   contactMail(contact: Contact) {
-  return this.http.get(`${environment.api}activation?email=${encodeURI(contact.email)}`);
+    return this.http.post(`${environment.api}contact`, contact).pipe(map((res: any) => res));
   }
 }

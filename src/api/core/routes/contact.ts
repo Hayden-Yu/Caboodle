@@ -8,7 +8,11 @@ export const router = express.Router();
 router.get('/contact', async (req: any, res, next) => {});
 
 router.post('/contact', (req, res, next) => {
-
+  try {
+    res.json(Contact.create(req.body));
+  } catch (err) {
+    next(err);
+  }
   const contact = Contact.build({
     firstName: req.body.firstName,
     lastName: req.body.lastName,
