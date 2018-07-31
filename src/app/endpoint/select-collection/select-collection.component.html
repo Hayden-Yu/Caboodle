@@ -1,7 +1,7 @@
 <div class="card" [hidden]="create">
   <div class="card-header">
     All Collections
-    <button class="float-right btn standardButton" (click)="create = true"><i class="material-icons" style="font-size: 16px;" placement="left">add</i><span class="d-none d-sm-inline">Create Collection</span></button>
+    <button class="float-right btn btn-outline-primary" (click)="create = true"><i class="material-icons" style="font-size: 16px;" placement="left">add</i><span class="d-none d-sm-inline">Create Collection</span></button>
   </div>
   <div style="max-height: 380px; overflow-y: auto;">
     <div class="list-group">
@@ -14,7 +14,7 @@
 
 <div class="card" [hidden]="!create">
   <div class="card-header">
-    <button class="btn standardButton" (click)="create = false"><i class="material-icons" style="font-size: 16px;">arrow_back_ios</i>Back</button>
+    <button class="btn btn-outline-primary" (click)="create = false"><i class="material-icons" style="font-size: 16px;">arrow_back_ios</i>Back</button>
     <span class="float-right">Create Collection</span>
   </div>
   <div class="card-body">

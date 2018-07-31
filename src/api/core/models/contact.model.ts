@@ -5,9 +5,6 @@ import { Table, Model, Column, Sequelize, Unique, IsEmail, AllowNull, Default } 
   timestamps: true
 })
 export class Contact extends Model<Contact> {
-  @AllowNull(false)
-  @IsEmail
-  @Unique
 
   @Column(Sequelize.STRING(16))
   firstName: string;
@@ -18,7 +15,7 @@ export class Contact extends Model<Contact> {
   @Column(Sequelize.STRING(64))
   email: string;
 
-  @Column(Sequelize.STRING)
+  @Column(Sequelize.STRING(64))
   issue: string;
 
   @Column(Sequelize.STRING(512))

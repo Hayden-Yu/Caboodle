@@ -6,7 +6,9 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { isPlatformServer } from '@angular/common';
-
+@Injectable({
+    providedIn: 'root'
+  })
 
 export class ContactService {
 
