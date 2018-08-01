@@ -21,12 +21,4 @@ export class Contact extends Model<Contact> {
   @Column(Sequelize.STRING(512))
   message: string;
 
-
-
-  @AllowNull(false)
-  @Default(false)
-  @Column(Sequelize.BOOLEAN)
-  active: boolean;
-
-
 }

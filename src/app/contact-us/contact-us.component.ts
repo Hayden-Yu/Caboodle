@@ -13,7 +13,6 @@ import { ContactService } from './../common/services/contact.service';
 export class ContactUsComponent implements OnInit {
   http: HttpClient;
    rForm: FormGroup;
-   post: any;
    fName;
    lName;
    email;
@@ -31,21 +30,19 @@ export class ContactUsComponent implements OnInit {
         'message': [null, Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(400)])]
       });
   }
-  submitForm() {
+  submitForm(post) {
     this.contactService.contactMail({
-      firstName: this.rForm.get('firstName').value.trim(),
-      lastName: this.rForm.get('lastName').value.trim(),
+      firstName: this.rForm.get('fName').value.trim(),
+      lastName: this.rForm.get('lName').value.trim(),
       email: this.rForm.get('email').value.trim(),
       issue: this.rForm.get('issue').value.trim(),
       message: this.rForm.get('message').value.trim()
-    });
-  }
-  addPost(post) {
-    this.fName = post.fName;
-    this.lName = post.lName;
-    this.email = post.email;
-    this.issue = post.issue;
-    this.message = post.message;
-
+    }).subscribe((() => {
+      this.fName = post.fName;
+      this.lName = post.lName;
+      this.email = post.email;
+      this.issue = post.issue;
+      this.message = post.message;
+    }));
   }
 }

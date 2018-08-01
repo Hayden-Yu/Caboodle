@@ -8,7 +8,7 @@
             <h1>Contact Us</h1>
           </div>
       <h4 class="mb-3">Contact Information</h4>
-        <form [formGroup]="rForm" (ngSubmit)="addPost(rForm.value)">
+        <form [formGroup]="rForm" (ngSubmit)="submitForm(rForm.value)">
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="fName">First Name</label>

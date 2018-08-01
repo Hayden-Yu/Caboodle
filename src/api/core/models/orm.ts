@@ -4,6 +4,7 @@ import { sequlize } from './../../architecture/sequelize';
 import { User } from './user.model';
 import { Forum } from './forum.model';
 import { Comments } from './comments.model';
+import { Contact } from './contact.model';
 
 sequlize.addModels([
   User,
@@ -11,7 +12,8 @@ sequlize.addModels([
   Collection,
   UserCollection,
   Forum,
-  Comments
+  Comments,
+  Contact,
 ]);
 
 export const orm = sequlize;
