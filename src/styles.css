@@ -66,20 +66,20 @@
                                   supported by Chrome and Opera */
 }
 .carousel-control-prev-icon{
-  background-image: url('https://apufpel.com.br/assets/img/seta_prim.png');
+  background-image: url('assets/images/seta_prim.png');
 }
 .carousel-control-next-icon{
- background-image: url('https://apufpel.com.br/assets/img/seta_ult.png');
+ background-image: url('assets/images/seta_ult.png');
 }
 .standardButton{
   background-color: #14a153;
   color: white;
-  text-shadow:     
+  text-shadow:
   -1px -1px 0 #777777,
   1px -1px 0 #777777,
   -1px 1px 0 #777777,
   1px 1px 0 #777777;
-  
+
 }
 
 .shadow-basic {
