@@ -71,11 +71,11 @@
             [
                 "YEAR",
                 "prospects", [
-                    "IDstation"
+                    "ID"
                 ]
             ],
         "awards", [
-            "idstation"
+            "id"
         ]
     ],
     "https://myttc.ca/" : {
