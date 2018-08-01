@@ -111,8 +111,8 @@ export class UserService {
     });
   }
 
-  getCurrentUser(): Observable<User> {
-    return this.currentUser ?
+  getCurrentUser(refresh?: boolean): Observable<User> {
+    return (this.currentUser && !refresh) ?
       of(this.currentUser) :
       this.http.get(`${environment.api}me`)
         .pipe(map((res: any) => this.currentUser = res));

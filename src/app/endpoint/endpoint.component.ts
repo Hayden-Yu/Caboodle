@@ -116,7 +116,6 @@ export class EndpointComponent implements OnInit, OnDestroy {
 
   save() {
     const request = this.requestComponent.getEndpoint();
-    console.log(request);
     if (!request.method || !URL_REGEX.test(request.url)) {
       this.showInvalidRequest();
       return;
