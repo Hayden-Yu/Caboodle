@@ -1,6 +1,6 @@
 <div class="container">
     <div class="detail-topic" align="center" >
-        <table class="table table-bordered">
+        <table class="table table-bordered shadow-basic">
             <tr>
                 <td><h2>{{article.title}}</h2></td>
             </tr>
@@ -16,7 +16,7 @@
                 <form class="needs-validation" (ngSubmit)="submitForm()" [formGroup]="formComment" novalidate>
 
                 <div class="mb-4">
-                <label for="Message">Comment</label>
+                <label for="Message">Comment On Thread</label>
                 <textarea type="textbox" class="form-control" id="Comment" formControlName="Comment" required></textarea>
                 <div class="invalid-feedback">
                     Comment cannot be blank!
@@ -29,7 +29,7 @@
         <br/>
     </div>
     <br/>
-    <table class="table table-bordered">
+    <table class="table table-bordered shadow-basic">
             <tr>
                 <td>Comment</td>
                 <td>User</td>
