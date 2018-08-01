@@ -1,3 +1,7 @@
 .info-box {
   height: 300px;
 }
+
+.profile-box {
+  box-shadow:0px 10px 6px -5px rgba(0,0,0,0.36);
+}
