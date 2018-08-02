@@ -28,5 +28,6 @@
       <ngb-panel title="Body" [disabled]="true"></ngb-panel>
     </ngb-accordion>
     <json-editor [options]="editorOptions" style="width: 100%;" height="400px"></json-editor>
+    <button class="btn btn-info float-right my-1" *ngIf="_result.body" type="button" (click)="saveFile()">Download Response</button>
   </div>
 </div>

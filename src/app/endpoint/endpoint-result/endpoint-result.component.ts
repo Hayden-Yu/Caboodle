@@ -1,6 +1,7 @@
 import { EndpointResponse } from './../../common/models/endpoint-response';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { JsonEditorComponent, JSONEditorOptions } from '../../json-editor/json-editor.component';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-endpoint-result',
@@ -26,12 +27,7 @@ export class EndpointResultComponent implements OnInit {
     this._result = result;
     if (this._result.body) {
       setTimeout(() => {
-        try {
-          JSON.parse(result.body);
-          this.editor.setMode('view');
-        } catch (e) {
-          this.editor.setMode('text');
-        }
+        this.editor.setMode(this.isJSON(result.body) ? 'view' : 'text');
         this.editor.setText(this._result.body);
       }, 10);
     }
@@ -39,5 +35,22 @@ export class EndpointResultComponent implements OnInit {
 
   statusColor(status: number) {
     return status >= 300 ? '#dc3545' : '#28a745';
+  }
+
+  saveFile() {
+    if (this._result.body) {
+      const isJSON = this.isJSON(this._result.body);
+      saveAs(new Blob([this._result.body], { type: isJSON ? 'text/json' : 'text/plain'}),
+      `caboodle-${new Date().toLocaleString()}.${isJSON ? 'json' : 'txt'}`);
+    }
+  }
+
+  isJSON(data: string) {
+    try {
+      JSON.parse(data);
+    } catch (e) {
+      return false;
+    }
+    return true;
   }
 }
