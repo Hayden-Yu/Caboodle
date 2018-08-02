@@ -38,14 +38,24 @@ export class ForumSubjectCreateComponent implements OnInit {
     this.formForum = this.formBuilder.group({Topic: '', Message: ''});
   }
 
+  invalidControl(formControlName: string): boolean {
+    return this.formForum.get(formControlName).invalid
+    && this.formForum.get(formControlName).touched;
+  }
+
   submitForm() {
     if (isUndefined(this.userID)) {
       this.router.navigate(['/login']);
       return;
     }
+    if (!this.formForum.valid) {
+      this.formForum.get('Topic').markAsTouched();
+      this.formForum.get('Message').markAsTouched();
+      return;
+    }
     this.forumService.createArticle({
-      title: this.formForum.get('Topic').value,
-      description: this.formForum.get('Message').value,
+      title: this.formForum.get('Topic').value.trim(),
+      description: this.formForum.get('Message').value.trim(),
       user_id: this.curUser.id
     })
     .subscribe(result => {

@@ -17,9 +17,10 @@
 
                 <div class="mb-4">
                 <label for="Message">Comment On Thread</label>
-                <textarea type="textbox" class="form-control" id="Comment" formControlName="Comment" required></textarea>
+                <textarea type="textbox" class="form-control" id="Comment" formControlName="Comment" [ngClass]="{'is-invalid': invalidControl('Comment')}"
+                required></textarea>
                 <div class="invalid-feedback">
-                    Comment cannot be blank!
+                Comment cannot be blank!
                 </div>
             </div>
             <hr class="mb-4">
