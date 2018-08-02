@@ -31,6 +31,7 @@ export class EndpointComponent implements OnInit, OnDestroy {
   invalidRequest = false;
   saved = false;
   alertTimer;
+  loading = false;
   constructor(private apiSercice: CaboodleApiService,
     private route: ActivatedRoute,
     private userSerivce: UserService,
@@ -63,8 +64,12 @@ export class EndpointComponent implements OnInit, OnDestroy {
     const request = this.requestComponent.getEndpoint();
     if (request.method && URL_REGEX.test(request.url)) {
       this.invalidRequest = false;
+      this.loading = true;
       this.apiSercice.invokeEndpoint(request)
-        .subscribe(result => this.response = result);
+        .subscribe(result => {
+          this.response = result;
+          this.loading = false;
+        });
     } else {
       this.showInvalidRequest();
     }
