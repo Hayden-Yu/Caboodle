@@ -9,14 +9,15 @@
 
             <div class="mb-3">
               <label for="Subject">Subject</label>
-              <input type="text" class="form-control" id="Topic" placeholder="" formControlName="Topic" required>
+              <input type="text" class="form-control" id="Topic" placeholder="" formControlName="Topic" [ngClass]="{'is-invalid': invalidControl('Topic')}"  required>
               <div class="invalid-feedback">
-                Please enter a subject title
+                Subject title cannot be blank!
               </div>
             </div>
               <div class="mb-4">
                 <label for="Message">Message</label>
-                <textarea type="textbox" class="form-control" id="Message" formControlName="Message" required></textarea>
+                <textarea type="textbox" class="form-control" id="Message" formControlName="Message" [ngClass]="{'is-invalid': invalidControl('Message')}" 
+                required></textarea>
                 <div class="invalid-feedback">
                   Subject message cannot be blank!
                 </div>

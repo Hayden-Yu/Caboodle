@@ -53,14 +53,23 @@ export class ForumContentComponent implements OnInit {
     this.formComment = this.formBuilder.group({Comment: ''});
   }
 
+  invalidControl(formControlName: string): boolean {
+    return this.formComment.get(formControlName).invalid
+    && this.formComment.get(formControlName).touched;
+  }
+
   submitForm() {
     if (isUndefined(this.userID)) {
       this.router.navigate(['/login']);
       return;
     }
+    if (!this.formComment.valid) {
+      this.formComment.get('Comment').markAsTouched();
+      return;
+    }
     this.commentsService.replyToThread({
       thread_id: this.articleID,
-      description: this.formComment.get('Comment').value,
+      description: this.formComment.get('Comment').value.trim(),
       user_id: this.userID
     }).subscribe(s => {
       this.commentList = s;
