@@ -1,3 +1,4 @@
+import { UserService } from './../../common/services/user.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CaboodleApiService } from './../../common/services/caboodle-api.service';
 import { Component, OnInit } from '@angular/core';
@@ -15,9 +16,12 @@ export class EndpointCreateComponent implements OnInit {
   collections: Collection[];
   validationAttempt = false;
   constructor(private apiService: CaboodleApiService,
+    private userService: UserService,
     public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
+    this.userService.getCurrentUser()
+      .subscribe(u => this.collections = u.collections);
   }
 
   setEndpoint(endpoint: Endpoint) {
@@ -34,8 +38,13 @@ export class EndpointCreateComponent implements OnInit {
     if (!this.endpoint.name || !this.endpoint.collectionId) {
       return;
     }
-    this.apiService.createEndpoint(this.endpoint)
+    if (this.endpoint._id) {
+      this.apiService.updateEndpoint(this.endpoint._id, this.endpoint)
       .subscribe(res => this.activeModal.close(res));
+    } else {
+      this.apiService.createEndpoint(this.endpoint)
+      .subscribe(res => this.activeModal.close(res));
+    }
   }
 
   cancel() {

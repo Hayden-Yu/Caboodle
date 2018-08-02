@@ -25,6 +25,12 @@ export class SelectCollectionComponent implements OnInit {
     this.collectionCreate.collectionCreated.subscribe(e => this.newCollection(e));
   }
 
+  @Input() set defaultSelection(id: number) {
+    if (id) {
+      this.active = id;
+    }
+  }
+
   newCollection($event: Collection) {
     console.log('ack');
     if (!this.collections) {

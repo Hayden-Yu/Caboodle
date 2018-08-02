@@ -8,7 +8,7 @@
   </div>
   <div class="form-group">
     <label>Select a collection to save to:</label>
-    <app-select-collection [collections]="collections" class="form-control" (selected)="endpoint.collectionId = $event" [ngClass]="{'is-invalid': validationAttempt && !endpoint.collectionId}">
+    <app-select-collection [collections]="collections" [defaultSelection]="endpoint.collectionId" class="form-control" (selected)="endpoint.collectionId = $event" [ngClass]="{'is-invalid': validationAttempt && !endpoint.collectionId}">
     </app-select-collection>
     <div class="invalid-feedback">
       Please choose a collection to save to
