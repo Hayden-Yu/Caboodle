@@ -38,8 +38,13 @@ export class EndpointCreateComponent implements OnInit {
     if (!this.endpoint.name || !this.endpoint.collectionId) {
       return;
     }
-    this.apiService.createEndpoint(this.endpoint)
+    if (this.endpoint._id) {
+      this.apiService.updateEndpoint(this.endpoint._id, this.endpoint)
       .subscribe(res => this.activeModal.close(res));
+    } else {
+      this.apiService.createEndpoint(this.endpoint)
+      .subscribe(res => this.activeModal.close(res));
+    }
   }
 
   cancel() {

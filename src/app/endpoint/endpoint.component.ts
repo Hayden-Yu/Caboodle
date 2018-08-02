@@ -126,16 +126,6 @@ export class EndpointComponent implements OnInit, OnDestroy {
       return;
     }
     this.invalidRequest = false;
-    if (request._id) {
-      this.apiSercice.updateEndpoint(request._id, request)
-        .subscribe(res => {
-          if (res) {
-            this.request = res;
-            this.showSaved();
-          }
-        });
-      return;
-    }
     const modalRef = this.modal.open(EndpointCreateComponent, { size: 'lg', beforeDismiss: () => false });
     modalRef.componentInstance.collections = this.user.collections;
     modalRef.componentInstance.setEndpoint(request);
