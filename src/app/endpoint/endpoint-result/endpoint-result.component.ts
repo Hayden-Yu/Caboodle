@@ -1,7 +1,9 @@
 import { EndpointResponse } from './../../common/models/endpoint-response';
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Inject, PLATFORM_ID } from '@angular/core';
 import { JsonEditorComponent, JSONEditorOptions } from '../../json-editor/json-editor.component';
-import { saveAs } from 'file-saver';
+import { isPlatformBrowser } from '@angular/common';
+
+
 
 @Component({
   selector: 'app-endpoint-result',
@@ -11,11 +13,18 @@ import { saveAs } from 'file-saver';
 export class EndpointResultComponent implements OnInit {
 
   _result: EndpointResponse = new EndpointResponse();
+  saveAs: any;
 
   @ViewChild(JsonEditorComponent)
   private editor: JsonEditorComponent;
   editorOptions: JSONEditorOptions;
-  constructor() { }
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
+    if (isPlatformBrowser(platformId)) {
+      this.saveAs = require('file-saver').saveAs;
+    }
+  }
 
   ngOnInit() {
     this.editorOptions = new JSONEditorOptions();
@@ -40,7 +49,7 @@ export class EndpointResultComponent implements OnInit {
   saveFile() {
     if (this._result.body) {
       const isJSON = this.isJSON(this._result.body);
-      saveAs(new Blob([this._result.body], { type: isJSON ? 'text/json' : 'text/plain'}),
+      this.saveAs(new Blob([this._result.body], { type: isJSON ? 'text/json' : 'text/plain'}),
       `caboodle-${new Date().toLocaleString()}.${isJSON ? 'json' : 'txt'}`);
     }
   }
