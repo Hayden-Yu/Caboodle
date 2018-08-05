@@ -1,16 +1,20 @@
 .table {
     background-color: whitesmoke;
+    table-layout: fixed;
 }
 
 .detail-topic {
     padding: 2rem;
+    width: 100%;
 }
 
-.td-text {
-    resize: none;
-    overflow: auto;
+.comment-description {
     width: 100%;
     height: auto;
-    border: none;
+    resize: none;
+}
+
+.comment-td {
+    width: 150%;
     word-wrap: break-word;
 }

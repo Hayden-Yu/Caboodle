@@ -7,7 +7,6 @@ import { Comments } from '../common/models/comments';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../common/services/user.service';
 import { isUndefined } from 'util';
-import { ResourceLoader } from '../../../node_modules/@angular/compiler';
 
 @Component({
   selector: 'app-forum-content',
