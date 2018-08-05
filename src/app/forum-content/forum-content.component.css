@@ -5,3 +5,12 @@
 .detail-topic {
     padding: 2rem;
 }
+
+.td-text {
+    resize: none;
+    overflow: auto;
+    width: 100%;
+    height: auto;
+    border: none;
+    word-wrap: break-word;
+}
