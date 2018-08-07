@@ -1,7 +1,20 @@
 .table {
     background-color: whitesmoke;
+    table-layout: fixed;
 }
 
 .detail-topic {
     padding: 2rem;
+    width: 100%;
+}
+
+.comment-description {
+    width: 100%;
+    height: auto;
+    resize: none;
+}
+
+.comment-td {
+    width: 150%;
+    word-wrap: break-word;
 }

@@ -37,7 +37,7 @@
                 <td>Date Posted</td>
             </tr>
             <tr *ngFor="let comments of commentList">
-                <td scope="row">{{comments.description}}</td>
+                <td scope="row" class="comment-td"><pre class="comment-description">{{comments.description}}</pre></td>
                 <td scope="row">{{comments.user.firstName + ' ' + comments.user.lastName}}</td>
                 <td scope="row">{{comments.timestamps | date : 'yyyy-MM-dd'}}</td>
             </tr>
